@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Age Calculator — Free & Instant | ToolReady</title>
+  <meta name="description" content="Calculate your exact age or the number of days between two dates.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../index.html" class="logo"><span class="mark">#</span>ToolReady</a>
+      <div class="site-search"><input type="text" placeholder="Search tools…" onclick="window.location.href='../index.html'" readonly></div>
+      <nav class="main-nav">
+        <a href="../index.html#sri-lanka">Sri Lanka</a>
+        <a href="../index.html#global">Global</a>
+        <a href="../index.html#it-tools">IT &amp; Security</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="calc-page">
+    <div class="wrap">
+      <div class="breadcrumb"><a href="../index.html">Home</a> / <a href="../index.html#global">Global Calculators</a> / Age Calculator</div>
+      <h1 class="calc-title">Age Calculator</h1>
+      <p class="calc-subtitle">Find your exact age, or the time between any two dates.</p>
+
+      <div class="calc-box">
+        <div class="field-row">
+          <div class="field-group">
+            <label for="birth-date">Date of birth</label>
+            <input type="date" id="birth-date">
+          </div>
+          <div class="field-group">
+            <label for="to-date">As of</label>
+            <input type="date" id="to-date">
+          </div>
+        </div>
+        <div class="calc-result">
+          <div class="result-label">Age</div>
+          <div class="result-value" id="age-result">—</div>
+        </div>
+        <p class="rate-note" id="days-breakdown"></p>
+      </div>
+
+      <div class="wrap" style="padding:0; margin-bottom:32px;"><div class="ad-slot">Ad slot — in-content (300×250)</div></div>
+
+      <div class="related-tools">
+        <h2>Related tools</h2>
+        <div class="tool-grid">
+          <a class="tool-card" href="bmi.html"><div class="icon">→</div><h3>BMI Calculator</h3><p>Check your body mass index.</p></a>
+          <a class="tool-card" href="unit-converter.html"><div class="icon">→</div><h3>Unit Converter</h3><p>Convert length, weight, temperature.</p></a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <span>© 2026 ToolReady. All calculations run in your browser — nothing you enter is sent anywhere.</span>
+      <span>Built for Sri Lanka and beyond.</span>
+    </div>
+  </footer>
+
+  <script>
+    const birthInput = document.getElementById('birth-date');
+    const toInput = document.getElementById('to-date');
+    const ageResult = document.getElementById('age-result');
+    const daysBreakdown = document.getElementById('days-breakdown');
+
+    // Default "as of" to today
+    toInput.valueAsDate = new Date();
+
+    function calc() {
+      if (!birthInput.value || !toInput.value) {
+        ageResult.textContent = '—';
+        daysBreakdown.textContent = '';
+        return;
+      }
+      const birth = new Date(birthInput.value);
+      const to = new Date(toInput.value);
+      if (to < birth) {
+        ageResult.textContent = 'End date is before start date';
+        daysBreakdown.textContent = '';
+        return;
+      }
+
+      let years = to.getFullYear() - birth.getFullYear();
+      let months = to.getMonth() - birth.getMonth();
+      let days = to.getDate() - birth.getDate();
+      if (days < 0) {
+        months -= 1;
+        const prevMonth = new Date(to.getFullYear(), to.getMonth(), 0);
+        days += prevMonth.getDate();
+      }
+      if (months < 0) {
+        years -= 1;
+        months += 12;
+      }
+
+      ageResult.textContent = `${years}y ${months}m ${days}d`;
+      const totalDays = Math.round((to - birth) / (1000 * 60 * 60 * 24));
+      daysBreakdown.textContent = `Total: ${totalDays.toLocaleString()} days`;
+    }
+
+    birthInput.addEventListener('input', calc);
+    toInput.addEventListener('input', calc);
+  </script>
+</body>
+</html>

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vehicle Import Duty Calculator Sri Lanka — Estimate | ToolReady</title>
+  <meta name="description" content="Estimate Sri Lanka vehicle import duty based on CIF value and engine capacity.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../index.html" class="logo"><span class="mark">#</span>ToolReady</a>
+      <div class="site-search"><input type="text" placeholder="Search tools…" onclick="window.location.href='../index.html'" readonly></div>
+      <nav class="main-nav">
+        <a href="../index.html#sri-lanka">Sri Lanka</a>
+        <a href="../index.html#global">Global</a>
+        <a href="../index.html#it-tools">IT &amp; Security</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="calc-page">
+    <div class="wrap">
+      <div class="breadcrumb"><a href="../index.html">Home</a> / <a href="../index.html#sri-lanka">Sri Lanka Calculators</a> / Vehicle Import Duty</div>
+      <h1 class="calc-title">Vehicle Import Duty Calculator</h1>
+      <p class="calc-subtitle">Rough estimate of import duty based on CIF value and engine capacity.</p>
+
+      <!-- IMPORTANT VISIBLE WARNING - vehicle duty rates are complex,
+           change often, and even existing published calculators
+           disagree with each other on exact percentages. Do not
+           remove this notice until you've personally verified every
+           rate in rates.js against the current Sri Lanka Customs
+           Gazette (customs.gov.lk). -->
+      <div style="background:#FFF6E5; border:1px solid var(--amber-dark); border-radius:var(--radius); padding:16px; margin-bottom:24px; font-size:0.88rem;">
+        ⚠ <strong>This calculator uses placeholder rates that have not been verified yet.</strong> Vehicle import duty in Sri Lanka has several components (Customs Duty, Excise, PAL, SSCL, VAT, sometimes a Luxury Tax) that change frequently and vary by source. Before you rely on this page, check the current numbers against the official Sri Lanka Customs Gazette and update <code>assets/js/rates.js</code>.
+      </div>
+
+      <div class="calc-box">
+        <div class="field-row">
+          <div class="field-group">
+            <label for="cif">CIF value (LKR)</label>
+            <input type="number" id="cif" placeholder="e.g. 3000000" inputmode="decimal">
+          </div>
+          <div class="field-group">
+            <label for="cc">Engine capacity (cc)</label>
+            <input type="number" id="cc" placeholder="e.g. 1500" inputmode="decimal">
+          </div>
+        </div>
+        <div class="field-group">
+          <label for="fueltype">Fuel type</label>
+          <select id="fueltype">
+            <option value="combustion">Petrol / Diesel</option>
+            <option value="ev">Electric</option>
+          </select>
+        </div>
+        <div class="calc-result">
+          <div class="result-label">Estimated total duty &amp; taxes</div>
+          <div class="result-value" id="duty-result">—</div>
+        </div>
+        <div style="margin-top:14px; font-size:0.85rem; color:var(--slate);" id="duty-breakdown"></div>
+        <p class="rate-note">Rates loading…</p>
+
+        <details style="margin-top:20px; border-top:1px solid var(--line-strong); padding-top:16px;">
+          <summary style="cursor:pointer; font-size:0.85rem; font-weight:500;">Adjust rates (if you have more current figures)</summary>
+          <p style="font-size:0.78rem; color:var(--slate); margin:10px 0 14px;">These default to our site's saved rates. Override any field below with your own numbers — useful if you've checked the current Customs Gazette or a broker's quote.</p>
+          <div class="field-row">
+            <div class="field-group">
+              <label for="ov-customs">Customs Duty (%)</label>
+              <input type="number" id="ov-customs" inputmode="decimal">
+            </div>
+            <div class="field-group">
+              <label for="ov-excise">Excise Duty (%)</label>
+              <input type="number" id="ov-excise" inputmode="decimal">
+            </div>
+          </div>
+          <div class="field-row">
+            <div class="field-group">
+              <label for="ov-pal">PAL (%)</label>
+              <input type="number" id="ov-pal" inputmode="decimal">
+            </div>
+            <div class="field-group">
+              <label for="ov-sscl">SSCL (%)</label>
+              <input type="number" id="ov-sscl" inputmode="decimal">
+            </div>
+          </div>
+          <div class="field-group">
+            <label for="ov-vat">VAT (%)</label>
+            <input type="number" id="ov-vat" inputmode="decimal">
+          </div>
+        </details>
+      </div>
+      <div class="wrap" style="padding:0; margin-bottom:32px;"><div class="ad-slot">Ad slot — in-content (300×250)</div></div>
+
+      <div class="explainer">
+        <h2>How this estimate is built</h2>
+        <p>Customs Duty is applied to the CIF value first. Excise Duty is then added on top, tiered by engine size for petrol/diesel vehicles (electric vehicles use a separate, typically much lower rate). PAL and SSCL apply as standard levies, and VAT is applied last on the cumulative total. Real customs assessments may include additional components not shown here.</p>
+      </div>
+
+      <div class="related-tools">
+        <h2>Related tools</h2>
+        <div class="tool-grid">
+          <a class="tool-card" href="apit-tax.html"><div class="icon">→</div><h3>APIT / Income Tax</h3><p>Calculate your monthly tax.</p></a>
+          <a class="tool-card" href="emi-loan.html"><div class="icon">→</div><h3>EMI / Loan Calculator</h3><p>Estimate financing for your import.</p></a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <span>© 2026 ToolReady. All calculations run in your browser — nothing you enter is sent anywhere.</span>
+      <span>Built for Sri Lanka and beyond.</span>
+    </div>
+  </footer>
+
+  <script src="../assets/js/rates.js"></script>
+  <script>
+    document.querySelector('.rate-note').textContent =
+      `Rates: ${RATES.vehicleDuty.source} · ${RATES.vehicleDuty.lastVerified}`;
+
+    function getExciseRate(cc) {
+      for (const tier of RATES.vehicleDuty.exciseByCC) {
+        if (cc <= tier.upToCC) return tier.rate;
+      }
+      return RATES.vehicleDuty.exciseByCC[RATES.vehicleDuty.exciseByCC.length - 1].rate;
+    }
+
+    // Pre-fill the override fields with the default rates (as %),
+    // so they show what's being used and are easy to tweak from there.
+    const ovCustoms = document.getElementById('ov-customs');
+    const ovExcise = document.getElementById('ov-excise');
+    const ovPal = document.getElementById('ov-pal');
+    const ovSscl = document.getElementById('ov-sscl');
+    const ovVat = document.getElementById('ov-vat');
+    ovCustoms.placeholder = (RATES.vehicleDuty.customsDutyRate * 100) + '% (default)';
+    ovPal.placeholder = (RATES.vehicleDuty.palRate * 100) + '% (default)';
+    ovSscl.placeholder = (RATES.vehicleDuty.ssclRate * 100) + '% (default)';
+    ovVat.placeholder = (RATES.vehicleDuty.vatRate * 100) + '% (default)';
+
+    // A % override field is used only if the visitor actually typed
+    // something in it - otherwise we fall back to the rates.js default.
+    function rateOrDefault(overrideInput, defaultFraction) {
+      const val = parseFloat(overrideInput.value);
+      return isNaN(val) ? defaultFraction : val / 100;
+    }
+
+    function calculate() {
+      const cif = parseFloat(document.getElementById('cif').value);
+      const cc = parseFloat(document.getElementById('cc').value);
+      const fuelType = document.getElementById('fueltype').value;
+      const resultEl = document.getElementById('duty-result');
+      const breakdownEl = document.getElementById('duty-breakdown');
+
+      if (isNaN(cif) || cif <= 0 || isNaN(cc) || cc <= 0) {
+        resultEl.textContent = '—';
+        breakdownEl.textContent = '';
+        return;
+      }
+
+      const r = RATES.vehicleDuty;
+      const defaultExcise = fuelType === 'ev' ? r.evExciseRate : getExciseRate(cc);
+      ovExcise.placeholder = (defaultExcise * 100) + '% (default)';
+
+      const customsDuty = cif * rateOrDefault(ovCustoms, r.customsDutyRate);
+      const exciseRate = rateOrDefault(ovExcise, defaultExcise);
+      const excise = (cif + customsDuty) * exciseRate;
+      const pal = cif * rateOrDefault(ovPal, r.palRate);
+      const sscl = cif * rateOrDefault(ovSscl, r.ssclRate);
+      const preVat = cif + customsDuty + excise + pal + sscl;
+      const vat = preVat * rateOrDefault(ovVat, r.vatRate);
+      const total = preVat + vat;
+
+      resultEl.textContent = 'Rs ' + total.toLocaleString(undefined, {maximumFractionDigits: 0});
+      breakdownEl.innerHTML =
+        `Customs Duty: Rs ${customsDuty.toLocaleString(undefined,{maximumFractionDigits:0})} &nbsp;·&nbsp; ` +
+        `Excise: Rs ${excise.toLocaleString(undefined,{maximumFractionDigits:0})} &nbsp;·&nbsp; ` +
+        `PAL: Rs ${pal.toLocaleString(undefined,{maximumFractionDigits:0})} &nbsp;·&nbsp; ` +
+        `SSCL: Rs ${sscl.toLocaleString(undefined,{maximumFractionDigits:0})} &nbsp;·&nbsp; ` +
+        `VAT: Rs ${vat.toLocaleString(undefined,{maximumFractionDigits:0})}`;
+    }
+
+    document.getElementById('cif').addEventListener('input', calculate);
+    document.getElementById('cc').addEventListener('input', calculate);
+    document.getElementById('fueltype').addEventListener('change', calculate);
+    [ovCustoms, ovExcise, ovPal, ovSscl, ovVat].forEach(el => el.addEventListener('input', calculate));
+  </script>
+</body>
+</html>

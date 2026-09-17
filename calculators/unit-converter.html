@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Unit Converter — Length, Weight, Temperature | ToolReady</title>
+  <meta name="description" content="Convert length, weight and temperature units instantly.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../index.html" class="logo"><span class="mark">#</span>ToolReady</a>
+      <div class="site-search"><input type="text" placeholder="Search tools…" onclick="window.location.href='../index.html'" readonly></div>
+      <nav class="main-nav">
+        <a href="../index.html#sri-lanka">Sri Lanka</a>
+        <a href="../index.html#global">Global</a>
+        <a href="../index.html#it-tools">IT &amp; Security</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="calc-page">
+    <div class="wrap">
+      <div class="breadcrumb"><a href="../index.html">Home</a> / <a href="../index.html#global">Global Calculators</a> / Unit Converter</div>
+      <h1 class="calc-title">Unit Converter</h1>
+      <p class="calc-subtitle">Convert length, weight or temperature instantly.</p>
+
+      <div class="calc-box">
+        <div class="field-group">
+          <label>Category</label>
+          <select id="category">
+            <option value="length">Length</option>
+            <option value="weight">Weight</option>
+            <option value="temperature">Temperature</option>
+          </select>
+        </div>
+        <div class="field-row">
+          <div class="field-group">
+            <label for="from-value">Value</label>
+            <input type="number" id="from-value" placeholder="e.g. 10" inputmode="decimal">
+          </div>
+          <div class="field-group">
+            <label for="from-unit">From</label>
+            <select id="from-unit"></select>
+          </div>
+        </div>
+        <div class="field-group">
+          <label for="to-unit">To</label>
+          <select id="to-unit"></select>
+        </div>
+        <div class="calc-result">
+          <div class="result-label">Result</div>
+          <div class="result-value" id="convert-result">—</div>
+        </div>
+      </div>
+
+      <div class="wrap" style="padding:0; margin-bottom:32px;"><div class="ad-slot">Ad slot — in-content (300×250)</div></div>
+
+      <div class="related-tools">
+        <h2>Related tools</h2>
+        <div class="tool-grid">
+          <a class="tool-card" href="bmi.html"><div class="icon">→</div><h3>BMI Calculator</h3><p>Check your body mass index.</p></a>
+          <a class="tool-card" href="age-calculator.html"><div class="icon">→</div><h3>Age Calculator</h3><p>Find your exact age.</p></a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <span>© 2026 ToolReady. All calculations run in your browser — nothing you enter is sent anywhere.</span>
+      <span>Built for Sri Lanka and beyond.</span>
+    </div>
+  </footer>
+
+  <script>
+    // Each unit's value = how many "base units" one of it equals.
+    // Length base = meters. Weight base = kilograms.
+    const UNIT_SETS = {
+      length: {
+        base: 'm',
+        units: { mm: 0.001, cm: 0.01, m: 1, km: 1000, inch: 0.0254, ft: 0.3048, yard: 0.9144, mile: 1609.34 }
+      },
+      weight: {
+        base: 'kg',
+        units: { mg: 0.000001, g: 0.001, kg: 1, tonne: 1000, oz: 0.0283495, lb: 0.453592 }
+      },
+      temperature: {
+        base: 'c',
+        units: { c: 'c', f: 'f', k: 'k' } // handled specially, not linear
+      }
+    };
+
+    const categorySel = document.getElementById('category');
+    const fromUnitSel = document.getElementById('from-unit');
+    const toUnitSel = document.getElementById('to-unit');
+    const fromValueInput = document.getElementById('from-value');
+    const resultEl = document.getElementById('convert-result');
+
+    function populateUnits() {
+      const set = UNIT_SETS[categorySel.value];
+      const keys = Object.keys(set.units);
+      fromUnitSel.innerHTML = keys.map(k => `<option value="${k}">${k}</option>`).join('');
+      toUnitSel.innerHTML = keys.map(k => `<option value="${k}">${k}</option>`).join('');
+      // default to two different, sensible units
+      fromUnitSel.selectedIndex = 0;
+      toUnitSel.selectedIndex = keys.length > 1 ? 1 : 0;
+    }
+
+    function tempToCelsius(value, unit) {
+      if (unit === 'c') return value;
+      if (unit === 'f') return (value - 32) * 5 / 9;
+      if (unit === 'k') return value - 273.15;
+    }
+    function celsiusTo(value, unit) {
+      if (unit === 'c') return value;
+      if (unit === 'f') return (value * 9 / 5) + 32;
+      if (unit === 'k') return value + 273.15;
+    }
+
+    function convert() {
+      const value = parseFloat(fromValueInput.value);
+      if (isNaN(value)) { resultEl.textContent = '—'; return; }
+
+      const category = categorySel.value;
+      const fromUnit = fromUnitSel.value;
+      const toUnit = toUnitSel.value;
+
+      let result;
+      if (category === 'temperature') {
+        const celsius = tempToCelsius(value, fromUnit);
+        result = celsiusTo(celsius, toUnit);
+      } else {
+        const set = UNIT_SETS[category].units;
+        const baseValue = value * set[fromUnit];
+        result = baseValue / set[toUnit];
+      }
+      resultEl.textContent = result.toLocaleString(undefined, {maximumFractionDigits: 4}) + ' ' + toUnit;
+    }
+
+    categorySel.addEventListener('change', () => { populateUnits(); convert(); });
+    [fromUnitSel, toUnitSel, fromValueInput].forEach(el => el.addEventListener('input', convert));
+    fromUnitSel.addEventListener('change', convert);
+    toUnitSel.addEventListener('change', convert);
+
+    populateUnits();
+  </script>
+</body>
+</html>

@@ -1,0 +1,389 @@
+/* ============================================
+   DESIGN TOKENS
+   These are the site's core colors, fonts, and spacing values,
+   defined once as variables so every page stays consistent.
+   Change a color here and it updates everywhere automatically.
+   ============================================ */
+:root {
+  --ink: #1B2430;          /* main text / headings */
+  --paper: #FAFAF7;        /* page background */
+  --paper-raised: #FFFFFF; /* card backgrounds */
+  --amber: #E8A33D;        /* primary accent - global tools */
+  --amber-dark: #C6832A;
+  --teal: #2F7A6D;         /* Sri Lanka category tag */
+  --navy-tag: #33475B;     /* IT/Security category tag */
+  --slate: #6B7280;        /* secondary text */
+  --line: #E5E1D8;         /* borders / dividers */
+  --line-strong: #D6D1C4;
+
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+
+  --radius: 6px;
+  --max-width: 1100px;
+}
+
+/* ============================================
+   RESET & BASE
+   Removes browser default spacing inconsistencies
+   so the site looks the same across all browsers.
+   ============================================ */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-display);
+  background-color: var(--paper);
+  color: var(--ink);
+  line-height: 1.55;
+  /* Subtle grid-line texture in the background - ties into the
+     "precision instrument" concept without being distracting */
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 48px 48px;
+  background-position: -1px -1px;
+  background-attachment: fixed;
+}
+
+a { color: inherit; text-decoration: none; }
+
+img, svg { display: block; max-width: 100%; }
+
+.wrap {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ============================================
+   HEADER / NAVIGATION
+   ============================================ */
+header.site-header {
+  background: var(--paper-raised);
+  border-bottom: 1px solid var(--line-strong);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  gap: 24px;
+}
+
+.logo {
+  font-weight: 700;
+  font-size: 1.25rem;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  display: flex;
+  align-items: baseline;
+  gap: 2px;
+}
+.logo .mark { color: var(--amber); font-family: var(--font-mono); }
+
+.site-search {
+  flex: 1;
+  max-width: 360px;
+  position: relative;
+}
+.site-search input {
+  width: 100%;
+  padding: 9px 14px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  background: var(--paper);
+  color: var(--ink);
+}
+.site-search input:focus {
+  outline: 2px solid var(--amber);
+  outline-offset: 1px;
+}
+
+nav.main-nav {
+  display: flex;
+  gap: 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+nav.main-nav a {
+  color: var(--slate);
+  padding: 4px 2px;
+  border-bottom: 2px solid transparent;
+  transition: color 0.15s, border-color 0.15s;
+}
+nav.main-nav a:hover,
+nav.main-nav a:focus-visible {
+  color: var(--ink);
+  border-bottom-color: var(--amber);
+}
+
+/* ============================================
+   HERO
+   ============================================ */
+.hero {
+  padding: 64px 0 48px;
+  border-bottom: 1px solid var(--line-strong);
+}
+.hero h1 {
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  max-width: 20ch;
+  margin-bottom: 14px;
+}
+.hero p {
+  color: var(--slate);
+  font-size: 1.05rem;
+  max-width: 52ch;
+  margin-bottom: 28px;
+}
+.hero-search {
+  max-width: 480px;
+}
+.hero-search input {
+  width: 100%;
+  padding: 14px 18px;
+  font-size: 1rem;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  background: var(--paper-raised);
+  font-family: var(--font-display);
+}
+.hero-search input:focus {
+  outline: 2px solid var(--amber);
+  outline-offset: 2px;
+}
+
+/* ============================================
+   CATEGORY SECTIONS + TOOL CARDS
+   ============================================ */
+.category-section {
+  padding: 40px 0;
+}
+.category-header {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--line-strong);
+  padding-bottom: 12px;
+}
+.category-header h2 {
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+.category-tag {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  padding: 3px 8px;
+  border-radius: 3px;
+  color: #fff;
+  letter-spacing: 0.02em;
+}
+.tag-sl { background: var(--teal); }
+.tag-global { background: var(--amber-dark); background: #C6832A; }
+.tag-it { background: var(--navy-tag); }
+
+.tool-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 14px;
+}
+
+.tool-card {
+  background: var(--paper-raised);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  padding: 18px;
+  transition: border-color 0.15s, transform 0.15s;
+}
+.tool-card:hover,
+.tool-card:focus-visible {
+  border-color: var(--ink);
+  transform: translateY(-2px);
+}
+.tool-card .icon {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--slate);
+  margin-bottom: 10px;
+}
+.tool-card h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+.tool-card p {
+  font-size: 0.85rem;
+  color: var(--slate);
+}
+
+/* ============================================
+   CALCULATOR PAGE LAYOUT
+   ============================================ */
+.calc-page {
+  padding: 40px 0 64px;
+}
+.breadcrumb {
+  font-size: 0.82rem;
+  color: var(--slate);
+  margin-bottom: 20px;
+}
+.breadcrumb a:hover { color: var(--ink); }
+
+.calc-title {
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
+}
+.calc-subtitle {
+  color: var(--slate);
+  margin-bottom: 32px;
+  max-width: 60ch;
+}
+
+.calc-box {
+  background: var(--paper-raised);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  padding: 28px;
+  margin-bottom: 40px;
+}
+
+.field-group {
+  margin-bottom: 18px;
+}
+.field-group label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 500;
+  margin-bottom: 6px;
+  color: var(--ink);
+}
+.field-group input,
+.field-group select {
+  width: 100%;
+  padding: 11px 14px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  background: var(--paper);
+  color: var(--ink);
+}
+.field-group input:focus,
+.field-group select:focus {
+  outline: 2px solid var(--amber);
+  outline-offset: 1px;
+}
+.field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.calc-result {
+  margin-top: 24px;
+  padding: 20px;
+  background: var(--paper);
+  border: 1px dashed var(--line-strong);
+  border-radius: var(--radius);
+}
+.calc-result .result-label {
+  font-size: 0.8rem;
+  color: var(--slate);
+  margin-bottom: 4px;
+}
+.calc-result .result-value {
+  font-family: var(--font-mono);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--teal);
+}
+
+.explainer {
+  max-width: 68ch;
+}
+.explainer h2 {
+  font-size: 1.2rem;
+  margin: 28px 0 10px;
+}
+.explainer p {
+  color: var(--slate);
+  margin-bottom: 12px;
+}
+
+.rate-note {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--slate);
+  margin-top: 14px;
+}
+
+/* ============================================
+   RELATED TOOLS
+   ============================================ */
+.related-tools {
+  margin-top: 48px;
+  padding-top: 32px;
+  border-top: 1px solid var(--line-strong);
+}
+.related-tools h2 {
+  font-size: 1.1rem;
+  margin-bottom: 16px;
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+footer.site-footer {
+  border-top: 1px solid var(--line-strong);
+  padding: 32px 0;
+  margin-top: 48px;
+  color: var(--slate);
+  font-size: 0.85rem;
+}
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* ============================================
+   AD SLOT PLACEHOLDERS
+   These are just empty containers where Monetag ad code
+   will go later - dashed border so you can see them while
+   building, doesn't render visibly once ads are active.
+   ============================================ */
+.ad-slot {
+  border: 1px dashed var(--line-strong);
+  border-radius: var(--radius);
+  padding: 12px;
+  text-align: center;
+  font-size: 0.7rem;
+  color: var(--line-strong);
+  margin: 24px 0;
+}
+
+/* ============================================
+   RESPONSIVE - mobile screens
+   ============================================ */
+@media (max-width: 640px) {
+  .header-inner { flex-wrap: wrap; }
+  .site-search { order: 3; max-width: 100%; }
+  nav.main-nav { gap: 14px; font-size: 0.85rem; }
+  .field-row { grid-template-columns: 1fr; }
+  .hero { padding: 40px 0 32px; }
+}

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EMI / Loan Calculator — Free & Instant | ToolReady</title>
+  <meta name="description" content="Calculate your monthly loan payment (EMI) for any loan amount, interest rate and term.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../index.html" class="logo"><span class="mark">#</span>ToolReady</a>
+      <div class="site-search"><input type="text" placeholder="Search tools…" onclick="window.location.href='../index.html'" readonly></div>
+      <nav class="main-nav">
+        <a href="../index.html#sri-lanka">Sri Lanka</a>
+        <a href="../index.html#global">Global</a>
+        <a href="../index.html#it-tools">IT &amp; Security</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="calc-page">
+    <div class="wrap">
+      <div class="breadcrumb"><a href="../index.html">Home</a> / <a href="../index.html#global">Global Calculators</a> / EMI / Loan Calculator</div>
+      <h1 class="calc-title">EMI / Loan Calculator</h1>
+      <p class="calc-subtitle">Enter your own loan amount, interest rate and term — every lender quotes a different rate, so type in what your bank offered you.</p>
+
+      <div class="calc-box">
+        <div class="field-group">
+          <label for="principal">Loan amount</label>
+          <input type="number" id="principal" placeholder="e.g. 2000000" inputmode="decimal">
+        </div>
+        <div class="field-row">
+          <div class="field-group">
+            <label for="rate">Annual interest rate (%)</label>
+            <input type="number" id="rate" placeholder="e.g. 14.5" inputmode="decimal">
+          </div>
+          <div class="field-group">
+            <label for="term">Loan term (years)</label>
+            <input type="number" id="term" placeholder="e.g. 5" inputmode="decimal">
+          </div>
+        </div>
+        <div class="calc-result">
+          <div class="result-label">Monthly payment (EMI)</div>
+          <div class="result-value" id="emi-result">—</div>
+        </div>
+        <div style="margin-top:16px; display:grid; grid-template-columns:1fr 1fr; gap:14px; font-size:0.85rem;">
+          <div><span style="color:var(--slate);">Total interest paid</span><br><span id="total-interest" style="font-family:var(--font-mono); font-weight:700;">—</span></div>
+          <div><span style="color:var(--slate);">Total repayment</span><br><span id="total-repayment" style="font-family:var(--font-mono); font-weight:700;">—</span></div>
+        </div>
+      </div>
+
+      <div class="wrap" style="padding:0; margin-bottom:32px;"><div class="ad-slot">Ad slot — in-content (300×250)</div></div>
+
+      <div class="explainer">
+        <h2>How EMI is calculated</h2>
+        <p>EMI uses the standard reducing-balance formula: EMI = P × r × (1+r)ⁿ ÷ ((1+r)ⁿ − 1), where P is the loan amount, r is the monthly interest rate, and n is the number of monthly payments. This assumes a fixed rate for the full term — check with your lender if yours is variable.</p>
+      </div>
+
+      <div class="related-tools">
+        <h2>Related tools</h2>
+        <div class="tool-grid">
+          <a class="tool-card" href="vehicle-duty.html"><div class="icon">→</div><h3>Vehicle Import Duty</h3><p>Estimate import cost before financing.</p></a>
+          <a class="tool-card" href="percentage.html"><div class="icon">→</div><h3>Percentage Calculator</h3><p>Quick percentage math.</p></a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <span>© 2026 ToolReady. All calculations run in your browser — nothing you enter is sent anywhere.</span>
+      <span>Built for Sri Lanka and beyond.</span>
+    </div>
+  </footer>
+
+  <script>
+    const principalInput = document.getElementById('principal');
+    const rateInput = document.getElementById('rate');
+    const termInput = document.getElementById('term');
+
+    function calc() {
+      const p = parseFloat(principalInput.value);
+      const annualRate = parseFloat(rateInput.value);
+      const years = parseFloat(termInput.value);
+      const emiEl = document.getElementById('emi-result');
+      const interestEl = document.getElementById('total-interest');
+      const repaymentEl = document.getElementById('total-repayment');
+
+      if (isNaN(p) || isNaN(annualRate) || isNaN(years) || p <= 0 || years <= 0) {
+        emiEl.textContent = '—'; interestEl.textContent = '—'; repaymentEl.textContent = '—';
+        return;
+      }
+
+      const n = years * 12;
+      const r = annualRate / 100 / 12;
+      let emi;
+      if (r === 0) {
+        emi = p / n;
+      } else {
+        emi = p * r * Math.pow(1 + r, n) / (Math.pow(1 + r, n) - 1);
+      }
+      const totalRepayment = emi * n;
+      const totalInterest = totalRepayment - p;
+
+      emiEl.textContent = emi.toLocaleString(undefined, {maximumFractionDigits: 2});
+      interestEl.textContent = totalInterest.toLocaleString(undefined, {maximumFractionDigits: 0});
+      repaymentEl.textContent = totalRepayment.toLocaleString(undefined, {maximumFractionDigits: 0});
+    }
+
+    [principalInput, rateInput, termInput].forEach(el => el.addEventListener('input', calc));
+  </script>
+</body>
+</html>

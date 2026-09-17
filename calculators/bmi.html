@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BMI Calculator — Free & Instant | ToolReady</title>
+  <meta name="description" content="Calculate your Body Mass Index (BMI) from height and weight, in metric or imperial units.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../index.html" class="logo"><span class="mark">#</span>ToolReady</a>
+      <div class="site-search"><input type="text" placeholder="Search tools…" onclick="window.location.href='../index.html'" readonly></div>
+      <nav class="main-nav">
+        <a href="../index.html#sri-lanka">Sri Lanka</a>
+        <a href="../index.html#global">Global</a>
+        <a href="../index.html#it-tools">IT &amp; Security</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="calc-page">
+    <div class="wrap">
+      <div class="breadcrumb"><a href="../index.html">Home</a> / <a href="../index.html#global">Global Calculators</a> / BMI Calculator</div>
+      <h1 class="calc-title">BMI Calculator</h1>
+      <p class="calc-subtitle">Work out your Body Mass Index and see which range it falls in.</p>
+
+      <div class="calc-box">
+        <div class="field-group">
+          <label>Units</label>
+          <select id="units">
+            <option value="metric">Metric (cm, kg)</option>
+            <option value="imperial">Imperial (in, lb)</option>
+          </select>
+        </div>
+        <div class="field-row">
+          <div class="field-group">
+            <label for="height">Height</label>
+            <input type="number" id="height" placeholder="e.g. 170" inputmode="decimal">
+          </div>
+          <div class="field-group">
+            <label for="weight">Weight</label>
+            <input type="number" id="weight" placeholder="e.g. 65" inputmode="decimal">
+          </div>
+        </div>
+        <div class="calc-result">
+          <div class="result-label">Your BMI</div>
+          <div class="result-value" id="bmi-result">—</div>
+        </div>
+        <p class="rate-note" id="bmi-category" style="font-size:0.9rem;"></p>
+      </div>
+
+      <div class="wrap" style="padding:0; margin-bottom:32px;"><div class="ad-slot">Ad slot — in-content (300×250)</div></div>
+
+      <div class="explainer">
+        <h2>BMI ranges</h2>
+        <p>Below 18.5: underweight &nbsp;·&nbsp; 18.5–24.9: healthy range &nbsp;·&nbsp; 25–29.9: overweight &nbsp;·&nbsp; 30+: obese. BMI is a general screening tool — it doesn't account for muscle mass, age, or body composition, so it's not a diagnosis. Talk to a healthcare provider for personalized guidance.</p>
+      </div>
+
+      <div class="related-tools">
+        <h2>Related tools</h2>
+        <div class="tool-grid">
+          <a class="tool-card" href="unit-converter.html"><div class="icon">→</div><h3>Unit Converter</h3><p>Convert weight, length and temperature.</p></a>
+          <a class="tool-card" href="age-calculator.html"><div class="icon">→</div><h3>Age Calculator</h3><p>Find your exact age.</p></a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <span>© 2026 ToolReady. All calculations run in your browser — nothing you enter is sent anywhere.</span>
+      <span>Built for Sri Lanka and beyond.</span>
+    </div>
+  </footer>
+
+  <script>
+    const unitsSel = document.getElementById('units');
+    const heightInput = document.getElementById('height');
+    const weightInput = document.getElementById('weight');
+    const bmiResult = document.getElementById('bmi-result');
+    const bmiCategory = document.getElementById('bmi-category');
+
+    function categoryFor(bmi) {
+      if (bmi < 18.5) return 'Underweight';
+      if (bmi < 25) return 'Healthy range';
+      if (bmi < 30) return 'Overweight';
+      return 'Obese';
+    }
+
+    function calc() {
+      const h = parseFloat(heightInput.value);
+      const w = parseFloat(weightInput.value);
+      if (isNaN(h) || isNaN(w) || h <= 0 || w <= 0) {
+        bmiResult.textContent = '—';
+        bmiCategory.textContent = '';
+        return;
+      }
+      let bmi;
+      if (unitsSel.value === 'metric') {
+        const meters = h / 100;
+        bmi = w / (meters * meters);
+      } else {
+        bmi = (w / (h * h)) * 703;
+      }
+      bmiResult.textContent = bmi.toFixed(1);
+      bmiCategory.textContent = categoryFor(bmi);
+    }
+
+    unitsSel.addEventListener('change', () => {
+      heightInput.placeholder = unitsSel.value === 'metric' ? 'e.g. 170' : 'e.g. 67';
+      weightInput.placeholder = unitsSel.value === 'metric' ? 'e.g. 65' : 'e.g. 143';
+      calc();
+    });
+    heightInput.addEventListener('input', calc);
+    weightInput.addEventListener('input', calc);
+  </script>
+</body>
+</html>

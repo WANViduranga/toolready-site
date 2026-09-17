@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>APIT / Income Tax Calculator Sri Lanka — Free | ToolReady</title>
+  <meta name="description" content="Calculate your monthly Sri Lanka APIT income tax based on the current IRD tax table. Free and instant.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../index.html" class="logo"><span class="mark">#</span>ToolReady</a>
+      <div class="site-search"><input type="text" placeholder="Search tools…" onclick="window.location.href='../index.html'" readonly></div>
+      <nav class="main-nav">
+        <a href="../index.html#sri-lanka">Sri Lanka</a>
+        <a href="../index.html#global">Global</a>
+        <a href="../index.html#it-tools">IT &amp; Security</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="calc-page">
+    <div class="wrap">
+      <div class="breadcrumb"><a href="../index.html">Home</a> / <a href="../index.html#sri-lanka">Sri Lanka Calculators</a> / APIT / Income Tax</div>
+      <h1 class="calc-title">APIT / Income Tax Calculator</h1>
+      <p class="calc-subtitle">Estimate your monthly Advance Personal Income Tax (APIT) based on your gross monthly salary, using the current IRD progressive tax table.</p>
+
+      <div class="calc-box">
+        <div class="field-group">
+          <label for="salary">Gross monthly salary (LKR)</label>
+          <input type="number" id="salary" placeholder="e.g. 250000" inputmode="decimal">
+        </div>
+        <div class="calc-result">
+          <div class="result-label">Estimated monthly APIT</div>
+          <div class="result-value" id="apit-result">—</div>
+        </div>
+        <div class="calc-result" style="margin-top:12px;">
+          <div class="result-label">Take-home salary (after APIT only)</div>
+          <div class="result-value" id="takehome-result" style="color:var(--ink);">—</div>
+        </div>
+        <p class="rate-note" id="rate-note"></p>
+      </div>
+
+      <div class="wrap" style="padding:0; margin-bottom:32px;"><div class="ad-slot">Ad slot — in-content (300×250)</div></div>
+
+      <div class="explainer">
+        <h2>How this is calculated</h2>
+        <p>Your annual salary (monthly × 12) has the personal relief subtracted, then the remainder is taxed progressively — each portion of income is taxed at the rate for its own bracket, not the whole amount at the top rate. The result is divided back down to a monthly figure.</p>
+        <p>This estimate covers only APIT on regular monthly employment income. It does not include EPF/ETF (use the EPF/ETF calculator), non-cash benefits, or bonus/lump-sum payments which use a different IRD table.</p>
+      </div>
+
+      <div class="related-tools">
+        <h2>Related tools</h2>
+        <div class="tool-grid">
+          <a class="tool-card" href="take-home-pay.html"><div class="icon">→</div><h3>Take-Home Pay</h3><p>Full net salary after tax and EPF.</p></a>
+          <a class="tool-card" href="epf-etf.html"><div class="icon">→</div><h3>EPF / ETF</h3><p>Estimate retirement fund contributions.</p></a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <span>© 2026 ToolReady. All calculations run in your browser — nothing you enter is sent anywhere.</span>
+      <span>Built for Sri Lanka and beyond.</span>
+    </div>
+  </footer>
+
+  <script src="../assets/js/rates.js"></script>
+  <script>
+    function calcAPIT(monthlySalary) {
+      const annual = monthlySalary * 12;
+      let taxable = Math.max(0, annual - RATES.apit.personalReliefAnnual);
+      let tax = 0;
+      let lowerBound = 0;
+      for (const bracket of RATES.apit.brackets) {
+        const bandSize = bracket.upTo - lowerBound;
+        const amountInBand = Math.min(Math.max(0, taxable - lowerBound), bandSize);
+        tax += amountInBand * bracket.rate;
+        lowerBound = bracket.upTo;
+        if (taxable <= lowerBound) break;
+      }
+      return tax / 12; // back to monthly
+    }
+
+    const salaryInput = document.getElementById('salary');
+    const apitResult = document.getElementById('apit-result');
+    const takehomeResult = document.getElementById('takehome-result');
+    document.getElementById('rate-note').textContent =
+      `Rates: ${RATES.apit.source} · Last checked ${RATES.apit.lastVerified}`;
+
+    salaryInput.addEventListener('input', () => {
+      const salary = parseFloat(salaryInput.value);
+      if (isNaN(salary) || salary <= 0) {
+        apitResult.textContent = '—';
+        takehomeResult.textContent = '—';
+        return;
+      }
+      const apit = calcAPIT(salary);
+      apitResult.textContent = 'Rs ' + apit.toLocaleString(undefined, {maximumFractionDigits: 0});
+      takehomeResult.textContent = 'Rs ' + (salary - apit).toLocaleString(undefined, {maximumFractionDigits: 0});
+    });
+  </script>
+</body>
+</html>

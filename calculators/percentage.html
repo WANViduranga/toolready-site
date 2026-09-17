@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Percentage Calculator — Free & Instant | ToolReady</title>
+  <meta name="description" content="Calculate percentages, percentage increase/decrease, and what percent one number is of another. Free and instant.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <!-- Note the "../" here - this page lives one folder deeper than the
+       homepage, so we go "up" one level before pointing to assets/ -->
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../index.html" class="logo"><span class="mark">#</span>ToolReady</a>
+      <div class="site-search">
+        <input type="text" id="siteSearch" placeholder="Search tools…" autocomplete="off" onclick="window.location.href='../index.html'">
+      </div>
+      <nav class="main-nav">
+        <a href="../index.html#sri-lanka">Sri Lanka</a>
+        <a href="../index.html#global">Global</a>
+        <a href="../index.html#it-tools">IT &amp; Security</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="calc-page">
+    <div class="wrap">
+
+      <div class="breadcrumb">
+        <a href="../index.html">Home</a> / <a href="../index.html#global">Global Calculators</a> / Percentage Calculator
+      </div>
+
+      <h1 class="calc-title">Percentage Calculator</h1>
+      <p class="calc-subtitle">Three common percentage problems, solved instantly. Pick the calculation you need below.</p>
+
+      <!-- ============================================
+           CALCULATOR 1: X% of Y
+           ============================================ -->
+      <div class="calc-box">
+        <div class="field-row">
+          <div class="field-group">
+            <label for="p1-percent">Percentage</label>
+            <input type="number" id="p1-percent" placeholder="e.g. 20" inputmode="decimal">
+          </div>
+          <div class="field-group">
+            <label for="p1-number">Of this number</label>
+            <input type="number" id="p1-number" placeholder="e.g. 500" inputmode="decimal">
+          </div>
+        </div>
+        <div class="calc-result">
+          <div class="result-label">Result</div>
+          <div class="result-value" id="p1-result">—</div>
+        </div>
+      </div>
+
+      <div class="wrap" style="padding:0; margin-bottom:32px;">
+        <div class="ad-slot">Ad slot — in-content (300×250)</div>
+      </div>
+
+      <!-- ============================================
+           CALCULATOR 2: X is what % of Y
+           ============================================ -->
+      <h2 style="font-size:1.2rem; margin-bottom:14px;">What percent is X of Y?</h2>
+      <div class="calc-box">
+        <div class="field-row">
+          <div class="field-group">
+            <label for="p2-x">This number</label>
+            <input type="number" id="p2-x" placeholder="e.g. 40" inputmode="decimal">
+          </div>
+          <div class="field-group">
+            <label for="p2-y">Is what percent of</label>
+            <input type="number" id="p2-y" placeholder="e.g. 200" inputmode="decimal">
+          </div>
+        </div>
+        <div class="calc-result">
+          <div class="result-label">Result</div>
+          <div class="result-value" id="p2-result">—</div>
+        </div>
+      </div>
+
+      <!-- ============================================
+           CALCULATOR 3: Percentage change
+           ============================================ -->
+      <h2 style="font-size:1.2rem; margin-bottom:14px;">Percentage increase / decrease</h2>
+      <div class="calc-box">
+        <div class="field-row">
+          <div class="field-group">
+            <label for="p3-from">From</label>
+            <input type="number" id="p3-from" placeholder="e.g. 80" inputmode="decimal">
+          </div>
+          <div class="field-group">
+            <label for="p3-to">To</label>
+            <input type="number" id="p3-to" placeholder="e.g. 100" inputmode="decimal">
+          </div>
+        </div>
+        <div class="calc-result">
+          <div class="result-label">Change</div>
+          <div class="result-value" id="p3-result">—</div>
+        </div>
+      </div>
+
+      <div class="explainer">
+        <h2>How this works</h2>
+        <p>A percentage is just a fraction of 100. To find X% of a number, multiply the number by X and divide by 100. To find what percent one number is of another, divide the first by the second and multiply by 100.</p>
+      </div>
+
+      <div class="related-tools">
+        <h2>Related tools</h2>
+        <div class="tool-grid">
+          <a class="tool-card" href="emi-loan.html">
+            <div class="icon">→</div>
+            <h3>EMI / Loan Calculator</h3>
+            <p>Calculate monthly loan payments for any rate and term.</p>
+          </a>
+          <a class="tool-card" href="take-home-pay.html">
+            <div class="icon">→</div>
+            <h3>Take-Home Pay</h3>
+            <p>Convert your gross salary to net pay.</p>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <span>© 2026 ToolReady. All calculations run in your browser — nothing you enter is sent anywhere.</span>
+      <span>Built for Sri Lanka and beyond.</span>
+    </div>
+  </footer>
+
+  <!-- ============================================
+       CALCULATOR LOGIC
+       Each block below listens for typing in its inputs
+       and updates the result live - no "Calculate" button needed.
+       ============================================ -->
+  <script>
+    // --- Calculator 1: X% of Y ---
+    const p1Percent = document.getElementById('p1-percent');
+    const p1Number = document.getElementById('p1-number');
+    const p1Result = document.getElementById('p1-result');
+    function calc1() {
+      const pct = parseFloat(p1Percent.value);
+      const num = parseFloat(p1Number.value);
+      if (isNaN(pct) || isNaN(num)) { p1Result.textContent = '—'; return; }
+      p1Result.textContent = ((pct / 100) * num).toLocaleString(undefined, {maximumFractionDigits: 2});
+    }
+    p1Percent.addEventListener('input', calc1);
+    p1Number.addEventListener('input', calc1);
+
+    // --- Calculator 2: X is what % of Y ---
+    const p2X = document.getElementById('p2-x');
+    const p2Y = document.getElementById('p2-y');
+    const p2Result = document.getElementById('p2-result');
+    function calc2() {
+      const x = parseFloat(p2X.value);
+      const y = parseFloat(p2Y.value);
+      if (isNaN(x) || isNaN(y) || y === 0) { p2Result.textContent = '—'; return; }
+      p2Result.textContent = ((x / y) * 100).toLocaleString(undefined, {maximumFractionDigits: 2}) + '%';
+    }
+    p2X.addEventListener('input', calc2);
+    p2Y.addEventListener('input', calc2);
+
+    // --- Calculator 3: Percentage change ---
+    const p3From = document.getElementById('p3-from');
+    const p3To = document.getElementById('p3-to');
+    const p3Result = document.getElementById('p3-result');
+    function calc3() {
+      const from = parseFloat(p3From.value);
+      const to = parseFloat(p3To.value);
+      if (isNaN(from) || isNaN(to) || from === 0) { p3Result.textContent = '—'; return; }
+      const change = ((to - from) / from) * 100;
+      const sign = change > 0 ? '+' : '';
+      p3Result.textContent = sign + change.toLocaleString(undefined, {maximumFractionDigits: 2}) + '%';
+    }
+    p3From.addEventListener('input', calc3);
+    p3To.addEventListener('input', calc3);
+  </script>
+</body>
+</html>

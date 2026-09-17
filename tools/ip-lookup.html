@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>What Is My IP Address? — Free Lookup | ToolReady</title>
+  <meta name="description" content="Find your public IP address and basic location info instantly.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../index.html" class="logo"><span class="mark">#</span>ToolReady</a>
+      <div class="site-search"><input type="text" placeholder="Search tools…" onclick="window.location.href='../index.html'" readonly></div>
+      <nav class="main-nav">
+        <a href="../index.html#sri-lanka">Sri Lanka</a>
+        <a href="../index.html#global">Global</a>
+        <a href="../index.html#it-tools">IT &amp; Security</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="calc-page">
+    <div class="wrap">
+      <div class="breadcrumb"><a href="../index.html">Home</a> / <a href="../index.html#it-tools">IT &amp; Security Tools</a> / IP Lookup</div>
+      <h1 class="calc-title">What Is My IP Address?</h1>
+      <p class="calc-subtitle">Your public IP address and approximate location, as seen by websites you visit.</p>
+
+      <div class="calc-box">
+        <div class="calc-result">
+          <div class="result-label">Your IP address</div>
+          <div class="result-value" id="ip-result">Looking up…</div>
+        </div>
+        <div id="ip-details" style="margin-top:18px; display:grid; grid-template-columns:1fr 1fr; gap:14px; font-size:0.85rem;"></div>
+        <p class="rate-note" id="ip-error"></p>
+      </div>
+
+      <div class="wrap" style="padding:0; margin-bottom:32px;"><div class="ad-slot">Ad slot — in-content (300×250)</div></div>
+
+      <div class="explainer">
+        <h2>A note on domain (WHOIS) lookups</h2>
+        <p>A true domain WHOIS lookup needs a small server-side component — browsers can't query WHOIS registries directly for security reasons, unlike the IP lookup above which uses a public API designed for this. This is worth adding once the site has a real backend or a serverless function; it's a good "phase 2" addition rather than something to force into a pure static site.</p>
+        <h2>How this works, and its limits</h2>
+        <p>This page calls a free public API (ipapi.co) from your browser to ask "what IP is this request coming from." It's genuinely useful and accurate for a casual check, but free tiers on these APIs usually cap the number of daily lookups — worth knowing if this tool gets popular, since you may eventually need a paid tier or a different provider.</p>
+      </div>
+
+      <div class="related-tools">
+        <h2>Related tools</h2>
+        <div class="tool-grid">
+          <a class="tool-card" href="password-generator.html"><div class="icon">→</div><h3>Password Generator</h3><p>Create a strong password instantly.</p></a>
+          <a class="tool-card" href="password-strength.html"><div class="icon">→</div><h3>Password Strength Checker</h3><p>Test how strong a password is.</p></a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <span>© 2026 ToolReady. Most tools run entirely in your browser — this page is the one exception, which queries a public IP-lookup API.</span>
+      <span>Built for Sri Lanka and beyond.</span>
+    </div>
+  </footer>
+
+  <script>
+    async function lookupIP() {
+      const resultEl = document.getElementById('ip-result');
+      const detailsEl = document.getElementById('ip-details');
+      const errorEl = document.getElementById('ip-error');
+      try {
+        const response = await fetch('https://ipapi.co/json/');
+        if (!response.ok) throw new Error('Lookup service returned an error');
+        const data = await response.json();
+        resultEl.textContent = data.ip || '—';
+        const fields = [
+          ['City', data.city],
+          ['Region', data.region],
+          ['Country', data.country_name],
+          ['ISP', data.org]
+        ];
+        detailsEl.innerHTML = fields.map(([label, value]) =>
+          `<div><span style="color:var(--slate);">${label}</span><br><span style="font-family:var(--font-mono); font-weight:700;">${value || '—'}</span></div>`
+        ).join('');
+      } catch (err) {
+        resultEl.textContent = 'Unable to look up';
+        errorEl.textContent = 'The lookup service didn\'t respond. This can happen if the free API\'s daily limit was hit, or you\'re offline.';
+      }
+    }
+    lookupIP();
+  </script>
+</body>
+</html>

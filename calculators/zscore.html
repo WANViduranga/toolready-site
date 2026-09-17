@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A-Level Z-Score Calculator Sri Lanka — Free | ToolReady</title>
+  <meta name="description" content="Calculate your A-Level Z-score from your marks, subject mean and standard deviation.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../index.html" class="logo"><span class="mark">#</span>ToolReady</a>
+      <div class="site-search"><input type="text" placeholder="Search tools…" onclick="window.location.href='../index.html'" readonly></div>
+      <nav class="main-nav">
+        <a href="../index.html#sri-lanka">Sri Lanka</a>
+        <a href="../index.html#global">Global</a>
+        <a href="../index.html#it-tools">IT &amp; Security</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="calc-page">
+    <div class="wrap">
+      <div class="breadcrumb"><a href="../index.html">Home</a> / <a href="../index.html#sri-lanka">Sri Lanka Calculators</a> / A-Level Z-Score</div>
+      <h1 class="calc-title">A-Level Z-Score Calculator</h1>
+      <p class="calc-subtitle">Add each subject's mark, mean and standard deviation to get your combined Z-score. Find the mean/SD for your year and stream on the Department of Examinations website.</p>
+
+      <div class="calc-box">
+        <div id="subjects"></div>
+        <button type="button" id="add-subject" style="margin-top:8px; padding:9px 16px; border:1px solid var(--line-strong); border-radius:var(--radius); background:var(--paper); font-family:var(--font-display); cursor:pointer; font-size:0.85rem;">+ Add subject</button>
+        <div class="calc-result" style="margin-top:20px;">
+          <div class="result-label">Combined Z-score</div>
+          <div class="result-value" id="z-result">—</div>
+        </div>
+      </div>
+
+      <div class="wrap" style="padding:0; margin-bottom:32px;"><div class="ad-slot">Ad slot — in-content (300×250)</div></div>
+
+      <div class="explainer">
+        <h2>What a Z-score means</h2>
+        <p>A Z-score shows how far your mark is from the average, measured in standard deviations: Z = (your mark − mean) ÷ standard deviation. Your combined Z-score is simply the sum of your three subject Z-scores. This calculator doesn't include district/cutoff data since those change every year — use it purely to work out your own Z-score once you have the official mean and SD figures for your exam year.</p>
+      </div>
+
+      <div class="related-tools">
+        <h2>Related tools</h2>
+        <div class="tool-grid">
+          <a class="tool-card" href="percentage.html"><div class="icon">→</div><h3>Percentage Calculator</h3><p>Quick percentage math.</p></a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <span>© 2026 ToolReady. All calculations run in your browser — nothing you enter is sent anywhere.</span>
+      <span>Built for Sri Lanka and beyond.</span>
+    </div>
+  </footer>
+
+  <script>
+    const subjectsEl = document.getElementById('subjects');
+    let subjectCount = 0;
+
+    function addSubject(label) {
+      subjectCount++;
+      const id = 'subj-' + subjectCount;
+      const row = document.createElement('div');
+      row.style.marginBottom = '18px';
+      row.style.paddingBottom = '18px';
+      row.style.borderBottom = '1px solid var(--line-strong)';
+      row.innerHTML = `
+        <label style="font-size:0.85rem; font-weight:600; display:block; margin-bottom:8px;">${label}</label>
+        <div class="field-row" style="grid-template-columns:1fr 1fr 1fr;">
+          <div class="field-group" style="margin-bottom:0;">
+            <label for="${id}-mark">Your mark</label>
+            <input type="number" id="${id}-mark" inputmode="decimal">
+          </div>
+          <div class="field-group" style="margin-bottom:0;">
+            <label for="${id}-mean">Mean</label>
+            <input type="number" id="${id}-mean" inputmode="decimal">
+          </div>
+          <div class="field-group" style="margin-bottom:0;">
+            <label for="${id}-sd">Std. deviation</label>
+            <input type="number" id="${id}-sd" inputmode="decimal">
+          </div>
+        </div>`;
+      subjectsEl.appendChild(row);
+      row.querySelectorAll('input').forEach(inp => inp.addEventListener('input', calcZ));
+    }
+
+    function calcZ() {
+      let total = 0;
+      let anyValid = false;
+      for (let i = 1; i <= subjectCount; i++) {
+        const mark = parseFloat(document.getElementById(`subj-${i}-mark`)?.value);
+        const mean = parseFloat(document.getElementById(`subj-${i}-mean`)?.value);
+        const sd = parseFloat(document.getElementById(`subj-${i}-sd`)?.value);
+        if (!isNaN(mark) && !isNaN(mean) && !isNaN(sd) && sd !== 0) {
+          total += (mark - mean) / sd;
+          anyValid = true;
+        }
+      }
+      document.getElementById('z-result').textContent = anyValid ? total.toFixed(4) : '—';
+    }
+
+    addSubject('Subject 1');
+    addSubject('Subject 2');
+    addSubject('Subject 3');
+
+    document.getElementById('add-subject').addEventListener('click', () => {
+      addSubject('Subject ' + (subjectCount + 1));
+    });
+  </script>
+</body>
+</html>

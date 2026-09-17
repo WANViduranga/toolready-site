@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EPF / ETF Calculator Sri Lanka — Free | ToolReady</title>
+  <meta name="description" content="Calculate your EPF and ETF contributions in Sri Lanka - employee and employer share, monthly and annual.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../index.html" class="logo"><span class="mark">#</span>ToolReady</a>
+      <div class="site-search"><input type="text" placeholder="Search tools…" onclick="window.location.href='../index.html'" readonly></div>
+      <nav class="main-nav">
+        <a href="../index.html#sri-lanka">Sri Lanka</a>
+        <a href="../index.html#global">Global</a>
+        <a href="../index.html#it-tools">IT &amp; Security</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="calc-page">
+    <div class="wrap">
+      <div class="breadcrumb"><a href="../index.html">Home</a> / <a href="../index.html#sri-lanka">Sri Lanka Calculators</a> / EPF / ETF</div>
+      <h1 class="calc-title">EPF / ETF Calculator</h1>
+      <p class="calc-subtitle">See exactly how much goes into your retirement fund each month — from you and from your employer.</p>
+
+      <div class="calc-box">
+        <div class="field-group">
+          <label for="salary-epf">Gross monthly salary (LKR)</label>
+          <input type="number" id="salary-epf" placeholder="e.g. 250000" inputmode="decimal">
+        </div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:20px;">
+          <div class="calc-result">
+            <div class="result-label">Your EPF (8%, deducted from salary)</div>
+            <div class="result-value" id="epf-employee" style="font-size:1.4rem;">—</div>
+          </div>
+          <div class="calc-result">
+            <div class="result-label">Employer EPF (12%)</div>
+            <div class="result-value" id="epf-employer" style="font-size:1.4rem;">—</div>
+          </div>
+          <div class="calc-result">
+            <div class="result-label">Employer ETF (3%)</div>
+            <div class="result-value" id="etf-employer" style="font-size:1.4rem;">—</div>
+          </div>
+          <div class="calc-result">
+            <div class="result-label">Total monthly contribution</div>
+            <div class="result-value" id="total-contribution" style="font-size:1.4rem;">—</div>
+          </div>
+        </div>
+        <p class="rate-note" id="rate-note"></p>
+      </div>
+
+      <div class="wrap" style="padding:0; margin-bottom:32px;"><div class="ad-slot">Ad slot — in-content (300×250)</div></div>
+
+      <div class="explainer">
+        <h2>EPF vs ETF, in plain terms</h2>
+        <p>EPF (Employees' Provident Fund) is a retirement savings pot — 8% comes out of your salary, and your employer adds 12% on top, so 20% of your salary total goes in every month. ETF (Employees' Trust Fund) is a separate, employer-only 3% contribution — you don't pay into it, but it's still yours at retirement.</p>
+      </div>
+
+      <div class="related-tools">
+        <h2>Related tools</h2>
+        <div class="tool-grid">
+          <a class="tool-card" href="take-home-pay.html"><div class="icon">→</div><h3>Take-Home Pay</h3><p>Full net salary calculation.</p></a>
+          <a class="tool-card" href="apit-tax.html"><div class="icon">→</div><h3>APIT / Income Tax</h3><p>Calculate your monthly tax.</p></a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <span>© 2026 ToolReady. All calculations run in your browser — nothing you enter is sent anywhere.</span>
+      <span>Built for Sri Lanka and beyond.</span>
+    </div>
+  </footer>
+
+  <script src="../assets/js/rates.js"></script>
+  <script>
+    const salaryInput = document.getElementById('salary-epf');
+    document.getElementById('rate-note').textContent =
+      `Rates: EPF ${RATES.epf.source} · ETF ${RATES.etf.source} · Last checked ${RATES.epf.lastVerified}`;
+
+    salaryInput.addEventListener('input', () => {
+      const salary = parseFloat(salaryInput.value);
+      const ids = ['epf-employee','epf-employer','etf-employer','total-contribution'];
+      if (isNaN(salary) || salary <= 0) {
+        ids.forEach(id => document.getElementById(id).textContent = '—');
+        return;
+      }
+      const empEpf = salary * RATES.epf.employeeRate;
+      const erEpf = salary * RATES.epf.employerRate;
+      const erEtf = salary * RATES.etf.employerRate;
+      const total = empEpf + erEpf + erEtf;
+      document.getElementById('epf-employee').textContent = 'Rs ' + empEpf.toLocaleString(undefined, {maximumFractionDigits: 0});
+      document.getElementById('epf-employer').textContent = 'Rs ' + erEpf.toLocaleString(undefined, {maximumFractionDigits: 0});
+      document.getElementById('etf-employer').textContent = 'Rs ' + erEtf.toLocaleString(undefined, {maximumFractionDigits: 0});
+      document.getElementById('total-contribution').textContent = 'Rs ' + total.toLocaleString(undefined, {maximumFractionDigits: 0});
+    });
+  </script>
+</body>
+</html>
