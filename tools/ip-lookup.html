@@ -38,13 +38,14 @@
         <p class="rate-note" id="ip-error"></p>
       </div>
 
-      <div class="wrap" style="padding:0; margin-bottom:32px;"><div class="ad-slot">Ad slot — in-content (300×250)</div></div>
+      <div class="wrap" style="padding:0; margin-bottom:32px;"><!-- Monetag ad code goes here (in-content, 300x250) --><div class="ad-slot" data-ad="in-content-300x250"></div></div>
 
       <div class="explainer">
         <h2>A note on domain (WHOIS) lookups</h2>
         <p>A true domain WHOIS lookup needs a small server-side component — browsers can't query WHOIS registries directly for security reasons, unlike the IP lookup above which uses a public API designed for this. This is worth adding once the site has a real backend or a serverless function; it's a good "phase 2" addition rather than something to force into a pure static site.</p>
         <h2>How this works, and its limits</h2>
         <p>This page calls a free public API (ipapi.co) from your browser to ask "what IP is this request coming from." It's genuinely useful and accurate for a casual check, but free tiers on these APIs usually cap the number of daily lookups — worth knowing if this tool gets popular, since you may eventually need a paid tier or a different provider.</p>
+        <p><strong>If you're testing by double-clicking the file:</strong> this specific page won't work, because browsers block this kind of external request from a page opened directly off your computer (a <code>file://</code> address). Every other calculator on this site works fine that way — this is the one exception, since it's the only one that needs to reach the internet. It works correctly once the site is served by an actual web server, including a local test server or the live site.</p>
       </div>
 
       <div class="related-tools">
@@ -85,7 +86,13 @@
         ).join('');
       } catch (err) {
         resultEl.textContent = 'Unable to look up';
-        errorEl.textContent = 'The lookup service didn\'t respond. This can happen if the free API\'s daily limit was hit, or you\'re offline.';
+        // Showing the raw error helps diagnose WHICH cause it is:
+        // "Failed to fetch" from a file:// page almost always means the
+        // browser blocked the request because the page isn't on a real
+        // server yet (see the note below) - a local server or the live
+        // site fixes it. Any other message likely means the free API's
+        // daily limit was hit, or the visitor is offline.
+        errorEl.textContent = 'The lookup didn\'t work (' + err.message + '). If you\'re testing this by double-clicking the file, that\'s the likely cause - see the note below.';
       }
     }
     lookupIP();

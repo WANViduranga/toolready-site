@@ -363,18 +363,14 @@ footer.site-footer {
 
 /* ============================================
    AD SLOT PLACEHOLDERS
-   These are just empty containers where Monetag ad code
-   will go later - dashed border so you can see them while
-   building, doesn't render visibly once ads are active.
+   These are empty containers where Monetag ad code will go.
+   Left with no visible styling so an unfilled slot doesn't show
+   an ugly placeholder box to visitors - it just takes up no space
+   until real ad code is pasted inside it.
    ============================================ */
 .ad-slot {
-  border: 1px dashed var(--line-strong);
-  border-radius: var(--radius);
-  padding: 12px;
-  text-align: center;
-  font-size: 0.7rem;
-  color: var(--line-strong);
-  margin: 24px 0;
+  /* intentionally empty - do not add a border/background here,
+     or every unfilled ad slot will look broken to visitors */
 }
 
 /* ============================================
