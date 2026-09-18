@@ -12,9 +12,10 @@
       instead of a half-sheet.
    3. Wiring the Back Button on calculator/tool pages so it
       navigates to the home page, like a native back gesture.
-   4. Loading the Telegram-specific Monetag ad zone into the same
-      .ad-slot containers the web version uses - see the TODO
-      below once you have that zone ID from Monetag.
+   4. Loading the Monetag Mini App SDK (zone 11831987) and
+      triggering their In-App Interstitial format, which shows
+      automatically on its own schedule - separate from, and never
+      conflicting with, the web zone (11828923).
    ============================================ */
 
 (function () {
@@ -67,18 +68,29 @@
   /* ---- 3. Mini App ad zone ----
      The web version's Monetag script (zone 11828923) is skipped
      inside Telegram - see the inline guard added near the top of
-     each page's <head>. Once you create a Telegram Mini App zone
-     in the Monetag dashboard, drop its zone ID below and this will
-     load it into the same .ad-slot containers automatically.
+     each page's <head>. This is the SEPARATE Monetag zone created
+     specifically for the Telegram Mini App (zone 11831987), using
+     their In-App Interstitial format: it shows automatically on
+     its own schedule, no click or reward action needed from us.
 
-     TODO: replace 'YOUR_TG_ZONE_ID' once you have it from Monetag,
-     then remove the early "return" line below this comment. */
-  return; // <-- remove this line once TG_ZONE_ID is set
-
-  // eslint-disable-next-line no-unreachable
-  const TG_ZONE_ID = 'YOUR_TG_ZONE_ID';
-  (function (s) {
-    s.dataset.zone = TG_ZONE_ID;
-    s.src = 'https://n6wxm.com/vignette.min.js'; // confirm this is the correct TG Mini App script URL in Monetag's dashboard - it may differ from the web snippet
-  })([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')));
+     Loaded dynamically (same pattern as the web zone's script) so
+     it only ever runs inside Telegram - never on the plain website. */
+  const tgAdScript = document.createElement('script');
+  tgAdScript.src = '//libtl.com/sdk.js';
+  tgAdScript.setAttribute('data-zone', '11831987');
+  tgAdScript.setAttribute('data-sdk', 'show_11831987');
+  tgAdScript.onload = function () {
+    if (typeof window.show_11831987 !== 'function') return;
+    window.show_11831987({
+      type: 'inApp',
+      inAppSettings: {
+        frequency: 2,   // show up to 2 ads automatically...
+        capping: 0.1,   // ...within a 0.1 hour (6 min) window...
+        interval: 30,   // ...at least 30s apart...
+        timeout: 5,     // ...with a 5s delay before the first one
+        everyPage: false // keep counting across page navigations, not resetting each page
+      }
+    });
+  };
+  document.head.appendChild(tgAdScript);
 })();
