@@ -44,27 +44,31 @@ const RATES = {
   },
 
   // --- Vehicle import duty ---
-  // ⚠ PLACEHOLDER RATES - DO NOT PUBLISH WITHOUT VERIFYING.
-  // Sri Lanka vehicle import duty is genuinely complex and changes
-  // often (multiple components: Customs Duty, Excise/SPD, PAL, SSCL,
-  // Surcharge, Luxury Tax, VAT - and the exact percentages are disputed
-  // even across existing tax-calculator sites). Before this calculator
-  // goes live, verify every number below against the current Sri Lanka
-  // Customs Gazette at customs.gov.lk, or an official notice.
+  // ⚠ ONE RATE STILL NEEDS YOUR VERIFICATION, PLUS ONE MISSING COMPONENT.
+  // PAL, SSCL, VAT and the excise tiers below are confirmed consistently
+  // across multiple current sources (checked 2026-09-19). Customs Duty
+  // itself is NOT settled - sources disagree between a flat 100% and a
+  // 30% base + temporary 50% surcharge (~45% effective) tied to a 2026
+  // gazette that may have since expired. Confirm the current figure with
+  // Sri Lanka Customs or a clearing agent, then update customsDutyRate
+  // below. Separately, a Luxury Tax layer (roughly 5-6M LKR CIF threshold,
+  // varies by fuel type) is not modelled here at all yet - add it once
+  // you've confirmed the current threshold and rate.
   vehicleDuty: {
-    lastVerified: "NEEDS VERIFICATION - placeholder values only",
-    source: "PLACEHOLDER - confirm with Sri Lanka Customs before publishing",
-    customsDutyRate: 1.00,      // 100% - verify
-    palRate: 0.075,             // 7.5% - verify
-    ssclRate: 0.025,            // 2.5% - verify
-    vatRate: 0.18,              // 18% - verify
-    exciseByCC: [               // excise duty tier by engine size - verify all
+    lastVerified: "2026-09-19 (customs duty rate + luxury tax still unconfirmed - see note above)",
+    source: "PAL/SSCL/VAT/Excise cross-checked across current sources; Customs Duty rate disputed - confirm before publishing",
+    customsDutyRate: 1.00,      // ⚠ DISPUTED - could be as low as ~0.45 - verify with Sri Lanka Customs
+    palRate: 0.075,             // 7.5% - confirmed
+    ssclRate: 0.025,            // 2.5% - confirmed
+    vatRate: 0.18,              // 18% - confirmed
+    exciseByCC: [                // confirmed - petrol/diesel, tiered by engine size
       { upToCC: 1000, rate: 0.00 },
       { upToCC: 1500, rate: 0.50 },
       { upToCC: 2000, rate: 0.65 },
       { upToCC: 3000, rate: 0.75 },
       { upToCC: Infinity, rate: 1.00 }
     ],
-    evExciseRate: 0.00           // EVs - verify current EV excise treatment
+    evExciseRate: 0.00           // confirmed - EVs pay 0% excise
+    // luxuryTax: not yet modelled - see note above
   }
 };
