@@ -1,6 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Telegram Mini App SDK + early detection (safe no-op outside Telegram) -->
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <script>
+    window.isTgMiniApp = function () {
+      try { return !!(window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.initData); }
+      catch (e) { return false; }
+    };
+    if (window.isTgMiniApp()) document.documentElement.classList.add('tg-mode');
+  </script>
+
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-4S4MPT9MFQ"></script>
   <script>
@@ -10,7 +20,12 @@
     gtag('config', 'G-4S4MPT9MFQ');
   </script>
 
-  <script>(function(s){s.dataset.zone='11828923',s.src='https://n6wxm.com/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+  <!-- Web ad zone - skipped inside Telegram, which gets its own zone via the TG Mini App script -->
+  <script>
+    if (!window.isTgMiniApp()) {
+      (function(s){s.dataset.zone='11828923',s.src='https://n6wxm.com/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')));
+    }
+  </script>
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -205,5 +220,6 @@
     p3From.addEventListener('input', calc3);
     p3To.addEventListener('input', calc3);
   </script>
+  <script src="../assets/js/telegram-mini.js"></script>
 </body>
 </html>
