@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Subnet / CIDR Calculator — Free | ToolReady</title>
+  <meta name="description" content="Calculate network address, broadcast address, usable host range, and subnet mask from an IP and CIDR prefix.">
+  <script>(function(s){s.dataset.zone='11828923',s.src='https://n6wxm.com/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4S4MPT9MFQ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-4S4MPT9MFQ');
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="canonical" href="https://gettoolready.com/tools/subnet-calculator.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Subnet / CIDR Calculator — Free">
+  <meta property="og:description" content="Calculate network address, broadcast address, usable host range, and subnet mask from an IP and CIDR prefix.">
+  <meta property="og:url" content="https://gettoolready.com/tools/subnet-calculator.html">
+  <meta property="og:site_name" content="ToolReady">
+  <meta name="twitter:card" content="summary">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../index.html" class="logo"><span class="mark">#</span>ToolReady</a>
+      <div class="site-search"><input type="text" placeholder="Search tools…" onclick="window.location.href='../index.html'" readonly></div>
+      <nav class="main-nav">
+        <a href="../index.html#sri-lanka">Sri Lanka</a>
+        <a href="../index.html#global">Global</a>
+        <a href="../index.html#it-tools">IT &amp; Security</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="calc-page">
+    <div class="wrap">
+      <div class="breadcrumb"><a href="../index.html">Home</a> / <a href="../index.html#it-tools">IT &amp; Security Tools</a> / Subnet Calculator</div>
+      <h1 class="calc-title">Subnet / CIDR Calculator</h1>
+      <p class="calc-subtitle">Enter an IP address and CIDR prefix to get the network address, broadcast address, usable host range, and mask.</p>
+
+      <div class="calc-box">
+        <div class="field-row">
+          <div class="field-group">
+            <label for="ip-input">IP address</label>
+            <input type="text" id="ip-input" placeholder="e.g. 192.168.1.10" value="192.168.1.10">
+          </div>
+          <div class="field-group">
+            <label for="prefix-input">Prefix length (CIDR)</label>
+            <input type="number" id="prefix-input" min="0" max="32" value="24">
+          </div>
+        </div>
+        <p class="rate-note" id="error-msg" style="color:#C0392B;"></p>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:16px;">
+          <div class="calc-result"><div class="result-label">Network address</div><div class="result-value" id="r-network" style="font-size:1.2rem;">—</div></div>
+          <div class="calc-result"><div class="result-label">Broadcast address</div><div class="result-value" id="r-broadcast" style="font-size:1.2rem;">—</div></div>
+          <div class="calc-result"><div class="result-label">Subnet mask</div><div class="result-value" id="r-mask" style="font-size:1.2rem;">—</div></div>
+          <div class="calc-result"><div class="result-label">Wildcard mask</div><div class="result-value" id="r-wildcard" style="font-size:1.2rem;">—</div></div>
+          <div class="calc-result"><div class="result-label">First usable host</div><div class="result-value" id="r-first" style="font-size:1.2rem;">—</div></div>
+          <div class="calc-result"><div class="result-label">Last usable host</div><div class="result-value" id="r-last" style="font-size:1.2rem;">—</div></div>
+        </div>
+        <div style="margin-top:14px; font-size:0.85rem;">
+          <span style="color:var(--slate);">Usable hosts</span><br>
+          <span id="r-usable" style="font-family:var(--font-mono); font-weight:700;">—</span>
+        </div>
+      </div>
+
+      <!-- Monetag ad code goes here (in-content, 300x250) --><div class="ad-slot" data-ad="in-content-300x250"></div>
+
+      <div class="explainer">
+        <h2>Notes on edge cases</h2>
+        <p>/31 networks (2 addresses) follow RFC 3021 — both addresses are usable, point-to-point style, with no network/broadcast distinction. /32 is a single host route. These are handled correctly here, not just the common /24-style cases.</p>
+      </div>
+
+      <div class="related-tools">
+        <h2>Related tools</h2>
+        <div class="tool-grid">
+          <a class="tool-card" href="ip-lookup.html"><div class="icon">→</div><h3>IP / WHOIS Lookup</h3><p>Find your public IP address.</p></a>
+          <a class="tool-card" href="hash-generator.html"><div class="icon">→</div><h3>Hash Generator</h3><p>Generate SHA/MD5 hashes.</p></a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <span>© 2026 ToolReady. All calculations run in your browser — nothing you enter is sent anywhere.</span>
+      <span><a href="../about.html">About</a> · <a href="../contact.html">Contact</a></span>
+    </div>
+  </footer>
+
+  <script>
+    function ipToInt(ip) {
+      const parts = ip.split('.').map(Number);
+      if (parts.length !== 4 || parts.some(p => isNaN(p) || p < 0 || p > 255 || !Number.isInteger(p))) return null;
+      return ((parts[0] << 24) | (parts[1] << 16) | (parts[2] << 8) | parts[3]) >>> 0;
+    }
+    function intToIp(int) {
+      return [(int >>> 24) & 255, (int >>> 16) & 255, (int >>> 8) & 255, int & 255].join('.');
+    }
+    function prefixToMask(prefix) {
+      if (prefix === 0) return 0;
+      return (0xFFFFFFFF << (32 - prefix)) >>> 0;
+    }
+
+    const ipInput = document.getElementById('ip-input');
+    const prefixInput = document.getElementById('prefix-input');
+    const errorMsg = document.getElementById('error-msg');
+    const outputIds = ['r-network','r-broadcast','r-mask','r-wildcard','r-first','r-last','r-usable'];
+
+    function clearOutputs() {
+      outputIds.forEach(id => document.getElementById(id).textContent = '—');
+    }
+
+    function calc() {
+      errorMsg.textContent = '';
+      const ip = ipInput.value.trim();
+      const prefix = parseInt(prefixInput.value);
+
+      const ipInt = ipToInt(ip);
+      if (ipInt === null) { errorMsg.textContent = 'Enter a valid IPv4 address (e.g. 192.168.1.10)'; clearOutputs(); return; }
+      if (isNaN(prefix) || prefix < 0 || prefix > 32) { errorMsg.textContent = 'Prefix must be between 0 and 32'; clearOutputs(); return; }
+
+      const mask = prefixToMask(prefix);
+      const wildcard = (~mask) >>> 0;
+      const network = (ipInt & mask) >>> 0;
+      const broadcast = (network | wildcard) >>> 0;
+      const totalAddresses = Math.pow(2, 32 - prefix);
+
+      let firstUsable, lastUsable, usableHosts;
+      if (prefix === 32) { firstUsable = network; lastUsable = network; usableHosts = 1; }
+      else if (prefix === 31) { firstUsable = network; lastUsable = broadcast; usableHosts = 2; }
+      else { firstUsable = (network + 1) >>> 0; lastUsable = (broadcast - 1) >>> 0; usableHosts = totalAddresses - 2; }
+
+      document.getElementById('r-network').textContent = intToIp(network);
+      document.getElementById('r-broadcast').textContent = intToIp(broadcast);
+      document.getElementById('r-mask').textContent = intToIp(mask);
+      document.getElementById('r-wildcard').textContent = intToIp(wildcard);
+      document.getElementById('r-first').textContent = intToIp(firstUsable);
+      document.getElementById('r-last').textContent = intToIp(lastUsable);
+      document.getElementById('r-usable').textContent = usableHosts.toLocaleString();
+    }
+
+    ipInput.addEventListener('input', calc);
+    prefixInput.addEventListener('input', calc);
+    calc();
+  </script>
+</body>
+</html>

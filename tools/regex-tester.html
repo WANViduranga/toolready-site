@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Regex Tester — Free | ToolReady</title>
+  <meta name="description" content="Test a regular expression against sample text with live match highlighting, entirely in your browser.">
+  <script>(function(s){s.dataset.zone='11828923',s.src='https://n6wxm.com/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4S4MPT9MFQ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-4S4MPT9MFQ');
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="canonical" href="https://gettoolready.com/tools/regex-tester.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Regex Tester — Free">
+  <meta property="og:description" content="Test a regular expression against sample text with live match highlighting.">
+  <meta property="og:url" content="https://gettoolready.com/tools/regex-tester.html">
+  <meta property="og:site_name" content="ToolReady">
+  <meta name="twitter:card" content="summary">
+  <style>
+    .regex-input-row { display:flex; align-items:center; gap:2px; font-family:var(--font-mono); }
+    .regex-slash { color:var(--slate); font-size:1.1rem; }
+    #pattern-input { flex:1; padding:11px 10px; border:1px solid var(--line-strong); border-radius:var(--radius); font-family:var(--font-mono); font-size:0.95rem; }
+    #flags-input { width:70px; padding:11px 10px; border:1px solid var(--line-strong); border-radius:var(--radius); font-family:var(--font-mono); font-size:0.95rem; }
+    #test-string { width:100%; min-height:150px; padding:12px; border:1px solid var(--line-strong); border-radius:var(--radius); font-family:var(--font-mono); font-size:0.88rem; resize:vertical; }
+    #highlighted-output { min-height:150px; padding:12px; border:1px solid var(--line-strong); border-radius:var(--radius); font-family:var(--font-mono); font-size:0.88rem; white-space:pre-wrap; word-break:break-word; background:var(--paper); }
+    #highlighted-output mark { background:#FFE8A3; color:var(--ink); border-radius:2px; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../index.html" class="logo"><span class="mark">#</span>ToolReady</a>
+      <div class="site-search"><input type="text" placeholder="Search tools…" onclick="window.location.href='../index.html'" readonly></div>
+      <nav class="main-nav">
+        <a href="../index.html#sri-lanka">Sri Lanka</a>
+        <a href="../index.html#global">Global</a>
+        <a href="../index.html#it-tools">IT &amp; Security</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="calc-page">
+    <div class="wrap">
+      <div class="breadcrumb"><a href="../index.html">Home</a> / <a href="../index.html#it-tools">IT &amp; Security Tools</a> / Regex Tester</div>
+      <h1 class="calc-title">Regex Tester</h1>
+      <p class="calc-subtitle">Enter a pattern and test string — matches highlight live as you type.</p>
+
+      <div class="calc-box">
+        <div class="field-group">
+          <label for="pattern-input">Pattern</label>
+          <div class="regex-input-row">
+            <span class="regex-slash">/</span>
+            <input type="text" id="pattern-input" placeholder="[a-z]+@[a-z]+\.[a-z]+" value="\d+">
+            <span class="regex-slash">/</span>
+            <input type="text" id="flags-input" placeholder="flags" value="g">
+          </div>
+        </div>
+        <p class="rate-note" id="regex-error" style="color:#C0392B;"></p>
+
+        <div class="field-group" style="margin-top:16px;">
+          <label for="test-string">Test string</label>
+          <textarea id="test-string">Call us at 071-2345678 or email support@example.com. Order #4521 shipped on 2026-09-20.</textarea>
+        </div>
+
+        <div class="field-group" style="margin-top:16px;">
+          <label>Highlighted matches (<span id="match-count">0</span>)</label>
+          <div id="highlighted-output"></div>
+        </div>
+      </div>
+
+      <!-- Monetag ad code goes here (in-content, 300x250) --><div class="ad-slot" data-ad="in-content-300x250"></div>
+
+      <div class="related-tools">
+        <h2>Related tools</h2>
+        <div class="tool-grid">
+          <a class="tool-card" href="json-formatter.html"><div class="icon">→</div><h3>JSON Formatter</h3><p>Format and validate JSON.</p></a>
+          <a class="tool-card" href="diff-checker.html"><div class="icon">→</div><h3>Text Diff Checker</h3><p>Compare two blocks of text.</p></a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <span>© 2026 ToolReady. All calculations run in your browser — nothing you enter is sent anywhere.</span>
+      <span><a href="../about.html">About</a> · <a href="../contact.html">Contact</a></span>
+    </div>
+  </footer>
+
+  <script>
+    // Verified: HTML-escapes text outside matches, highlights matches,
+    // handles zero-length matches without infinite loop, and reports
+    // invalid regex gracefully.
+    function escapeHtml(str) {
+      return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
+
+    const patternInput = document.getElementById('pattern-input');
+    const flagsInput = document.getElementById('flags-input');
+    const testString = document.getElementById('test-string');
+    const output = document.getElementById('highlighted-output');
+    const matchCountEl = document.getElementById('match-count');
+    const errorEl = document.getElementById('regex-error');
+
+    function run() {
+      errorEl.textContent = '';
+      const pattern = patternInput.value;
+      const text = testString.value;
+      let flags = flagsInput.value.replace(/[^gimsuy]/g, '');
+      if (!flags.includes('g')) flags += 'g'; // always scan all matches for highlighting
+
+      if (pattern === '') {
+        output.textContent = text;
+        matchCountEl.textContent = '0';
+        return;
+      }
+
+      let re;
+      try { re = new RegExp(pattern, flags); }
+      catch (e) { errorEl.textContent = 'Invalid regex: ' + e.message; output.textContent = escapeHtml(text); matchCountEl.textContent = '0'; return; }
+
+      let html = '';
+      let lastIndex = 0;
+      let count = 0;
+      let match;
+      re.lastIndex = 0;
+      let iterations = 0;
+      while ((match = re.exec(text)) !== null) {
+        count++;
+        html += escapeHtml(text.slice(lastIndex, match.index));
+        html += '<mark>' + escapeHtml(match[0]) + '</mark>';
+        lastIndex = match.index + match[0].length;
+        if (match[0].length === 0) re.lastIndex++;
+        iterations++;
+        if (iterations > 20000) break; // safety guard against pathological patterns
+      }
+      html += escapeHtml(text.slice(lastIndex));
+
+      output.innerHTML = html;
+      matchCountEl.textContent = count.toLocaleString();
+    }
+
+    [patternInput, flagsInput, testString].forEach(el => el.addEventListener('input', run));
+    run();
+  </script>
+</body>
+</html>

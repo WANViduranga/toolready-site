@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UUID Generator — Free | ToolReady</title>
+  <meta name="description" content="Generate one or many random UUIDs (v4) instantly in your browser.">
+  <script>(function(s){s.dataset.zone='11828923',s.src='https://n6wxm.com/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4S4MPT9MFQ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-4S4MPT9MFQ');
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="canonical" href="https://gettoolready.com/tools/uuid-generator.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="UUID Generator — Free">
+  <meta property="og:description" content="Generate one or many random UUIDs (v4) instantly in your browser.">
+  <meta property="og:url" content="https://gettoolready.com/tools/uuid-generator.html">
+  <meta property="og:site_name" content="ToolReady">
+  <meta name="twitter:card" content="summary">
+  <style>
+    #uuid-list { font-family:var(--font-mono); font-size:0.9rem; line-height:2; }
+    #uuid-list div { padding:6px 10px; border-bottom:1px solid var(--line); word-break:break-all; }
+    #uuid-list div:last-child { border-bottom:none; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../index.html" class="logo"><span class="mark">#</span>ToolReady</a>
+      <div class="site-search"><input type="text" placeholder="Search tools…" onclick="window.location.href='../index.html'" readonly></div>
+      <nav class="main-nav">
+        <a href="../index.html#sri-lanka">Sri Lanka</a>
+        <a href="../index.html#global">Global</a>
+        <a href="../index.html#it-tools">IT &amp; Security</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="calc-page">
+    <div class="wrap">
+      <div class="breadcrumb"><a href="../index.html">Home</a> / <a href="../index.html#it-tools">IT &amp; Security Tools</a> / UUID Generator</div>
+      <h1 class="calc-title">UUID Generator</h1>
+      <p class="calc-subtitle">Generate random UUIDs (version 4), one or many at a time.</p>
+
+      <div class="calc-box">
+        <div class="field-row">
+          <div class="field-group">
+            <label for="count-input">How many?</label>
+            <input type="number" id="count-input" min="1" max="100" value="1">
+          </div>
+          <div class="field-group" style="display:flex; align-items:flex-end;">
+            <button type="button" id="generate-btn" style="width:100%; padding:11px; border:none; border-radius:var(--radius); background:var(--ink); color:#fff; font-family:var(--font-display); font-weight:600; cursor:pointer;">Generate</button>
+          </div>
+        </div>
+        <div id="uuid-list"></div>
+        <button type="button" id="copy-all-btn" style="margin-top:14px; padding:9px 16px; border:1px solid var(--line-strong); border-radius:var(--radius); background:var(--paper); font-family:var(--font-display); cursor:pointer; font-size:0.85rem;">Copy all</button>
+      </div>
+
+      <!-- Monetag ad code goes here (in-content, 300x250) --><div class="ad-slot" data-ad="in-content-300x250"></div>
+
+      <div class="related-tools">
+        <h2>Related tools</h2>
+        <div class="tool-grid">
+          <a class="tool-card" href="password-generator.html"><div class="icon">→</div><h3>Password Generator</h3><p>Create a strong password instantly.</p></a>
+          <a class="tool-card" href="hash-generator.html"><div class="icon">→</div><h3>Hash Generator</h3><p>Generate SHA/MD5 hashes.</p></a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <span>© 2026 ToolReady. All calculations run in your browser — nothing you enter is sent anywhere.</span>
+      <span><a href="../about.html">About</a> · <a href="../contact.html">Contact</a></span>
+    </div>
+  </footer>
+
+  <script>
+    // Prefer the native crypto.randomUUID; fall back to a
+    // crypto.getRandomValues-based RFC 4122 v4 implementation for
+    // older browsers where randomUUID isn't available.
+    function generateUUID() {
+      if (typeof crypto.randomUUID === 'function') return crypto.randomUUID();
+      const bytes = new Uint8Array(16);
+      crypto.getRandomValues(bytes);
+      bytes[6] = (bytes[6] & 0x0f) | 0x40; // version 4
+      bytes[8] = (bytes[8] & 0x3f) | 0x80; // variant 10xx
+      const hex = Array.from(bytes).map(b => b.toString(16).padStart(2, '0'));
+      return `${hex.slice(0,4).join('')}-${hex.slice(4,6).join('')}-${hex.slice(6,8).join('')}-${hex.slice(8,10).join('')}-${hex.slice(10,16).join('')}`;
+    }
+
+    const listEl = document.getElementById('uuid-list');
+    const countInput = document.getElementById('count-input');
+
+    function generate() {
+      const count = Math.min(100, Math.max(1, parseInt(countInput.value) || 1));
+      listEl.innerHTML = '';
+      for (let i = 0; i < count; i++) {
+        const div = document.createElement('div');
+        div.textContent = generateUUID();
+        listEl.appendChild(div);
+      }
+    }
+
+    document.getElementById('generate-btn').addEventListener('click', generate);
+    document.getElementById('copy-all-btn').addEventListener('click', () => {
+      const all = Array.from(listEl.children).map(d => d.textContent).join('\n');
+      navigator.clipboard.writeText(all).then(() => {
+        const btn = document.getElementById('copy-all-btn');
+        const original = btn.textContent;
+        btn.textContent = 'Copied!';
+        setTimeout(() => { btn.textContent = original; }, 1500);
+      });
+    });
+
+    generate();
+  </script>
+</body>
+</html>

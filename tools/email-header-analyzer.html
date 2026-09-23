@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Email Header Analyzer — Free | ToolReady</title>
+  <meta name="description" content="Paste raw email headers to see the delivery path, timing between hops, and SPF/DKIM/DMARC results.">
+  <script>(function(s){s.dataset.zone='11828923',s.src='https://n6wxm.com/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4S4MPT9MFQ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-4S4MPT9MFQ');
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="canonical" href="https://gettoolready.com/tools/email-header-analyzer.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Email Header Analyzer — Free">
+  <meta property="og:description" content="Paste raw email headers to see the delivery path, timing between hops, and SPF/DKIM/DMARC results.">
+  <meta property="og:url" content="https://gettoolready.com/tools/email-header-analyzer.html">
+  <meta property="og:site_name" content="ToolReady">
+  <meta name="twitter:card" content="summary">
+  <style>
+    .eh-textarea { width:100%; min-height:220px; padding:12px; border:1px solid var(--line-strong); border-radius:var(--radius); font-family:var(--font-mono); font-size:0.8rem; resize:vertical; }
+    .eh-section { margin-top:24px; }
+    .eh-section h3 { font-size:1rem; margin-bottom:10px; }
+    .eh-summary-row { display:flex; gap:10px; padding:6px 0; font-size:0.88rem; border-bottom:1px solid var(--line); }
+    .eh-summary-row:last-child { border-bottom:none; }
+    .eh-summary-label { width:110px; flex-shrink:0; color:var(--slate); font-weight:600; }
+    .eh-summary-value { font-family:var(--font-mono); word-break:break-all; }
+    .eh-hop { border:1px solid var(--line-strong); border-radius:var(--radius); padding:12px 14px; margin-bottom:10px; }
+    .eh-hop-title { font-weight:700; font-size:0.85rem; margin-bottom:6px; }
+    .eh-hop-detail { font-size:0.82rem; color:var(--slate); margin-bottom:2px; }
+    .eh-hop-raw { margin-top:8px; font-family:var(--font-mono); font-size:0.72rem; color:var(--slate); background:var(--paper); padding:8px; border-radius:4px; word-break:break-all; white-space:pre-wrap; }
+    .eh-delay { font-size:0.78rem; color:var(--amber-dark); font-weight:600; margin-top:4px; }
+    .badge { display:inline-block; padding:2px 9px; border-radius:20px; font-size:0.72rem; font-weight:700; font-family:var(--font-mono); }
+    .badge-pass { background:#E3F5EE; color:#1B4D3E; }
+    .badge-fail { background:#FCEAEA; color:#7A2020; }
+    .badge-other { background:var(--line); color:var(--slate); }
+    .eh-auth-block { border:1px solid var(--line-strong); border-radius:var(--radius); padding:12px 14px; margin-bottom:10px; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../index.html" class="logo"><span class="mark">#</span>ToolReady</a>
+      <div class="site-search"><input type="text" placeholder="Search tools…" onclick="window.location.href='../index.html'" readonly></div>
+      <nav class="main-nav">
+        <a href="../index.html#sri-lanka">Sri Lanka</a>
+        <a href="../index.html#global">Global</a>
+        <a href="../index.html#it-tools">IT &amp; Security</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="calc-page">
+    <div class="wrap">
+      <div class="breadcrumb"><a href="../index.html">Home</a> / <a href="../index.html#it-tools">IT &amp; Security Tools</a> / Email Header Analyzer</div>
+      <h1 class="calc-title">Email Header Analyzer</h1>
+      <p class="calc-subtitle">Paste the full raw headers from an email (in Gmail: "Show original"; in Outlook: "View message source") to see the delivery path and authentication results.</p>
+
+      <div class="calc-box">
+        <div class="field-group">
+          <label for="header-input">Raw email headers</label>
+          <textarea id="header-input" class="eh-textarea" placeholder="Paste raw headers here, starting from something like:&#10;Delivered-To: you@example.com&#10;Received: from ...&#10;..."></textarea>
+        </div>
+      </div>
+
+      <div id="results" style="display:none;">
+        <div class="eh-section">
+          <h3>Summary</h3>
+          <div class="calc-box" id="summary-box"></div>
+        </div>
+
+        <div class="eh-section">
+          <h3>Authentication results (SPF / DKIM / DMARC)</h3>
+          <div id="auth-results"></div>
+        </div>
+
+        <div class="eh-section">
+          <h3>Delivery path (oldest hop first)</h3>
+          <p style="font-size:0.82rem; color:var(--slate); margin-bottom:12px;">Each "Received" header is added by a mail server as the message passes through it. Parsing real-world header formats is genuinely messy — the extracted "from"/"by"/"time" fields below are best-effort; the full raw line is always shown too so you can verify.</p>
+          <div id="hops-list"></div>
+        </div>
+      </div>
+
+      <!-- Monetag ad code goes here (in-content, 300x250) --><div class="ad-slot" data-ad="in-content-300x250"></div>
+
+      <div class="explainer">
+        <h2>What to look for</h2>
+        <p>A phishing red flag: the "From" address domain doesn't match the domain in the earliest (originating) hop, or SPF/DKIM/DMARC all show "fail" or "none" for a message claiming to be from a well-known company. Large, unexplained time gaps between hops can also indicate a message was held or relayed through an unexpected system.</p>
+      </div>
+
+      <div class="related-tools">
+        <h2>Related tools</h2>
+        <div class="tool-grid">
+          <a class="tool-card" href="ip-lookup.html"><div class="icon">→</div><h3>IP / WHOIS Lookup</h3><p>Look up an IP seen in the headers.</p></a>
+          <a class="tool-card" href="regex-tester.html"><div class="icon">→</div><h3>Regex Tester</h3><p>Test regular expressions live.</p></a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <span>© 2026 ToolReady. All calculations run in your browser — nothing you enter is sent anywhere.</span>
+      <span><a href="../about.html">About</a> · <a href="../contact.html">Contact</a></span>
+    </div>
+  </footer>
+
+  <script>
+    // ===== Parsing logic - verified against a realistic multi-hop sample =====
+    function escapeHtml(str) {
+      return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
+
+    function unfoldHeaders(raw) {
+      const lines = raw.replace(/\r\n/g, '\n').split('\n');
+      const headers = [];
+      for (const line of lines) {
+        if (/^[ \t]/.test(line) && headers.length > 0) {
+          headers[headers.length - 1].value += ' ' + line.trim();
+        } else {
+          const idx = line.indexOf(':');
+          if (idx === -1) continue;
+          const name = line.slice(0, idx).trim();
+          const value = line.slice(idx + 1).trim();
+          if (name) headers.push({ name, value });
+        }
+      }
+      return headers;
+    }
+
+    function parseReceived(raw) {
+      const result = { raw };
+      const semiIdx = raw.lastIndexOf(';');
+      let mainPart = raw;
+      if (semiIdx !== -1) {
+        const tsPart = raw.slice(semiIdx + 1).trim();
+        const d = new Date(tsPart);
+        if (!isNaN(d.getTime())) { result.timestamp = d; result.timestampRaw = tsPart; }
+        mainPart = raw.slice(0, semiIdx);
+      }
+      const fromMatch = mainPart.match(/(?:^|\s)from\s+([\s\S]*?)\s+by\s+/i);
+      if (fromMatch) result.from = fromMatch[1].replace(/\s+/g, ' ').trim();
+      const byMatch = mainPart.match(/(?:^|\s)by\s+([\s\S]*?)\s+(with|via|id)\s+/i) || mainPart.match(/(?:^|\s)by\s+([\s\S]*)$/i);
+      if (byMatch) result.by = byMatch[1].replace(/\s+/g, ' ').trim();
+      return result;
+    }
+
+    function parseAuthResults(raw) {
+      const results = {};
+      const re = /\b(spf|dkim|dmarc)\s*=\s*(\w+)/gi;
+      let m;
+      while ((m = re.exec(raw)) !== null) results[m[1].toLowerCase()] = m[2].toLowerCase();
+      return results;
+    }
+
+    function badgeFor(value) {
+      if (!value) return '<span class="badge badge-other">not found</span>';
+      const v = value.toLowerCase();
+      if (v === 'pass') return `<span class="badge badge-pass">pass</span>`;
+      if (v === 'fail' || v === 'softfail') return `<span class="badge badge-fail">${escapeHtml(v)}</span>`;
+      return `<span class="badge badge-other">${escapeHtml(v)}</span>`;
+    }
+
+    function formatDuration(ms) {
+      const absMs = Math.abs(ms);
+      const sign = ms < 0 ? '−' : '+';
+      if (absMs < 1000) return `${sign}${absMs}ms`;
+      if (absMs < 60000) return `${sign}${(absMs / 1000).toFixed(1)}s`;
+      if (absMs < 3600000) return `${sign}${(absMs / 60000).toFixed(1)}m`;
+      return `${sign}${(absMs / 3600000).toFixed(1)}h`;
+    }
+
+    function analyze() {
+      const raw = document.getElementById('header-input').value;
+      const resultsEl = document.getElementById('results');
+      if (raw.trim() === '') { resultsEl.style.display = 'none'; return; }
+
+      const headers = unfoldHeaders(raw);
+      if (headers.length === 0) { resultsEl.style.display = 'none'; return; }
+      resultsEl.style.display = '';
+
+      // --- Summary fields ---
+      function getHeader(name) {
+        const h = headers.find(h => h.name.toLowerCase() === name.toLowerCase());
+        return h ? h.value : null;
+      }
+      const summaryFields = [
+        ['From', getHeader('From')],
+        ['To', getHeader('To')],
+        ['Subject', getHeader('Subject')],
+        ['Date', getHeader('Date')],
+        ['Return-Path', getHeader('Return-Path')],
+        ['Message-ID', getHeader('Message-ID')]
+      ];
+      document.getElementById('summary-box').innerHTML = summaryFields
+        .filter(([,v]) => v)
+        .map(([label, value]) => `<div class="eh-summary-row"><span class="eh-summary-label">${label}</span><span class="eh-summary-value">${escapeHtml(value)}</span></div>`)
+        .join('') || '<p style="color:var(--slate); font-size:0.85rem;">No standard summary headers (From/To/Subject) found in the pasted text.</p>';
+
+      // --- Authentication-Results ---
+      const authHeaders = headers.filter(h => h.name.toLowerCase() === 'authentication-results');
+      const authEl = document.getElementById('auth-results');
+      if (authHeaders.length === 0) {
+        authEl.innerHTML = '<p style="color:var(--slate); font-size:0.85rem;">No Authentication-Results header found in the pasted text.</p>';
+      } else {
+        authEl.innerHTML = authHeaders.map(h => {
+          const results = parseAuthResults(h.value);
+          const authservId = h.value.split(';')[0].trim();
+          return `<div class="eh-auth-block">
+            <div style="font-size:0.78rem; color:var(--slate); margin-bottom:8px;">Reported by: ${escapeHtml(authservId)}</div>
+            <div style="display:flex; gap:16px;">
+              <div>SPF ${badgeFor(results.spf)}</div>
+              <div>DKIM ${badgeFor(results.dkim)}</div>
+              <div>DMARC ${badgeFor(results.dmarc)}</div>
+            </div>
+          </div>`;
+        }).join('');
+      }
+
+      // --- Received hops ---
+      const receivedHeaders = headers.filter(h => h.name.toLowerCase() === 'received');
+      const hopsEl = document.getElementById('hops-list');
+      if (receivedHeaders.length === 0) {
+        hopsEl.innerHTML = '<p style="color:var(--slate); font-size:0.85rem;">No "Received" headers found in the pasted text.</p>';
+      } else {
+        // Received headers appear newest-first in raw email (each hop
+        // prepends its own). Reverse so we show the journey oldest -> newest,
+        // which is the intuitive reading order for "path the email took".
+        const chronological = receivedHeaders.slice().reverse().map(h => parseReceived(h.value));
+        hopsEl.innerHTML = chronological.map((hop, idx) => {
+          let delayHtml = '';
+          if (idx > 0 && hop.timestamp && chronological[idx - 1].timestamp) {
+            const deltaMs = hop.timestamp.getTime() - chronological[idx - 1].timestamp.getTime();
+            delayHtml = `<div class="eh-delay">${formatDuration(deltaMs)} since previous hop</div>`;
+          }
+          return `<div class="eh-hop">
+            <div class="eh-hop-title">Hop ${idx + 1}${idx === 0 ? ' (origin)' : idx === chronological.length - 1 ? ' (final / most recent)' : ''}</div>
+            ${hop.from ? `<div class="eh-hop-detail"><strong>From:</strong> ${escapeHtml(hop.from)}</div>` : ''}
+            ${hop.by ? `<div class="eh-hop-detail"><strong>By:</strong> ${escapeHtml(hop.by)}</div>` : ''}
+            ${hop.timestampRaw ? `<div class="eh-hop-detail"><strong>Time:</strong> ${escapeHtml(hop.timestampRaw)}</div>` : ''}
+            ${delayHtml}
+            <div class="eh-hop-raw">${escapeHtml(hop.raw)}</div>
+          </div>`;
+        }).join('');
+      }
+    }
+
+    document.getElementById('header-input').addEventListener('input', analyze);
+  </script>
+</body>
+</html>

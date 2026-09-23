@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JSON Formatter & Validator — Free | ToolReady</title>
+  <meta name="description" content="Format, validate, and minify JSON instantly in your browser.">
+  <script>(function(s){s.dataset.zone='11828923',s.src='https://n6wxm.com/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4S4MPT9MFQ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-4S4MPT9MFQ');
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="canonical" href="https://gettoolready.com/tools/json-formatter.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="JSON Formatter & Validator — Free">
+  <meta property="og:description" content="Format, validate, and minify JSON instantly in your browser.">
+  <meta property="og:url" content="https://gettoolready.com/tools/json-formatter.html">
+  <meta property="og:site_name" content="ToolReady">
+  <meta name="twitter:card" content="summary">
+  <style>
+    .json-textarea { width:100%; min-height:280px; padding:14px; border:1px solid var(--line-strong); border-radius:var(--radius); font-family:var(--font-mono); font-size:0.88rem; background:var(--paper); color:var(--ink); resize:vertical; line-height:1.5; }
+    .json-textarea:focus { outline:2px solid var(--amber); outline-offset:1px; }
+    .json-btn { padding:9px 18px; border:1px solid var(--line-strong); border-radius:var(--radius); background:var(--paper-raised); font-family:var(--font-display); font-weight:600; cursor:pointer; font-size:0.85rem; }
+    .json-btn.primary { background:var(--ink); color:#fff; border-color:var(--ink); }
+    .status-valid { color:var(--teal); }
+    .status-invalid { color:#C0392B; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../index.html" class="logo"><span class="mark">#</span>ToolReady</a>
+      <div class="site-search"><input type="text" placeholder="Search tools…" onclick="window.location.href='../index.html'" readonly></div>
+      <nav class="main-nav">
+        <a href="../index.html#sri-lanka">Sri Lanka</a>
+        <a href="../index.html#global">Global</a>
+        <a href="../index.html#it-tools">IT &amp; Security</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="calc-page">
+    <div class="wrap">
+      <div class="breadcrumb"><a href="../index.html">Home</a> / <a href="../index.html#it-tools">IT &amp; Security Tools</a> / JSON Formatter</div>
+      <h1 class="calc-title">JSON Formatter &amp; Validator</h1>
+      <p class="calc-subtitle">Paste JSON below — it's validated live as you type, with format and minify options.</p>
+
+      <div class="calc-box">
+        <div class="field-group">
+          <label for="json-input">JSON input</label>
+          <textarea id="json-input" class="json-textarea" placeholder='{"example": "paste your JSON here"}'></textarea>
+        </div>
+        <p style="font-weight:700; margin-top:8px;"><span id="status-msg" class="status-valid"></span></p>
+        <div style="display:flex; gap:10px; margin:14px 0;">
+          <button type="button" id="format-btn" class="json-btn primary">Format (pretty)</button>
+          <button type="button" id="minify-btn" class="json-btn">Minify</button>
+          <button type="button" id="copy-btn" class="json-btn">Copy</button>
+        </div>
+      </div>
+
+      <!-- Monetag ad code goes here (in-content, 300x250) --><div class="ad-slot" data-ad="in-content-300x250"></div>
+
+      <div class="related-tools">
+        <h2>Related tools</h2>
+        <div class="tool-grid">
+          <a class="tool-card" href="jwt-decoder.html"><div class="icon">→</div><h3>JWT Decoder</h3><p>Decode JSON Web Tokens.</p></a>
+          <a class="tool-card" href="regex-tester.html"><div class="icon">→</div><h3>Regex Tester</h3><p>Test regular expressions live.</p></a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <span>© 2026 ToolReady. All calculations run in your browser — nothing you enter is sent anywhere.</span>
+      <span><a href="../about.html">About</a> · <a href="../contact.html">Contact</a></span>
+    </div>
+  </footer>
+
+  <script>
+    const input = document.getElementById('json-input');
+    const statusMsg = document.getElementById('status-msg');
+
+    function validate() {
+      const text = input.value.trim();
+      if (text === '') { statusMsg.textContent = ''; return null; }
+      try {
+        const parsed = JSON.parse(text);
+        statusMsg.textContent = '✓ Valid JSON';
+        statusMsg.className = 'status-valid';
+        return parsed;
+      } catch (e) {
+        statusMsg.textContent = '✗ Invalid: ' + e.message;
+        statusMsg.className = 'status-invalid';
+        return undefined; // undefined = invalid, null = empty
+      }
+    }
+
+    input.addEventListener('input', validate);
+
+    document.getElementById('format-btn').addEventListener('click', () => {
+      const parsed = validate();
+      if (parsed !== null && parsed !== undefined) input.value = JSON.stringify(parsed, null, 2);
+    });
+    document.getElementById('minify-btn').addEventListener('click', () => {
+      const parsed = validate();
+      if (parsed !== null && parsed !== undefined) input.value = JSON.stringify(parsed);
+    });
+    document.getElementById('copy-btn').addEventListener('click', () => {
+      navigator.clipboard.writeText(input.value).then(() => {
+        const btn = document.getElementById('copy-btn');
+        const original = btn.textContent;
+        btn.textContent = 'Copied!';
+        setTimeout(() => { btn.textContent = original; }, 1500);
+      });
+    });
+  </script>
+</body>
+</html>

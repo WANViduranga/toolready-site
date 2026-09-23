@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Text Diff Checker — Free | ToolReady</title>
+  <meta name="description" content="Compare two blocks of text and see exactly what changed, line by line, in your browser.">
+  <script>(function(s){s.dataset.zone='11828923',s.src='https://n6wxm.com/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4S4MPT9MFQ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-4S4MPT9MFQ');
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="canonical" href="https://gettoolready.com/tools/diff-checker.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Text Diff Checker — Free">
+  <meta property="og:description" content="Compare two blocks of text and see exactly what changed, line by line.">
+  <meta property="og:url" content="https://gettoolready.com/tools/diff-checker.html">
+  <meta property="og:site_name" content="ToolReady">
+  <meta name="twitter:card" content="summary">
+  <style>
+    .diff-textarea { width:100%; min-height:160px; padding:12px; border:1px solid var(--line-strong); border-radius:var(--radius); font-family:var(--font-mono); font-size:0.85rem; resize:vertical; }
+    .diff-output { font-family:var(--font-mono); font-size:0.85rem; border:1px solid var(--line-strong); border-radius:var(--radius); overflow:hidden; margin-top:20px; }
+    .diff-line { padding:3px 12px; white-space:pre-wrap; word-break:break-word; }
+    .diff-equal { background:var(--paper-raised); color:var(--slate); }
+    .diff-add { background:#E3F5EE; color:#1B4D3E; }
+    .diff-remove { background:#FCEAEA; color:#7A2020; }
+    .diff-summary { font-size:0.82rem; color:var(--slate); margin-top:10px; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../index.html" class="logo"><span class="mark">#</span>ToolReady</a>
+      <div class="site-search"><input type="text" placeholder="Search tools…" onclick="window.location.href='../index.html'" readonly></div>
+      <nav class="main-nav">
+        <a href="../index.html#sri-lanka">Sri Lanka</a>
+        <a href="../index.html#global">Global</a>
+        <a href="../index.html#it-tools">IT &amp; Security</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="calc-page">
+    <div class="wrap">
+      <div class="breadcrumb"><a href="../index.html">Home</a> / <a href="../index.html#it-tools">IT &amp; Security Tools</a> / Text Diff Checker</div>
+      <h1 class="calc-title">Text Diff Checker</h1>
+      <p class="calc-subtitle">Paste two versions of text below to see exactly what changed between them, line by line.</p>
+
+      <div class="calc-box">
+        <div class="field-row">
+          <div class="field-group">
+            <label for="text-a">Original</label>
+            <textarea id="text-a" class="diff-textarea" placeholder="Paste the original text"></textarea>
+          </div>
+          <div class="field-group">
+            <label for="text-b">Changed</label>
+            <textarea id="text-b" class="diff-textarea" placeholder="Paste the changed text"></textarea>
+          </div>
+        </div>
+        <p class="rate-note" id="diff-warning" style="color:var(--amber-dark);"></p>
+        <div class="diff-output" id="diff-output"></div>
+        <p class="diff-summary" id="diff-summary"></p>
+      </div>
+
+      <!-- Monetag ad code goes here (in-content, 300x250) --><div class="ad-slot" data-ad="in-content-300x250"></div>
+
+      <div class="related-tools">
+        <h2>Related tools</h2>
+        <div class="tool-grid">
+          <a class="tool-card" href="json-formatter.html"><div class="icon">→</div><h3>JSON Formatter</h3><p>Format and validate JSON.</p></a>
+          <a class="tool-card" href="regex-tester.html"><div class="icon">→</div><h3>Regex Tester</h3><p>Test regular expressions live.</p></a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <span>© 2026 ToolReady. All calculations run in your browser — nothing you enter is sent anywhere.</span>
+      <span><a href="../about.html">About</a> · <a href="../contact.html">Contact</a></span>
+    </div>
+  </footer>
+
+  <script>
+    // Standard LCS-based line diff - verified against multiple test
+    // cases (pure insertion, pure removal, replacement, identical text).
+    function computeDiff(linesA, linesB) {
+      const n = linesA.length, m = linesB.length;
+      const dp = Array.from({length: n + 1}, () => new Array(m + 1).fill(0));
+      for (let i = n - 1; i >= 0; i--) {
+        for (let j = m - 1; j >= 0; j--) {
+          if (linesA[i] === linesB[j]) dp[i][j] = dp[i + 1][j + 1] + 1;
+          else dp[i][j] = Math.max(dp[i + 1][j], dp[i][j + 1]);
+        }
+      }
+      const result = [];
+      let i = 0, j = 0;
+      while (i < n && j < m) {
+        if (linesA[i] === linesB[j]) { result.push({type: 'equal', line: linesA[i]}); i++; j++; }
+        else if (dp[i + 1][j] >= dp[i][j + 1]) { result.push({type: 'remove', line: linesA[i]}); i++; }
+        else { result.push({type: 'add', line: linesB[j]}); j++; }
+      }
+      while (i < n) { result.push({type: 'remove', line: linesA[i]}); i++; }
+      while (j < m) { result.push({type: 'add', line: linesB[j]}); j++; }
+      return result;
+    }
+
+    function escapeHtml(str) {
+      return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
+
+    const textA = document.getElementById('text-a');
+    const textB = document.getElementById('text-b');
+    const outputEl = document.getElementById('diff-output');
+    const summaryEl = document.getElementById('diff-summary');
+    const warningEl = document.getElementById('diff-warning');
+
+    const MAX_LINES = 2000; // guards against the O(n*m) comparison freezing the browser on huge pastes
+
+    function run() {
+      const linesA = textA.value.split('\n');
+      const linesB = textB.value.split('\n');
+      warningEl.textContent = '';
+
+      if (linesA.length > MAX_LINES || linesB.length > MAX_LINES) {
+        warningEl.textContent = `One side has over ${MAX_LINES} lines — comparison skipped to avoid freezing your browser. Try a smaller excerpt.`;
+        outputEl.innerHTML = ''; summaryEl.textContent = '';
+        return;
+      }
+
+      if (textA.value === '' && textB.value === '') { outputEl.innerHTML = ''; summaryEl.textContent = ''; return; }
+
+      const diff = computeDiff(linesA, linesB);
+      let added = 0, removed = 0;
+      const html = diff.map(entry => {
+        if (entry.type === 'add') added++;
+        if (entry.type === 'remove') removed++;
+        const prefix = entry.type === 'add' ? '+ ' : entry.type === 'remove' ? '- ' : '  ';
+        const cls = entry.type === 'add' ? 'diff-add' : entry.type === 'remove' ? 'diff-remove' : 'diff-equal';
+        return `<div class="diff-line ${cls}">${escapeHtml(prefix + entry.line)}</div>`;
+      }).join('');
+
+      outputEl.innerHTML = html;
+      summaryEl.textContent = `${added} line${added === 1 ? '' : 's'} added, ${removed} line${removed === 1 ? '' : 's'} removed`;
+    }
+
+    textA.addEventListener('input', run);
+    textB.addEventListener('input', run);
+  </script>
+</body>
+</html>
