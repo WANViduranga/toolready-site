@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tip Calculator — Free & Instant | ToolReady</title>
+  <meta name="description" content="Calculate the tip amount and split the bill between any number of people.">
+  <script>(function(s){s.dataset.zone='11828923',s.src='https://n6wxm.com/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4S4MPT9MFQ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-4S4MPT9MFQ');
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="canonical" href="https://gettoolready.com/calculators/tip-calculator.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Tip Calculator — Free & Instant">
+  <meta property="og:description" content="Calculate the tip amount and split the bill between any number of people.">
+  <meta property="og:url" content="https://gettoolready.com/calculators/tip-calculator.html">
+  <meta property="og:site_name" content="ToolReady">
+  <meta name="twitter:card" content="summary">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../index.html" class="logo"><span class="mark">#</span>ToolReady</a>
+      <div class="site-search"><input type="text" placeholder="Search tools…" onclick="window.location.href='../index.html'" readonly></div>
+      <nav class="main-nav">
+        <a href="../index.html#sri-lanka">Sri Lanka</a>
+        <a href="../index.html#global">Global</a>
+        <a href="../index.html#it-tools">IT &amp; Security</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="calc-page">
+    <div class="wrap">
+      <div class="breadcrumb"><a href="../index.html">Home</a> / <a href="../index.html#global">Global Calculators</a> / Tip Calculator</div>
+      <h1 class="calc-title">Tip Calculator</h1>
+      <p class="calc-subtitle">Work out the tip and split the total between everyone at the table.</p>
+
+      <div class="calc-box">
+        <div class="field-row">
+          <div class="field-group">
+            <label for="bill">Bill amount</label>
+            <input type="number" id="bill" placeholder="e.g. 4500" inputmode="decimal">
+          </div>
+          <div class="field-group">
+            <label for="tippct">Tip (%)</label>
+            <input type="number" id="tippct" placeholder="e.g. 10" inputmode="decimal" value="10">
+          </div>
+        </div>
+        <div class="field-group">
+          <label for="people">Split between how many people?</label>
+          <input type="number" id="people" placeholder="1" inputmode="decimal" value="1">
+        </div>
+        <div class="calc-result">
+          <div class="result-label">Tip amount</div>
+          <div class="result-value" id="tip-result">—</div>
+        </div>
+        <div style="margin-top:16px; display:grid; grid-template-columns:1fr 1fr; gap:14px; font-size:0.85rem;">
+          <div><span style="color:var(--slate);">Total bill</span><br><span id="total-result" style="font-family:var(--font-mono); font-weight:700;">—</span></div>
+          <div><span style="color:var(--slate);">Per person</span><br><span id="perperson-result" style="font-family:var(--font-mono); font-weight:700;">—</span></div>
+        </div>
+      </div>
+
+      <!-- Monetag ad code goes here (in-content, 300x250) --><div class="ad-slot" data-ad="in-content-300x250"></div>
+
+      <div class="related-tools">
+        <h2>Related tools</h2>
+        <div class="tool-grid">
+          <a class="tool-card" href="percentage.html"><div class="icon">→</div><h3>Percentage Calculator</h3><p>Quick percentage math.</p></a>
+          <a class="tool-card" href="discount.html"><div class="icon">→</div><h3>Discount Calculator</h3><p>Find sale price or discount %.</p></a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <span>© 2026 ToolReady. All calculations run in your browser — nothing you enter is sent anywhere.</span>
+      <span><a href="../about.html">About</a> · <a href="../contact.html">Contact</a></span>
+    </div>
+  </footer>
+
+  <script>
+    const billInput = document.getElementById('bill');
+    const tippctInput = document.getElementById('tippct');
+    const peopleInput = document.getElementById('people');
+
+    function calc() {
+      const bill = parseFloat(billInput.value);
+      const tipPct = parseFloat(tippctInput.value);
+      const people = parseFloat(peopleInput.value) || 1;
+
+      const tipEl = document.getElementById('tip-result');
+      const totalEl = document.getElementById('total-result');
+      const perPersonEl = document.getElementById('perperson-result');
+
+      if (isNaN(bill) || isNaN(tipPct) || bill <= 0) {
+        tipEl.textContent = '—'; totalEl.textContent = '—'; perPersonEl.textContent = '—';
+        return;
+      }
+
+      const tip = bill * (tipPct / 100);
+      const total = bill + tip;
+      const perPerson = total / people;
+
+      tipEl.textContent = tip.toLocaleString(undefined, {maximumFractionDigits: 2});
+      totalEl.textContent = total.toLocaleString(undefined, {maximumFractionDigits: 2});
+      perPersonEl.textContent = perPerson.toLocaleString(undefined, {maximumFractionDigits: 2});
+    }
+
+    [billInput, tippctInput, peopleInput].forEach(el => el.addEventListener('input', calc));
+  </script>
+</body>
+</html>

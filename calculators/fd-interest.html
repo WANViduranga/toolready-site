@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fixed Deposit (FD) Interest Calculator — Free | ToolReady</title>
+  <meta name="description" content="Calculate the maturity value and interest earned on a fixed deposit, at any bank's rate and compounding frequency.">
+  <script>(function(s){s.dataset.zone='11828923',s.src='https://n6wxm.com/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4S4MPT9MFQ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-4S4MPT9MFQ');
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="canonical" href="https://gettoolready.com/calculators/fd-interest.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Fixed Deposit (FD) Interest Calculator — Free">
+  <meta property="og:description" content="Calculate the maturity value and interest earned on a fixed deposit, at any bank's rate and compounding frequency.">
+  <meta property="og:url" content="https://gettoolready.com/calculators/fd-interest.html">
+  <meta property="og:site_name" content="ToolReady">
+  <meta name="twitter:card" content="summary">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../index.html" class="logo"><span class="mark">#</span>ToolReady</a>
+      <div class="site-search"><input type="text" placeholder="Search tools…" onclick="window.location.href='../index.html'" readonly></div>
+      <nav class="main-nav">
+        <a href="../index.html#sri-lanka">Sri Lanka</a>
+        <a href="../index.html#global">Global</a>
+        <a href="../index.html#it-tools">IT &amp; Security</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="calc-page">
+    <div class="wrap">
+      <div class="breadcrumb"><a href="../index.html">Home</a> / <a href="../index.html#sri-lanka">Sri Lanka Calculators</a> / FD Interest Calculator</div>
+      <h1 class="calc-title">Fixed Deposit (FD) Interest Calculator</h1>
+      <p class="calc-subtitle">Enter your own bank's rate — every bank quotes differently, so type in what you were offered.</p>
+
+      <div class="calc-box">
+        <div class="field-group">
+          <label for="principal">Deposit amount (LKR)</label>
+          <input type="number" id="principal" placeholder="e.g. 500000" inputmode="decimal">
+        </div>
+        <div class="field-row">
+          <div class="field-group">
+            <label for="rate">Annual interest rate (%)</label>
+            <input type="number" id="rate" placeholder="e.g. 11.5" inputmode="decimal">
+          </div>
+          <div class="field-group">
+            <label for="term">Term (months)</label>
+            <input type="number" id="term" placeholder="e.g. 12" inputmode="decimal">
+          </div>
+        </div>
+        <div class="field-group">
+          <label for="compounding">Interest paid</label>
+          <select id="compounding">
+            <option value="12">Monthly</option>
+            <option value="4">Quarterly</option>
+            <option value="1">Annually</option>
+            <option value="0">At maturity (simple interest)</option>
+          </select>
+        </div>
+        <div class="calc-result">
+          <div class="result-label">Maturity value</div>
+          <div class="result-value" id="maturity-result">—</div>
+        </div>
+        <div style="margin-top:16px; font-size:0.85rem;">
+          <span style="color:var(--slate);">Total interest earned</span><br>
+          <span id="interest-result" style="font-family:var(--font-mono); font-weight:700;">—</span>
+        </div>
+      </div>
+
+      <!-- Monetag ad code goes here (in-content, 300x250) --><div class="ad-slot" data-ad="in-content-300x250"></div>
+
+      <div class="explainer">
+        <h2>How this is calculated</h2>
+        <p>For monthly, quarterly or annual compounding, this uses the standard compound interest formula applied over the deposit term. "At maturity" uses simple interest (no compounding), matching how some fixed deposits pay out a single lump sum at the end rather than periodic interest.</p>
+      </div>
+
+      <div class="related-tools">
+        <h2>Related tools</h2>
+        <div class="tool-grid">
+          <a class="tool-card" href="compound-interest.html"><div class="icon">→</div><h3>Compound Interest Calculator</h3><p>Model long-term investment growth.</p></a>
+          <a class="tool-card" href="epf-etf.html"><div class="icon">→</div><h3>EPF / ETF</h3><p>Estimate retirement fund contributions.</p></a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <span>© 2026 ToolReady. All calculations run in your browser — nothing you enter is sent anywhere.</span>
+      <span><a href="../about.html">About</a> · <a href="../contact.html">Contact</a></span>
+    </div>
+  </footer>
+
+  <script>
+    const principalInput = document.getElementById('principal');
+    const rateInput = document.getElementById('rate');
+    const termInput = document.getElementById('term');
+    const compoundingSel = document.getElementById('compounding');
+
+    function calc() {
+      const p = parseFloat(principalInput.value);
+      const annualRate = parseFloat(rateInput.value);
+      const months = parseFloat(termInput.value);
+      const n = parseInt(compoundingSel.value);
+      const maturityEl = document.getElementById('maturity-result');
+      const interestEl = document.getElementById('interest-result');
+
+      if (isNaN(p) || isNaN(annualRate) || isNaN(months) || p <= 0 || months <= 0) {
+        maturityEl.textContent = '—';
+        interestEl.textContent = '—';
+        return;
+      }
+
+      const years = months / 12;
+      const r = annualRate / 100;
+      let maturity;
+
+      if (n === 0) {
+        // simple interest, paid at maturity
+        maturity = p * (1 + r * years);
+      } else {
+        maturity = p * Math.pow(1 + r / n, n * years);
+      }
+
+      const interest = maturity - p;
+      maturityEl.textContent = 'Rs ' + maturity.toLocaleString(undefined, {maximumFractionDigits: 0});
+      interestEl.textContent = 'Rs ' + interest.toLocaleString(undefined, {maximumFractionDigits: 0});
+    }
+
+    [principalInput, rateInput, termInput, compoundingSel].forEach(el => el.addEventListener('input', calc));
+  </script>
+</body>
+</html>

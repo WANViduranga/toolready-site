@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GPA Calculator — Free & Instant | ToolReady</title>
+  <meta name="description" content="Calculate your GPA from your course grades and credit hours, on the standard 4.0 scale.">
+  <script>(function(s){s.dataset.zone='11828923',s.src='https://n6wxm.com/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4S4MPT9MFQ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-4S4MPT9MFQ');
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="canonical" href="https://gettoolready.com/calculators/gpa-calculator.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="GPA Calculator — Free & Instant">
+  <meta property="og:description" content="Calculate your GPA from your course grades and credit hours, on the standard 4.0 scale.">
+  <meta property="og:url" content="https://gettoolready.com/calculators/gpa-calculator.html">
+  <meta property="og:site_name" content="ToolReady">
+  <meta name="twitter:card" content="summary">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../index.html" class="logo"><span class="mark">#</span>ToolReady</a>
+      <div class="site-search"><input type="text" placeholder="Search tools…" onclick="window.location.href='../index.html'" readonly></div>
+      <nav class="main-nav">
+        <a href="../index.html#sri-lanka">Sri Lanka</a>
+        <a href="../index.html#global">Global</a>
+        <a href="../index.html#it-tools">IT &amp; Security</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="calc-page">
+    <div class="wrap">
+      <div class="breadcrumb"><a href="../index.html">Home</a> / <a href="../index.html#global">Global Calculators</a> / GPA Calculator</div>
+      <h1 class="calc-title">GPA Calculator</h1>
+      <p class="calc-subtitle">Add each course's grade and credit hours to get your weighted GPA, on the standard 4.0 scale.</p>
+
+      <div class="calc-box">
+        <div id="courses"></div>
+        <button type="button" id="add-course" style="margin-top:8px; padding:9px 16px; border:1px solid var(--line-strong); border-radius:var(--radius); background:var(--paper); font-family:var(--font-display); cursor:pointer; font-size:0.85rem;">+ Add course</button>
+        <div class="calc-result" style="margin-top:20px;">
+          <div class="result-label">GPA</div>
+          <div class="result-value" id="gpa-result">—</div>
+        </div>
+      </div>
+
+      <!-- Monetag ad code goes here (in-content, 300x250) --><div class="ad-slot" data-ad="in-content-300x250"></div>
+
+      <div class="explainer">
+        <h2>Grade scale used</h2>
+        <p>A = 4.0, A- = 3.7, B+ = 3.3, B = 3.0, B- = 2.7, C+ = 2.3, C = 2.0, C- = 1.7, D+ = 1.3, D = 1.0, F = 0.0. Your institution's scale may differ slightly — check your syllabus or student handbook if you need an exact official figure.</p>
+      </div>
+
+      <div class="related-tools">
+        <h2>Related tools</h2>
+        <div class="tool-grid">
+          <a class="tool-card" href="percentage.html"><div class="icon">→</div><h3>Percentage Calculator</h3><p>Quick percentage math.</p></a>
+          <a class="tool-card" href="zscore.html"><div class="icon">→</div><h3>A-Level Z-Score</h3><p>For Sri Lanka A-Level results.</p></a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <span>© 2026 ToolReady. All calculations run in your browser — nothing you enter is sent anywhere.</span>
+      <span><a href="../about.html">About</a> · <a href="../contact.html">Contact</a></span>
+    </div>
+  </footer>
+
+  <script>
+    const GRADE_POINTS = {
+      'A': 4.0, 'A-': 3.7, 'B+': 3.3, 'B': 3.0, 'B-': 2.7,
+      'C+': 2.3, 'C': 2.0, 'C-': 1.7, 'D+': 1.3, 'D': 1.0, 'F': 0.0
+    };
+
+    const coursesEl = document.getElementById('courses');
+    let courseCount = 0;
+
+    function addCourse() {
+      courseCount++;
+      const id = 'course-' + courseCount;
+      const row = document.createElement('div');
+      row.className = 'field-row';
+      row.style.marginBottom = '14px';
+      const gradeOptions = Object.keys(GRADE_POINTS).map(g => `<option value="${g}">${g}</option>`).join('');
+      row.innerHTML = `
+        <div class="field-group" style="margin-bottom:0;">
+          <label for="${id}-grade">Grade</label>
+          <select id="${id}-grade">${gradeOptions}</select>
+        </div>
+        <div class="field-group" style="margin-bottom:0;">
+          <label for="${id}-credits">Credit hours</label>
+          <input type="number" id="${id}-credits" placeholder="e.g. 3" inputmode="decimal">
+        </div>`;
+      coursesEl.appendChild(row);
+      row.querySelectorAll('input, select').forEach(el => el.addEventListener('input', calcGPA));
+      calcGPA();
+    }
+
+    function calcGPA() {
+      let totalPoints = 0;
+      let totalCredits = 0;
+      for (let i = 1; i <= courseCount; i++) {
+        const gradeEl = document.getElementById(`course-${i}-grade`);
+        const creditsEl = document.getElementById(`course-${i}-credits`);
+        if (!gradeEl || !creditsEl) continue;
+        const credits = parseFloat(creditsEl.value);
+        if (isNaN(credits) || credits <= 0) continue;
+        totalPoints += GRADE_POINTS[gradeEl.value] * credits;
+        totalCredits += credits;
+      }
+      const resultEl = document.getElementById('gpa-result');
+      resultEl.textContent = totalCredits > 0 ? (totalPoints / totalCredits).toFixed(2) : '—';
+    }
+
+    addCourse();
+    addCourse();
+    addCourse();
+
+    document.getElementById('add-course').addEventListener('click', addCourse);
+  </script>
+</body>
+</html>

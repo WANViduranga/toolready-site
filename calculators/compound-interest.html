@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Compound Interest Calculator — Free | ToolReady</title>
+  <meta name="description" content="Calculate investment growth over time with compound interest, including optional regular contributions.">
+  <script>(function(s){s.dataset.zone='11828923',s.src='https://n6wxm.com/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4S4MPT9MFQ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-4S4MPT9MFQ');
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="canonical" href="https://gettoolready.com/calculators/compound-interest.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Compound Interest Calculator — Free">
+  <meta property="og:description" content="Calculate investment growth over time with compound interest, including optional regular contributions.">
+  <meta property="og:url" content="https://gettoolready.com/calculators/compound-interest.html">
+  <meta property="og:site_name" content="ToolReady">
+  <meta name="twitter:card" content="summary">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../index.html" class="logo"><span class="mark">#</span>ToolReady</a>
+      <div class="site-search"><input type="text" placeholder="Search tools…" onclick="window.location.href='../index.html'" readonly></div>
+      <nav class="main-nav">
+        <a href="../index.html#sri-lanka">Sri Lanka</a>
+        <a href="../index.html#global">Global</a>
+        <a href="../index.html#it-tools">IT &amp; Security</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="calc-page">
+    <div class="wrap">
+      <div class="breadcrumb"><a href="../index.html">Home</a> / <a href="../index.html#global">Global Calculators</a> / Compound Interest Calculator</div>
+      <h1 class="calc-title">Compound Interest Calculator</h1>
+      <p class="calc-subtitle">See how an investment grows over time, with optional regular monthly contributions.</p>
+
+      <div class="calc-box">
+        <div class="field-row">
+          <div class="field-group">
+            <label for="principal">Starting amount</label>
+            <input type="number" id="principal" placeholder="e.g. 100000" inputmode="decimal">
+          </div>
+          <div class="field-group">
+            <label for="monthly">Monthly contribution (optional)</label>
+            <input type="number" id="monthly" placeholder="e.g. 5000" inputmode="decimal">
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field-group">
+            <label for="rate">Annual interest rate (%)</label>
+            <input type="number" id="rate" placeholder="e.g. 10" inputmode="decimal">
+          </div>
+          <div class="field-group">
+            <label for="years">Years</label>
+            <input type="number" id="years" placeholder="e.g. 10" inputmode="decimal">
+          </div>
+        </div>
+        <div class="calc-result">
+          <div class="result-label">Final value</div>
+          <div class="result-value" id="final-result">—</div>
+        </div>
+        <div style="margin-top:16px; display:grid; grid-template-columns:1fr 1fr; gap:14px; font-size:0.85rem;">
+          <div><span style="color:var(--slate);">Total contributed</span><br><span id="contributed-result" style="font-family:var(--font-mono); font-weight:700;">—</span></div>
+          <div><span style="color:var(--slate);">Total interest earned</span><br><span id="growth-result" style="font-family:var(--font-mono); font-weight:700;">—</span></div>
+        </div>
+      </div>
+
+      <!-- Monetag ad code goes here (in-content, 300x250) --><div class="ad-slot" data-ad="in-content-300x250"></div>
+
+      <div class="explainer">
+        <h2>How this works</h2>
+        <p>Interest is compounded monthly on the starting amount, and if you add a monthly contribution, each one starts earning its own compound growth from the month it's added. This is a simplified model assuming a constant rate of return — real investments fluctuate, so treat this as a planning estimate, not a guarantee.</p>
+      </div>
+
+      <div class="related-tools">
+        <h2>Related tools</h2>
+        <div class="tool-grid">
+          <a class="tool-card" href="fd-interest.html"><div class="icon">→</div><h3>Fixed Deposit Calculator</h3><p>For a single lump-sum deposit.</p></a>
+          <a class="tool-card" href="emi-loan.html"><div class="icon">→</div><h3>EMI / Loan Calculator</h3><p>Calculate monthly loan payments.</p></a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <span>© 2026 ToolReady. All calculations run in your browser — nothing you enter is sent anywhere.</span>
+      <span><a href="../about.html">About</a> · <a href="../contact.html">Contact</a></span>
+    </div>
+  </footer>
+
+  <script>
+    const principalInput = document.getElementById('principal');
+    const monthlyInput = document.getElementById('monthly');
+    const rateInput = document.getElementById('rate');
+    const yearsInput = document.getElementById('years');
+
+    function calc() {
+      const p = parseFloat(principalInput.value) || 0;
+      const monthly = parseFloat(monthlyInput.value) || 0;
+      const annualRate = parseFloat(rateInput.value);
+      const years = parseFloat(yearsInput.value);
+
+      const finalEl = document.getElementById('final-result');
+      const contributedEl = document.getElementById('contributed-result');
+      const growthEl = document.getElementById('growth-result');
+
+      if (isNaN(annualRate) || isNaN(years) || years <= 0 || (p <= 0 && monthly <= 0)) {
+        finalEl.textContent = '—';
+        contributedEl.textContent = '—';
+        growthEl.textContent = '—';
+        return;
+      }
+
+      const monthlyRate = annualRate / 100 / 12;
+      const totalMonths = years * 12;
+
+      // Lump sum growth
+      let futureValue = p * Math.pow(1 + monthlyRate, totalMonths);
+
+      // Monthly contributions growth (future value of an ordinary annuity)
+      if (monthly > 0) {
+        if (monthlyRate === 0) {
+          futureValue += monthly * totalMonths;
+        } else {
+          futureValue += monthly * ((Math.pow(1 + monthlyRate, totalMonths) - 1) / monthlyRate);
+        }
+      }
+
+      const totalContributed = p + (monthly * totalMonths);
+      const totalGrowth = futureValue - totalContributed;
+
+      finalEl.textContent = futureValue.toLocaleString(undefined, {maximumFractionDigits: 0});
+      contributedEl.textContent = totalContributed.toLocaleString(undefined, {maximumFractionDigits: 0});
+      growthEl.textContent = totalGrowth.toLocaleString(undefined, {maximumFractionDigits: 0});
+    }
+
+    [principalInput, monthlyInput, rateInput, yearsInput].forEach(el => el.addEventListener('input', calc));
+  </script>
+</body>
+</html>

@@ -70,5 +70,17 @@ const RATES = {
     ],
     evExciseRate: 0.00           // confirmed - EVs pay 0% excise
     // luxuryTax: not yet modelled - see note above
+  },
+
+  // --- Gratuity (Sri Lanka) ---
+  // Set by law (Payment of Gratuity Act No. 12 of 1983), not a rate that
+  // moves with the economy - so this needs far less maintenance than the
+  // tax/duty entries above. Still worth checking occasionally in case of
+  // a future amendment.
+  gratuity: {
+    lastVerified: "2026-09-22",
+    source: "Payment of Gratuity Act No. 12 of 1983",
+    minimumYearsOfService: 5,      // must complete 5+ years to qualify
+    monthsSalaryPerYear: 0.5       // half a month's salary per year of service
   }
 };

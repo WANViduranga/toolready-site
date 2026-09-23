@@ -1,16 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Telegram Mini App SDK + early detection (safe no-op outside Telegram) -->
-  <script src="https://telegram.org/js/telegram-web-app.js"></script>
-  <script>
-    window.isTgMiniApp = function () {
-      try { return !!(window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.initData); }
-      catch (e) { return false; }
-    };
-    if (window.isTgMiniApp()) document.documentElement.classList.add('tg-mode');
-  </script>
-
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-4S4MPT9MFQ"></script>
   <script>
@@ -20,12 +10,7 @@
     gtag('config', 'G-4S4MPT9MFQ');
   </script>
 
-  <!-- Web ad zone - skipped inside Telegram, which gets its own zone via the TG Mini App script -->
-  <script>
-    if (!window.isTgMiniApp()) {
-      (function(s){s.dataset.zone='11828923',s.src='https://n6wxm.com/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')));
-    }
-  </script>
+  <script>(function(s){s.dataset.zone='11828923',s.src='https://n6wxm.com/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -122,6 +107,16 @@
             <h3>A-Level Z-Score</h3>
             <p>Estimate your Z-score and compare against past cutoffs.</p>
           </a>
+          <a class="tool-card" href="calculators/gratuity.html" data-keywords="gratuity resignation retirement sri lanka">
+            <div class="icon">06</div>
+            <h3>Gratuity Calculator</h3>
+            <p>Estimate your gratuity after 5+ years of service.</p>
+          </a>
+          <a class="tool-card" href="calculators/fd-interest.html" data-keywords="fixed deposit fd interest bank sri lanka">
+            <div class="icon">07</div>
+            <h3>Fixed Deposit (FD) Interest</h3>
+            <p>Calculate maturity value on a fixed deposit.</p>
+          </a>
         </div>
       </div>
     </section>
@@ -160,6 +155,41 @@
             <div class="icon">05</div>
             <h3>Age Calculator</h3>
             <p>Find your exact age or the days between two dates.</p>
+          </a>
+          <a class="tool-card" href="calculators/reverse-tax.html" data-keywords="reverse tax pre-tax price calculator">
+            <div class="icon">06</div>
+            <h3>Reverse Tax Calculator</h3>
+            <p>Find the pre-tax price from a tax-inclusive total.</p>
+          </a>
+          <a class="tool-card" href="calculators/compound-interest.html" data-keywords="compound interest investment growth calculator">
+            <div class="icon">07</div>
+            <h3>Compound Interest Calculator</h3>
+            <p>Model investment growth over time.</p>
+          </a>
+          <a class="tool-card" href="calculators/discount.html" data-keywords="discount sale price percent off calculator">
+            <div class="icon">08</div>
+            <h3>Discount Calculator</h3>
+            <p>Find sale price or the real discount %.</p>
+          </a>
+          <a class="tool-card" href="calculators/gpa-calculator.html" data-keywords="gpa cgpa grade point average calculator">
+            <div class="icon">09</div>
+            <h3>GPA Calculator</h3>
+            <p>Calculate your weighted GPA from grades and credits.</p>
+          </a>
+          <a class="tool-card" href="calculators/date-calculator.html" data-keywords="date calculator add subtract days">
+            <div class="icon">10</div>
+            <h3>Date Calculator</h3>
+            <p>Add or subtract days from a date.</p>
+          </a>
+          <a class="tool-card" href="calculators/tip-calculator.html" data-keywords="tip calculator bill split restaurant">
+            <div class="icon">11</div>
+            <h3>Tip Calculator</h3>
+            <p>Work out the tip and split the bill.</p>
+          </a>
+          <a class="tool-card" href="calculators/time-duration.html" data-keywords="time duration hours calculator work">
+            <div class="icon">12</div>
+            <h3>Time Duration Calculator</h3>
+            <p>Find the hours and minutes between two times.</p>
           </a>
         </div>
       </div>
@@ -227,6 +257,5 @@
       filterTools(e.target.value);
     });
   </script>
-  <script src="assets/js/telegram-mini.js"></script>
 </body>
 </html>

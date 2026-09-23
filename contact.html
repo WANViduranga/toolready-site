@@ -1,16 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Telegram Mini App SDK + early detection (safe no-op outside Telegram) -->
-  <script src="https://telegram.org/js/telegram-web-app.js"></script>
-  <script>
-    window.isTgMiniApp = function () {
-      try { return !!(window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.initData); }
-      catch (e) { return false; }
-    };
-    if (window.isTgMiniApp()) document.documentElement.classList.add('tg-mode');
-  </script>
-
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-4S4MPT9MFQ"></script>
   <script>
@@ -24,12 +14,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Contact — ToolReady</title>
   <meta name="description" content="Get in touch with ToolReady — report an issue, suggest a tool, or flag an outdated rate.">
-  <!-- Web ad zone - skipped inside Telegram, which gets its own zone via the TG Mini App script -->
-  <script>
-    if (!window.isTgMiniApp()) {
-      (function(s){s.dataset.zone='11828923',s.src='https://n6wxm.com/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')));
-    }
-  </script>
+  <script>(function(s){s.dataset.zone='11828923',s.src='https://n6wxm.com/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -81,6 +66,5 @@
       <span><a href="about.html">About</a> · <a href="contact.html">Contact</a></span>
     </div>
   </footer>
-  <script src="assets/js/telegram-mini.js"></script>
 </body>
 </html>

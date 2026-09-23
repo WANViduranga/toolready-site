@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gratuity Calculator Sri Lanka — Free | ToolReady</title>
+  <meta name="description" content="Calculate your estimated gratuity in Sri Lanka based on your last drawn salary and years of service.">
+  <script>(function(s){s.dataset.zone='11828923',s.src='https://n6wxm.com/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4S4MPT9MFQ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-4S4MPT9MFQ');
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="canonical" href="https://gettoolready.com/calculators/gratuity.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Gratuity Calculator Sri Lanka — Free">
+  <meta property="og:description" content="Calculate your estimated gratuity in Sri Lanka based on your last drawn salary and years of service.">
+  <meta property="og:url" content="https://gettoolready.com/calculators/gratuity.html">
+  <meta property="og:site_name" content="ToolReady">
+  <meta name="twitter:card" content="summary">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../index.html" class="logo"><span class="mark">#</span>ToolReady</a>
+      <div class="site-search"><input type="text" placeholder="Search tools…" onclick="window.location.href='../index.html'" readonly></div>
+      <nav class="main-nav">
+        <a href="../index.html#sri-lanka">Sri Lanka</a>
+        <a href="../index.html#global">Global</a>
+        <a href="../index.html#it-tools">IT &amp; Security</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="calc-page">
+    <div class="wrap">
+      <div class="breadcrumb"><a href="../index.html">Home</a> / <a href="../index.html#sri-lanka">Sri Lanka Calculators</a> / Gratuity Calculator</div>
+      <h1 class="calc-title">Gratuity Calculator</h1>
+      <p class="calc-subtitle">Estimate your gratuity under the Payment of Gratuity Act — for employees who've completed 5 or more years of continuous service.</p>
+
+      <div class="calc-box">
+        <div class="field-row">
+          <div class="field-group">
+            <label for="salary">Last drawn monthly salary (LKR)</label>
+            <input type="number" id="salary" placeholder="e.g. 150000" inputmode="decimal">
+          </div>
+          <div class="field-group">
+            <label for="years">Years of service</label>
+            <input type="number" id="years" placeholder="e.g. 8" inputmode="decimal" step="0.1">
+          </div>
+        </div>
+        <div class="calc-result">
+          <div class="result-label">Estimated gratuity</div>
+          <div class="result-value" id="gratuity-result">—</div>
+        </div>
+        <p class="rate-note" id="gratuity-note"></p>
+      </div>
+
+      <!-- Monetag ad code goes here (in-content, 300x250) --><div class="ad-slot" data-ad="in-content-300x250"></div>
+
+      <div class="explainer">
+        <h2>How this is calculated</h2>
+        <p>Gratuity = half a month's last-drawn salary × completed years of service. You only qualify once you've completed at least 5 years of continuous service — resigning or being terminated before that generally means no gratuity is payable under the Act.</p>
+        <p>This is an estimate. The exact figure your employer calculates may differ slightly depending on how "salary" is defined in your case (basic pay vs. consolidated pay), how partial years are treated, and any company-specific policy that's more generous than the statutory minimum. Check with your HR department or the Department of Labour for an exact figure.</p>
+      </div>
+
+      <div class="related-tools">
+        <h2>Related tools</h2>
+        <div class="tool-grid">
+          <a class="tool-card" href="epf-etf.html"><div class="icon">→</div><h3>EPF / ETF</h3><p>Estimate retirement fund contributions.</p></a>
+          <a class="tool-card" href="take-home-pay.html"><div class="icon">→</div><h3>Take-Home Pay</h3><p>Full net salary after tax and EPF.</p></a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <span>© 2026 ToolReady. All calculations run in your browser — nothing you enter is sent anywhere.</span>
+      <span><a href="../about.html">About</a> · <a href="../contact.html">Contact</a></span>
+    </div>
+  </footer>
+
+  <script src="../assets/js/rates.js"></script>
+  <script>
+    const salaryInput = document.getElementById('salary');
+    const yearsInput = document.getElementById('years');
+    const resultEl = document.getElementById('gratuity-result');
+    const noteEl = document.getElementById('gratuity-note');
+
+    noteEl.textContent = `Based on: ${RATES.gratuity.source} · Last checked ${RATES.gratuity.lastVerified}`;
+
+    function calc() {
+      const salary = parseFloat(salaryInput.value);
+      const years = parseFloat(yearsInput.value);
+
+      if (isNaN(salary) || isNaN(years) || salary <= 0 || years <= 0) {
+        resultEl.textContent = '—';
+        return;
+      }
+
+      if (years < RATES.gratuity.minimumYearsOfService) {
+        resultEl.textContent = 'Not eligible (under 5 years)';
+        resultEl.style.color = 'var(--slate)';
+        return;
+      }
+
+      const gratuity = salary * RATES.gratuity.monthsSalaryPerYear * years;
+      resultEl.style.color = 'var(--teal)';
+      resultEl.textContent = 'Rs ' + gratuity.toLocaleString(undefined, {maximumFractionDigits: 0});
+    }
+
+    salaryInput.addEventListener('input', calc);
+    yearsInput.addEventListener('input', calc);
+  </script>
+</body>
+</html>

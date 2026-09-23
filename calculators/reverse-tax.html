@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reverse Tax Calculator — Find Pre-Tax Price | ToolReady</title>
+  <meta name="description" content="Find the pre-tax price and tax amount from a tax-inclusive total. Useful for invoicing and expense claims.">
+  <script>(function(s){s.dataset.zone='11828923',s.src='https://n6wxm.com/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4S4MPT9MFQ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-4S4MPT9MFQ');
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="canonical" href="https://gettoolready.com/calculators/reverse-tax.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Reverse Tax Calculator — Find Pre-Tax Price">
+  <meta property="og:description" content="Find the pre-tax price and tax amount from a tax-inclusive total.">
+  <meta property="og:url" content="https://gettoolready.com/calculators/reverse-tax.html">
+  <meta property="og:site_name" content="ToolReady">
+  <meta name="twitter:card" content="summary">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../index.html" class="logo"><span class="mark">#</span>ToolReady</a>
+      <div class="site-search"><input type="text" placeholder="Search tools…" onclick="window.location.href='../index.html'" readonly></div>
+      <nav class="main-nav">
+        <a href="../index.html#sri-lanka">Sri Lanka</a>
+        <a href="../index.html#global">Global</a>
+        <a href="../index.html#it-tools">IT &amp; Security</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="calc-page">
+    <div class="wrap">
+      <div class="breadcrumb"><a href="../index.html">Home</a> / <a href="../index.html#global">Global Calculators</a> / Reverse Tax Calculator</div>
+      <h1 class="calc-title">Reverse Tax Calculator</h1>
+      <p class="calc-subtitle">Have a tax-inclusive total and need to know the pre-tax price? Enter it below.</p>
+
+      <div class="calc-box">
+        <div class="field-row">
+          <div class="field-group">
+            <label for="total">Total price (tax included)</label>
+            <input type="number" id="total" placeholder="e.g. 118" inputmode="decimal">
+          </div>
+          <div class="field-group">
+            <label for="taxrate">Tax rate (%)</label>
+            <input type="number" id="taxrate" placeholder="e.g. 18" inputmode="decimal">
+          </div>
+        </div>
+        <div class="calc-result">
+          <div class="result-label">Pre-tax price</div>
+          <div class="result-value" id="pretax-result">—</div>
+        </div>
+        <div style="margin-top:16px; font-size:0.85rem;">
+          <span style="color:var(--slate);">Tax amount</span><br>
+          <span id="taxamount-result" style="font-family:var(--font-mono); font-weight:700;">—</span>
+        </div>
+      </div>
+
+      <!-- Monetag ad code goes here (in-content, 300x250) --><div class="ad-slot" data-ad="in-content-300x250"></div>
+
+      <div class="explainer">
+        <h2>How this works</h2>
+        <p>Pre-tax price = total ÷ (1 + tax rate ÷ 100). This is the reverse of adding tax onto a price — useful when you're handed a final receipt total and need to back out how much was the actual price versus the tax, for expense reports or invoicing.</p>
+      </div>
+
+      <div class="related-tools">
+        <h2>Related tools</h2>
+        <div class="tool-grid">
+          <a class="tool-card" href="percentage.html"><div class="icon">→</div><h3>Percentage Calculator</h3><p>Quick percentage math.</p></a>
+          <a class="tool-card" href="discount.html"><div class="icon">→</div><h3>Discount Calculator</h3><p>Find sale price or discount %.</p></a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <span>© 2026 ToolReady. All calculations run in your browser — nothing you enter is sent anywhere.</span>
+      <span><a href="../about.html">About</a> · <a href="../contact.html">Contact</a></span>
+    </div>
+  </footer>
+
+  <script>
+    const totalInput = document.getElementById('total');
+    const taxrateInput = document.getElementById('taxrate');
+
+    function calc() {
+      const total = parseFloat(totalInput.value);
+      const rate = parseFloat(taxrateInput.value);
+      const pretaxEl = document.getElementById('pretax-result');
+      const taxEl = document.getElementById('taxamount-result');
+
+      if (isNaN(total) || isNaN(rate) || total <= 0) {
+        pretaxEl.textContent = '—';
+        taxEl.textContent = '—';
+        return;
+      }
+
+      const pretax = total / (1 + rate / 100);
+      const taxAmount = total - pretax;
+
+      pretaxEl.textContent = pretax.toLocaleString(undefined, {maximumFractionDigits: 2});
+      taxEl.textContent = taxAmount.toLocaleString(undefined, {maximumFractionDigits: 2});
+    }
+
+    totalInput.addEventListener('input', calc);
+    taxrateInput.addEventListener('input', calc);
+  </script>
+</body>
+</html>

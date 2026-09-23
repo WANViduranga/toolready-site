@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Date Calculator — Add or Subtract Days | ToolReady</title>
+  <meta name="description" content="Find the date that's a certain number of days before or after another date.">
+  <script>(function(s){s.dataset.zone='11828923',s.src='https://n6wxm.com/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4S4MPT9MFQ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-4S4MPT9MFQ');
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="canonical" href="https://gettoolready.com/calculators/date-calculator.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Date Calculator — Add or Subtract Days">
+  <meta property="og:description" content="Find the date that's a certain number of days before or after another date.">
+  <meta property="og:url" content="https://gettoolready.com/calculators/date-calculator.html">
+  <meta property="og:site_name" content="ToolReady">
+  <meta name="twitter:card" content="summary">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../index.html" class="logo"><span class="mark">#</span>ToolReady</a>
+      <div class="site-search"><input type="text" placeholder="Search tools…" onclick="window.location.href='../index.html'" readonly></div>
+      <nav class="main-nav">
+        <a href="../index.html#sri-lanka">Sri Lanka</a>
+        <a href="../index.html#global">Global</a>
+        <a href="../index.html#it-tools">IT &amp; Security</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="calc-page">
+    <div class="wrap">
+      <div class="breadcrumb"><a href="../index.html">Home</a> / <a href="../index.html#global">Global Calculators</a> / Date Calculator</div>
+      <h1 class="calc-title">Date Calculator</h1>
+      <p class="calc-subtitle">Find the date a certain number of days before or after a starting date — handy for deadlines, due dates, and countdowns.</p>
+
+      <div class="calc-box">
+        <div class="field-group">
+          <label for="start-date">Start date</label>
+          <input type="date" id="start-date">
+        </div>
+        <div class="field-row">
+          <div class="field-group">
+            <label for="direction">Direction</label>
+            <select id="direction">
+              <option value="add">Add days</option>
+              <option value="subtract">Subtract days</option>
+            </select>
+          </div>
+          <div class="field-group">
+            <label for="days">Number of days</label>
+            <input type="number" id="days" placeholder="e.g. 90" inputmode="decimal">
+          </div>
+        </div>
+        <div class="calc-result">
+          <div class="result-label">Result date</div>
+          <div class="result-value" id="date-result" style="font-size:1.5rem;">—</div>
+        </div>
+      </div>
+
+      <!-- Monetag ad code goes here (in-content, 300x250) --><div class="ad-slot" data-ad="in-content-300x250"></div>
+
+      <div class="related-tools">
+        <h2>Related tools</h2>
+        <div class="tool-grid">
+          <a class="tool-card" href="age-calculator.html"><div class="icon">→</div><h3>Age Calculator</h3><p>Find the difference between two dates.</p></a>
+          <a class="tool-card" href="time-duration.html"><div class="icon">→</div><h3>Time Duration Calculator</h3><p>Calculate hours between two times.</p></a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <span>© 2026 ToolReady. All calculations run in your browser — nothing you enter is sent anywhere.</span>
+      <span><a href="../about.html">About</a> · <a href="../contact.html">Contact</a></span>
+    </div>
+  </footer>
+
+  <script>
+    const startInput = document.getElementById('start-date');
+    const directionSel = document.getElementById('direction');
+    const daysInput = document.getElementById('days');
+    const resultEl = document.getElementById('date-result');
+
+    startInput.valueAsDate = new Date();
+
+    function calc() {
+      if (!startInput.value || !daysInput.value) { resultEl.textContent = '—'; return; }
+      const start = new Date(startInput.value);
+      const days = parseInt(daysInput.value);
+      if (isNaN(days)) { resultEl.textContent = '—'; return; }
+
+      const multiplier = directionSel.value === 'subtract' ? -1 : 1;
+      const result = new Date(start);
+      result.setDate(result.getDate() + (days * multiplier));
+
+      resultEl.textContent = result.toLocaleDateString(undefined, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+    }
+
+    [startInput, directionSel, daysInput].forEach(el => el.addEventListener('input', calc));
+    directionSel.addEventListener('change', calc);
+  </script>
+</body>
+</html>

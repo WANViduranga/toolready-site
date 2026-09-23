@@ -24,28 +24,6 @@
 }
 
 /* ============================================
-   TELEGRAM MINI APP THEME
-   These stay unused (and harmless) on the normal website. They're
-   only populated - via JS, in telegram-mini.js - when the site is
-   opened inside Telegram, and only take effect inside html.tg-mode.
-   This is what lets the SAME html/css files serve both a
-   browser tab and a Telegram Mini App with two different looks.
-   ============================================ */
-html.tg-mode {
-  --paper: var(--tg-bg, var(--paper));
-  --paper-raised: var(--tg-secondary-bg, var(--paper-raised));
-  --ink: var(--tg-text, var(--ink));
-  --slate: var(--tg-hint, var(--slate));
-  --amber: var(--tg-button, var(--amber));
-  --amber-dark: var(--tg-button, var(--amber-dark));
-}
-/* Telegram's own header/safe-area chrome already frames the page,
-   so our sticky site header and background grid texture are
-   redundant inside the Mini App - drop them there. */
-html.tg-mode body { background-image: none; }
-html.tg-mode header.site-header { position: static; }
-
-/* ============================================
    RESET & BASE
    Removes browser default spacing inconsistencies
    so the site looks the same across all browsers.

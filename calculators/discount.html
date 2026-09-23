@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Discount Calculator — Sale Price & % Off | ToolReady</title>
+  <meta name="description" content="Calculate the sale price after a discount, or find what percentage off a deal really is.">
+  <script>(function(s){s.dataset.zone='11828923',s.src='https://n6wxm.com/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4S4MPT9MFQ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-4S4MPT9MFQ');
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="canonical" href="https://gettoolready.com/calculators/discount.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Discount Calculator — Sale Price & % Off">
+  <meta property="og:description" content="Calculate the sale price after a discount, or find what percentage off a deal really is.">
+  <meta property="og:url" content="https://gettoolready.com/calculators/discount.html">
+  <meta property="og:site_name" content="ToolReady">
+  <meta name="twitter:card" content="summary">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../index.html" class="logo"><span class="mark">#</span>ToolReady</a>
+      <div class="site-search"><input type="text" placeholder="Search tools…" onclick="window.location.href='../index.html'" readonly></div>
+      <nav class="main-nav">
+        <a href="../index.html#sri-lanka">Sri Lanka</a>
+        <a href="../index.html#global">Global</a>
+        <a href="../index.html#it-tools">IT &amp; Security</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="calc-page">
+    <div class="wrap">
+      <div class="breadcrumb"><a href="../index.html">Home</a> / <a href="../index.html#global">Global Calculators</a> / Discount Calculator</div>
+      <h1 class="calc-title">Discount Calculator</h1>
+      <p class="calc-subtitle">Find the sale price after a discount, or work out what percentage off a deal actually is.</p>
+
+      <div class="calc-box">
+        <div class="field-row">
+          <div class="field-group">
+            <label for="original">Original price</label>
+            <input type="number" id="original" placeholder="e.g. 5000" inputmode="decimal">
+          </div>
+          <div class="field-group">
+            <label for="discount">Discount (%)</label>
+            <input type="number" id="discount" placeholder="e.g. 25" inputmode="decimal">
+          </div>
+        </div>
+        <div class="calc-result">
+          <div class="result-label">Sale price</div>
+          <div class="result-value" id="sale-result">—</div>
+        </div>
+        <div style="margin-top:16px; font-size:0.85rem;">
+          <span style="color:var(--slate);">You save</span><br>
+          <span id="saved-result" style="font-family:var(--font-mono); font-weight:700;">—</span>
+        </div>
+      </div>
+
+      <h2 style="font-size:1.2rem; margin-bottom:14px;">Or: find the discount %</h2>
+      <div class="calc-box">
+        <div class="field-row">
+          <div class="field-group">
+            <label for="orig2">Original price</label>
+            <input type="number" id="orig2" placeholder="e.g. 5000" inputmode="decimal">
+          </div>
+          <div class="field-group">
+            <label for="sale2">Sale price</label>
+            <input type="number" id="sale2" placeholder="e.g. 3750" inputmode="decimal">
+          </div>
+        </div>
+        <div class="calc-result">
+          <div class="result-label">Discount</div>
+          <div class="result-value" id="discountpct-result">—</div>
+        </div>
+      </div>
+
+      <!-- Monetag ad code goes here (in-content, 300x250) --><div class="ad-slot" data-ad="in-content-300x250"></div>
+
+      <div class="related-tools">
+        <h2>Related tools</h2>
+        <div class="tool-grid">
+          <a class="tool-card" href="percentage.html"><div class="icon">→</div><h3>Percentage Calculator</h3><p>Quick percentage math.</p></a>
+          <a class="tool-card" href="reverse-tax.html"><div class="icon">→</div><h3>Reverse Tax Calculator</h3><p>Find pre-tax price from a total.</p></a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <span>© 2026 ToolReady. All calculations run in your browser — nothing you enter is sent anywhere.</span>
+      <span><a href="../about.html">About</a> · <a href="../contact.html">Contact</a></span>
+    </div>
+  </footer>
+
+  <script>
+    const originalInput = document.getElementById('original');
+    const discountInput = document.getElementById('discount');
+    function calc1() {
+      const orig = parseFloat(originalInput.value);
+      const pct = parseFloat(discountInput.value);
+      const saleEl = document.getElementById('sale-result');
+      const savedEl = document.getElementById('saved-result');
+      if (isNaN(orig) || isNaN(pct) || orig <= 0) { saleEl.textContent = '—'; savedEl.textContent = '—'; return; }
+      const saved = orig * (pct / 100);
+      const sale = orig - saved;
+      saleEl.textContent = sale.toLocaleString(undefined, {maximumFractionDigits: 2});
+      savedEl.textContent = saved.toLocaleString(undefined, {maximumFractionDigits: 2});
+    }
+    originalInput.addEventListener('input', calc1);
+    discountInput.addEventListener('input', calc1);
+
+    const orig2Input = document.getElementById('orig2');
+    const sale2Input = document.getElementById('sale2');
+    function calc2() {
+      const orig = parseFloat(orig2Input.value);
+      const sale = parseFloat(sale2Input.value);
+      const resultEl = document.getElementById('discountpct-result');
+      if (isNaN(orig) || isNaN(sale) || orig <= 0) { resultEl.textContent = '—'; return; }
+      const pct = ((orig - sale) / orig) * 100;
+      resultEl.textContent = pct.toLocaleString(undefined, {maximumFractionDigits: 2}) + '% off';
+    }
+    orig2Input.addEventListener('input', calc2);
+    sale2Input.addEventListener('input', calc2);
+  </script>
+</body>
+</html>
