@@ -17,13 +17,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ASCII / Unicode Translator — Free | ToolReady</title>
-  <meta name="description" content="Convert text to character codes and back, both directions, with full Unicode support.">
+  <meta name="description" content="Convert text to character codes and back, in decimal, hex, or binary — full Unicode support, with auto-detect.">
   <link rel="canonical" href="https://gettoolready.com/tools/ascii-translator.html">
 
   <!-- Open Graph tags - control how this page looks when shared as a link -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="ASCII / Unicode Translator — Free | ToolReady">
-  <meta property="og:description" content="Convert text to character codes and back, both directions, with full Unicode support.">
+  <meta property="og:description" content="Convert text to character codes and back, in decimal, hex, or binary — full Unicode support, with auto-detect.">
   <meta property="og:url" content="https://gettoolready.com/tools/ascii-translator.html">
   <meta property="og:site_name" content="ToolReady">
   <meta name="twitter:card" content="summary">
@@ -33,7 +33,12 @@
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../assets/css/style.css">
   <style>
-    .ascii-textarea { width:100%; min-height:100px; padding:12px; border:1px solid var(--line-strong); border-radius:var(--radius); font-family:var(--font-mono); font-size:0.9rem; resize:vertical; }
+    .ascii-textarea { width:100%; min-height:100px; padding:12px; border:1px solid var(--line-strong); border-radius:var(--radius); font-family:var(--font-mono); font-size:0.9rem; resize:vertical; background:var(--paper); color:var(--ink); }
+    .split-cols { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+    @media (max-width: 720px) { .split-cols { grid-template-columns:1fr; } }
+    .split-panel { border:1px solid var(--line-strong); border-radius:var(--radius); padding:18px; background:var(--paper-raised); }
+    .split-panel h2 { font-size:0.95rem; margin-bottom:14px; }
+    .auto-badge { display:inline-block; font-family:var(--font-mono); font-size:0.7rem; padding:2px 8px; border-radius:10px; background:var(--teal); color:#fff; margin-left:8px; }
   </style>
   <script src="../assets/js/tracking.js"></script>
   <link rel="icon" href="../favicon.ico">
@@ -50,7 +55,7 @@
   "@type": "WebApplication",
   "name": "ASCII / Unicode Translator",
   "url": "https://gettoolready.com/tools/ascii-translator.html",
-  "description": "Convert text to character codes and back, both directions, with full Unicode support.",
+  "description": "Convert text to character codes and back, in decimal, hex, or binary — full Unicode support, with auto-detect.",
   "applicationCategory": "UtilityApplication",
   "operatingSystem": "Any",
   "isAccessibleForFree": true,
@@ -105,28 +110,49 @@
     <div class="wrap">
       <div class="breadcrumb"><a href="../index.html">Home</a> / <a href="../index.html#it-tools">IT &amp; Security Tools</a> / ASCII / Unicode Translator</div>
       <h1 class="calc-title">ASCII / Unicode Translator</h1>
-      <p class="calc-subtitle">Convert text to character codes, or character codes back to text — works for standard ASCII and full Unicode (including emoji).</p>
+      <p class="calc-subtitle">Convert text to character codes, or character codes back to text — decimal, hex, or binary, with full Unicode support (including emoji).</p>
 
-      <div class="calc-box">
-        <div class="field-group">
-          <label for="text-input">Text</label>
-          <textarea id="text-input" class="ascii-textarea" placeholder="Type text here">Hello!</textarea>
+      <div class="split-cols">
+        <div class="split-panel">
+          <h2>Text → Codes</h2>
+          <div class="field-group">
+            <label for="text-input">Text</label>
+            <textarea id="text-input" class="ascii-textarea">Hello!</textarea>
+          </div>
+          <div class="field-group">
+            <label for="left-format">Code format</label>
+            <select id="left-format">
+              <option value="dec">Decimal</option>
+              <option value="hex">Hex</option>
+              <option value="bin">Binary</option>
+            </select>
+          </div>
+          <div class="field-group" style="margin-bottom:0;">
+            <label for="codes-output">Character codes (space-separated)</label>
+            <textarea id="codes-output" class="ascii-textarea" readonly></textarea>
+          </div>
         </div>
-        <div class="field-group">
-          <label>Code format</label>
-          <select id="code-format">
-            <option value="dec">Decimal</option>
-            <option value="hex">Hex</option>
-          </select>
-        </div>
-        <div class="field-group">
-          <label for="codes-output">Character codes (space-separated)</label>
-          <textarea id="codes-output" class="ascii-textarea"></textarea>
-        </div>
-        <p class="rate-note" id="ascii-error" style="color:#C0392B;"></p>
-        <div style="display:flex; gap:10px;">
-          <button type="button" id="text-to-codes-btn" style="padding:9px 16px; border:1px solid var(--line-strong); border-radius:var(--radius); background:var(--ink); color:#fff; font-family:var(--font-display); font-weight:600; cursor:pointer; font-size:0.85rem;">Text → Codes</button>
-          <button type="button" id="codes-to-text-btn" style="padding:9px 16px; border:1px solid var(--line-strong); border-radius:var(--radius); background:var(--paper-raised); font-family:var(--font-display); font-weight:600; cursor:pointer; font-size:0.85rem;">Codes → Text</button>
+
+        <div class="split-panel">
+          <h2>Codes → Text</h2>
+          <div class="field-group">
+            <label for="right-format">Code format <span class="auto-badge" id="auto-badge">AUTO-DETECTED</span></label>
+            <select id="right-format">
+              <option value="auto">Auto-detect</option>
+              <option value="dec">Decimal</option>
+              <option value="hex">Hex</option>
+              <option value="bin">Binary</option>
+            </select>
+          </div>
+          <div class="field-group">
+            <label for="codes-input">Character codes (space or comma-separated)</label>
+            <textarea id="codes-input" class="ascii-textarea" placeholder="72 101 108 108 111 33"></textarea>
+          </div>
+          <div class="field-group" style="margin-bottom:0;">
+            <label for="text-output">Text</label>
+            <textarea id="text-output" class="ascii-textarea" readonly></textarea>
+          </div>
+          <p class="rate-note" id="ascii-error" style="color:#C0392B;"></p>
         </div>
       </div>
 
@@ -155,43 +181,86 @@
   </footer>
 
   <script>
+    function codeForChar(codePoint, format) {
+      if (format === 'bin') return codePoint.toString(2);
+      if (format === 'hex') return codePoint.toString(16).toUpperCase();
+      return codePoint.toString(10);
+    }
+    function numberFromToken(token, format) {
+      return format === 'bin' ? parseInt(token, 2) : format === 'hex' ? parseInt(token, 16) : parseInt(token, 10);
+    }
+
     const textInput = document.getElementById('text-input');
     const codesOutput = document.getElementById('codes-output');
-    const codeFormat = document.getElementById('code-format');
-    const errorEl = document.getElementById('ascii-error');
+    const leftFormat = document.getElementById('left-format');
 
-    // Uses codePointAt/fromCodePoint (not charCodeAt/fromCharCode) so
-    // emoji and other characters outside the Basic Multilingual Plane
-    // convert correctly instead of being split into broken surrogate pairs.
     function textToCodes() {
-      errorEl.textContent = '';
-      const codes = Array.from(textInput.value).map(ch => {
-        const code = ch.codePointAt(0);
-        return codeFormat.value === 'hex' ? code.toString(16).toUpperCase() : code;
-      });
+      const codes = Array.from(textInput.value).map(ch => codeForChar(ch.codePointAt(0), leftFormat.value));
       codesOutput.value = codes.join(' ');
+    }
+    textInput.addEventListener('input', textToCodes);
+    leftFormat.addEventListener('change', textToCodes);
+
+    const codesInput = document.getElementById('codes-input');
+    const textOutput = document.getElementById('text-output');
+    const rightFormat = document.getElementById('right-format');
+    const errorEl = document.getElementById('ascii-error');
+    const autoBadge = document.getElementById('auto-badge');
+
+    // Verified heuristic: pure-binary tokens with at least one token 5+
+    // digits long are treated as binary (a real character's binary code
+    // is rarely that short); otherwise falls back to decimal, since a
+    // string of plain digits is far more commonly meant as decimal than
+    // as a coincidentally-valid short binary/hex string.
+    function detectFormat(input) {
+      const tokens = input.trim().split(/[\s,]+/).filter(Boolean);
+      if (tokens.length === 0) return null;
+      const isBinary = tokens.every(t => /^[01]+$/.test(t));
+      const isDecimal = tokens.every(t => /^[0-9]+$/.test(t));
+      const isHex = tokens.every(t => /^[0-9A-Fa-f]+$/.test(t));
+      if (isBinary && tokens.some(t => t.length >= 5)) return 'bin';
+      if (isDecimal) return 'dec';
+      if (isHex) return 'hex';
+      if (isBinary) return 'bin';
+      return null;
     }
 
     function codesToText() {
       errorEl.textContent = '';
-      const parts = codesOutput.value.trim().split(/[\s,]+/).filter(Boolean);
+      const raw = codesInput.value;
+      if (raw.trim() === '') { textOutput.value = ''; autoBadge.style.display = 'none'; return; }
+
+      let format = rightFormat.value;
+      if (format === 'auto') {
+        const detected = detectFormat(raw);
+        if (!detected) { errorEl.textContent = "Couldn't detect the format — try selecting it manually."; autoBadge.style.display = 'none'; return; }
+        format = detected;
+        autoBadge.textContent = 'DETECTED: ' + ({dec:'Decimal', hex:'Hex', bin:'Binary'})[format];
+        autoBadge.style.display = '';
+      } else {
+        autoBadge.style.display = 'none';
+      }
+
+      const tokens = raw.trim().split(/[\s,]+/).filter(Boolean);
       try {
-        const codes = parts.map(p => {
-          const n = codeFormat.value === 'hex' ? parseInt(p, 16) : parseInt(p, 10);
-          if (isNaN(n) || n < 0 || n > 0x10FFFF) throw new Error(`"${p}" isn't a valid code point`);
+        const codes = tokens.map(t => {
+          const n = numberFromToken(t, format);
+          if (isNaN(n) || n < 0 || n > 0x10FFFF) throw new Error(`"${t}" isn't a valid ${format === 'bin' ? 'binary' : format === 'hex' ? 'hex' : 'decimal'} code`);
           return n;
         });
-        textInput.value = String.fromCodePoint(...codes);
+        textOutput.value = String.fromCodePoint(...codes);
       } catch (e) {
         errorEl.textContent = e.message;
+        textOutput.value = '';
       }
     }
 
-    document.getElementById('text-to-codes-btn').addEventListener('click', textToCodes);
-    document.getElementById('codes-to-text-btn').addEventListener('click', codesToText);
-    codeFormat.addEventListener('change', textToCodes);
+    codesInput.addEventListener('input', codesToText);
+    rightFormat.addEventListener('change', codesToText);
 
     textToCodes();
+    codesInput.value = '72 101 108 108 111 33';
+    codesToText();
   </script>
 </body>
 </html>

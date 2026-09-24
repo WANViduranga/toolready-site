@@ -191,9 +191,22 @@
       if (!text) { canvas.width = 0; canvas.height = 0; return; }
 
       try {
-        const qr = qrcode(0, 'M'); // typeNumber 0 = auto-detect size; error correction level M
-        qr.addData(text);
-        qr.make();
+        // v1.0.3 (the cdnjs-hosted version) doesn't support typeNumber=0
+        // (auto-detect) - it throws for every input. Verified fix: try
+        // increasing type numbers until one is large enough to fit the data.
+        let qr, lastError;
+        for (let typeNumber = 1; typeNumber <= 40; typeNumber++) {
+          try {
+            qr = qrcode(typeNumber, 'M');
+            qr.addData(text);
+            qr.make();
+            break;
+          } catch (e) {
+            lastError = e;
+            qr = null;
+          }
+        }
+        if (!qr) throw lastError || new Error('No type number fit this data');
 
         const moduleCount = qr.getModuleCount();
         const size = (moduleCount + MARGIN * 2) * CELL_SIZE;

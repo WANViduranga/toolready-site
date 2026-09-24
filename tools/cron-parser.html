@@ -192,7 +192,7 @@
     function describeField(parsed, unit, names) {
       switch (parsed.type) {
         case 'every': return `every ${unit}`;
-        case 'exact': return names ? names[parsed.value] : `${unit} ${parsed.value}`;
+        case 'exact': return names ? names[parsed.value] : `${parsed.value}`;
         case 'list': return (names ? parsed.values.map(v => names[v]) : parsed.values).join(', ');
         case 'range': return names ? `${names[parsed.start]}\u2013${names[parsed.end]}` : `${parsed.start}\u2013${parsed.end}`;
         case 'step': return parsed.end !== undefined

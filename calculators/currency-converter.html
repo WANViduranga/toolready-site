@@ -177,10 +177,10 @@
 
       resultEl.textContent = 'Loading…';
       try {
-        const response = await fetch(`https://api.frankfurter.dev/v2/rates?base=${from}&symbols=${to}`);
+        const response = await fetch(`https://api.frankfurter.dev/v2/rate/${from}/${to}`);
         if (!response.ok) throw new Error('Rate lookup failed');
         const data = await response.json();
-        const rate = data.rates[to];
+        const rate = data.rate;
         if (!rate) throw new Error('Currency pair not available');
         const converted = amount * rate;
         resultEl.textContent = converted.toLocaleString(undefined, {maximumFractionDigits: 2}) + ' ' + to;
