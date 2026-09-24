@@ -82,5 +82,37 @@ const RATES = {
     source: "Payment of Gratuity Act No. 12 of 1983",
     minimumYearsOfService: 5,      // must complete 5+ years to qualify
     monthsSalaryPerYear: 0.5       // half a month's salary per year of service
+  },
+
+  // --- Stamp duty on property transfer (Sri Lanka) ---
+  // Collected by Provincial Councils, not central government. Multiple
+  // sources cross-checked (2026) - most consistently report a tiered
+  // rate for both Deed of Transfer (purchase) and Deed of Gift. One
+  // source reported a flat 4% instead of the tiered structure below,
+  // so this is flagged for the visitor to double check with their
+  // notary/Provincial Council before relying on it for a real transaction.
+  stampDuty: {
+    lastVerified: "2026-09-24",
+    source: "Stamp Duty (Special Provisions) Act No. 12/2006 + Provincial Council statutes - cross-checked across multiple sources, one minor conflict noted",
+    transfer: { firstBand: 100000, firstBandRate: 0.03, remainderRate: 0.04 },
+    gift: { firstBand: 50000, firstBandRate: 0.03, remainderRate: 0.02 },
+    mortgageBondRate: 0.001 // Rs 1 per Rs 1,000 of the loan
+  },
+
+  // --- Vehicle revenue license (Sri Lanka) ---
+  // Annual road-use license, weight-based (not engine-capacity-based).
+  // Genuinely has many vehicle categories (lorries, coaches, etc.) -
+  // this covers only the most common private-vehicle categories.
+  // Gazetted under the Motor Traffic Fees Regulations, Nov 2022.
+  vehicleRevenueLicense: {
+    lastVerified: "2026-09-24",
+    source: "Motor Traffic Fees Regulations (gazetted Nov 2022), via multiple 2026 sources - covers common private-vehicle categories only",
+    categories: {
+      "petrol-car": { label: "Petrol car / SUV", fee: 2500 },
+      "diesel-car": { label: "Diesel car / SUV", fee: 3900 },
+      "motorcycle": { label: "Motorcycle", fee: 900 },
+      "three-wheeler": { label: "Three-wheeler", fee: 550 }
+    },
+    evDiscountRate: 0.5 // EVs pay ~50% of the equivalent petrol fee
   }
 };

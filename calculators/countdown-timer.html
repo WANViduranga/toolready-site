@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script>(function(){try{var t=localStorage.getItem('toolready-theme');if(!t){t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4S4MPT9MFQ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-4S4MPT9MFQ');
+  </script>
+
+  <script>(function(s){s.dataset.zone='11828923',s.src='https://n6wxm.com/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Countdown Timer — Free | ToolReady</title>
+  <meta name="description" content="Count down to any date and time - live, updating every second.">
+  <link rel="canonical" href="https://gettoolready.com/calculators/countdown-timer.html">
+
+  <!-- Open Graph tags - control how this page looks when shared as a link -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Countdown Timer — Free | ToolReady">
+  <meta property="og:description" content="Count down to any date and time - live, updating every second.">
+  <meta property="og:url" content="https://gettoolready.com/calculators/countdown-timer.html">
+  <meta property="og:site_name" content="ToolReady">
+  <meta name="twitter:card" content="summary">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <style>
+    .countdown-display { display:grid; grid-template-columns:repeat(4, 1fr); gap:12px; text-align:center; margin:20px 0; }
+    .countdown-unit { background:var(--paper); border:1px solid var(--line-strong); border-radius:var(--radius); padding:16px 8px; }
+    .countdown-unit .num { font-family:var(--font-mono); font-size:2rem; font-weight:700; color:var(--teal); }
+    .countdown-unit .label { font-size:0.72rem; color:var(--slate); text-transform:uppercase; letter-spacing:0.04em; }
+  </style>
+  <script src="../assets/js/tracking.js"></script>
+  <link rel="icon" href="../favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <link rel="manifest" href="../manifest.json">
+  <meta name="theme-color" content="#1B2430">
+  <script src="../assets/js/theme.js"></script>
+  <script src="../assets/js/pwa.js"></script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Countdown Timer",
+  "url": "https://gettoolready.com/calculators/countdown-timer.html",
+  "description": "Count down to any date and time - live, updating every second.",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Any",
+  "isAccessibleForFree": true,
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}
+  </script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://gettoolready.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Global Calculators",
+      "item": "https://gettoolready.com/#global"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Countdown Timer",
+      "item": "https://gettoolready.com/calculators/countdown-timer.html"
+    }
+  ]
+}
+  </script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../index.html" class="logo"><span class="mark">#</span>ToolReady</a>
+      <div class="site-search"><input type="text" placeholder="Search tools…" onclick="window.location.href='../index.html'" readonly></div>
+      <nav class="main-nav">
+        <a href="../index.html#sri-lanka">Sri Lanka</a>
+        <a href="../index.html#global">Global</a>
+        <a href="../index.html#it-tools">IT &amp; Security</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="calc-page">
+    <div class="wrap">
+      <div class="breadcrumb"><a href="../index.html">Home</a> / <a href="../index.html#global">Global Calculators</a> / Countdown Timer</div>
+      <h1 class="calc-title">Countdown Timer</h1>
+      <p class="calc-subtitle">Count down to any date and time.</p>
+
+      <div class="calc-box">
+        <div class="field-row">
+          <div class="field-group">
+            <label for="target-date">Target date</label>
+            <input type="date" id="target-date">
+          </div>
+          <div class="field-group">
+            <label for="target-time">Target time</label>
+            <input type="time" id="target-time" value="00:00">
+          </div>
+        </div>
+        <div class="countdown-display">
+          <div class="countdown-unit"><div class="num" id="cd-days">—</div><div class="label">Days</div></div>
+          <div class="countdown-unit"><div class="num" id="cd-hours">—</div><div class="label">Hours</div></div>
+          <div class="countdown-unit"><div class="num" id="cd-minutes">—</div><div class="label">Minutes</div></div>
+          <div class="countdown-unit"><div class="num" id="cd-seconds">—</div><div class="label">Seconds</div></div>
+        </div>
+        <p class="rate-note" id="cd-status" style="text-align:center;"></p>
+      </div>
+
+      <!-- Monetag ad code goes here (in-content, 300x250) --><div class="ad-slot" data-ad="in-content-300x250"></div>
+
+      <div class="related-tools">
+        <h2>Related tools</h2>
+        <div class="tool-grid">
+          <a class="tool-card" href="date-calculator.html"><div class="icon">→</div><h3>Date Calculator</h3><p>Add or subtract days from a date.</p></a>
+          <a class="tool-card" href="age-calculator.html"><div class="icon">→</div><h3>Age Calculator</h3><p>Find the difference between two dates.</p></a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <span>© 2026 ToolReady. All calculations run in your browser — nothing you enter is sent anywhere.</span>
+      <span>Built for Sri Lanka and beyond.</span>
+    </div>
+  </footer>
+
+  <script>
+    const dateInput = document.getElementById('target-date');
+    const timeInput = document.getElementById('target-time');
+    const statusEl = document.getElementById('cd-status');
+    let intervalId = null;
+
+    // Default target: 30 days from now
+    const defaultTarget = new Date();
+    defaultTarget.setDate(defaultTarget.getDate() + 30);
+    dateInput.valueAsDate = defaultTarget;
+
+    function updateCountdown() {
+      if (!dateInput.value) return;
+      const [h, m] = (timeInput.value || '00:00').split(':').map(Number);
+      const target = new Date(dateInput.value);
+      target.setHours(h || 0, m || 0, 0, 0);
+
+      const now = new Date();
+      let diff = target.getTime() - now.getTime();
+
+      if (diff <= 0) {
+        document.getElementById('cd-days').textContent = '0';
+        document.getElementById('cd-hours').textContent = '0';
+        document.getElementById('cd-minutes').textContent = '0';
+        document.getElementById('cd-seconds').textContent = '0';
+        statusEl.textContent = 'This moment has passed';
+        return;
+      }
+      statusEl.textContent = '';
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      diff -= days * (1000 * 60 * 60 * 24);
+      const hours = Math.floor(diff / (1000 * 60 * 60));
+      diff -= hours * (1000 * 60 * 60);
+      const minutes = Math.floor(diff / (1000 * 60));
+      diff -= minutes * (1000 * 60);
+      const seconds = Math.floor(diff / 1000);
+
+      document.getElementById('cd-days').textContent = days.toLocaleString();
+      document.getElementById('cd-hours').textContent = hours;
+      document.getElementById('cd-minutes').textContent = minutes;
+      document.getElementById('cd-seconds').textContent = seconds;
+    }
+
+    function restart() {
+      if (intervalId) clearInterval(intervalId);
+      updateCountdown();
+      intervalId = setInterval(updateCountdown, 1000);
+    }
+
+    dateInput.addEventListener('input', restart);
+    timeInput.addEventListener('input', restart);
+    restart();
+  </script>
+</body>
+</html>

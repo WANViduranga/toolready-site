@@ -24,6 +24,48 @@
 }
 
 /* ============================================
+   DARK THEME
+   Activated by [data-theme="dark"] on <html>, set by theme.js
+   (either from a saved preference or the OS setting). Same
+   variable names, dark-appropriate values - every component
+   below just works without any component-level dark mode code.
+   ============================================ */
+html[data-theme="dark"] {
+  --ink: #F1EFEA;
+  --paper: #14181F;
+  --paper-raised: #1D2129;
+  --amber: #F0B65C;
+  --amber-dark: #D9963A;
+  --teal: #4FAD93;
+  --navy-tag: #5C7690;
+  --slate: #9AA1AC;
+  --line: #262B34;
+  --line-strong: #363C47;
+}
+
+/* ============================================
+   THEME TOGGLE BUTTON
+   Injected into the header by theme.js on every page.
+   ============================================ */
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  background: var(--paper);
+  color: var(--ink);
+  cursor: pointer;
+  flex-shrink: 0;
+  font-size: 1rem;
+  transition: background 0.15s, border-color 0.15s;
+}
+.theme-toggle:hover { border-color: var(--ink); }
+
+
+/* ============================================
    RESET & BASE
    Removes browser default spacing inconsistencies
    so the site looks the same across all browsers.

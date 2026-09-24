@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script>(function(){try{var t=localStorage.getItem('toolready-theme');if(!t){t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4S4MPT9MFQ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-4S4MPT9MFQ');
+  </script>
+
+  <script>(function(s){s.dataset.zone='11828923',s.src='https://n6wxm.com/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fuel Cost Calculator — Free | ToolReady</title>
+  <meta name="description" content="Estimate fuel cost for a trip based on distance, fuel efficiency, and price per liter.">
+  <link rel="canonical" href="https://gettoolready.com/calculators/fuel-cost.html">
+
+  <!-- Open Graph tags - control how this page looks when shared as a link -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Fuel Cost Calculator — Free | ToolReady">
+  <meta property="og:description" content="Estimate fuel cost for a trip based on distance, fuel efficiency, and price per liter.">
+  <meta property="og:url" content="https://gettoolready.com/calculators/fuel-cost.html">
+  <meta property="og:site_name" content="ToolReady">
+  <meta name="twitter:card" content="summary">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <script src="../assets/js/tracking.js"></script>
+  <link rel="icon" href="../favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <link rel="manifest" href="../manifest.json">
+  <meta name="theme-color" content="#1B2430">
+  <script src="../assets/js/theme.js"></script>
+  <script src="../assets/js/pwa.js"></script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Fuel Cost Calculator",
+  "url": "https://gettoolready.com/calculators/fuel-cost.html",
+  "description": "Estimate fuel cost for a trip based on distance, fuel efficiency, and price per liter.",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Any",
+  "isAccessibleForFree": true,
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}
+  </script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://gettoolready.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Global Calculators",
+      "item": "https://gettoolready.com/#global"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Fuel Cost Calculator",
+      "item": "https://gettoolready.com/calculators/fuel-cost.html"
+    }
+  ]
+}
+  </script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../index.html" class="logo"><span class="mark">#</span>ToolReady</a>
+      <div class="site-search"><input type="text" placeholder="Search tools…" onclick="window.location.href='../index.html'" readonly></div>
+      <nav class="main-nav">
+        <a href="../index.html#sri-lanka">Sri Lanka</a>
+        <a href="../index.html#global">Global</a>
+        <a href="../index.html#it-tools">IT &amp; Security</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="calc-page">
+    <div class="wrap">
+      <div class="breadcrumb"><a href="../index.html">Home</a> / <a href="../index.html#global">Global Calculators</a> / Fuel Cost Calculator</div>
+      <h1 class="calc-title">Fuel Cost Calculator</h1>
+      <p class="calc-subtitle">Estimate the fuel cost for a trip. Enter today's price yourself — it varies by station and changes often, so no default is assumed.</p>
+
+      <div class="calc-box">
+        <div class="field-row">
+          <div class="field-group">
+            <label for="distance">Distance (km)</label>
+            <input type="number" id="distance" placeholder="e.g. 120" inputmode="decimal">
+          </div>
+          <div class="field-group">
+            <label for="efficiency">Fuel efficiency (km per liter)</label>
+            <input type="number" id="efficiency" placeholder="e.g. 12" inputmode="decimal">
+          </div>
+        </div>
+        <div class="field-group">
+          <label for="price">Price per liter</label>
+          <input type="number" id="price" placeholder="e.g. 340" inputmode="decimal">
+        </div>
+        <div class="calc-result">
+          <div class="result-label">Estimated fuel cost</div>
+          <div class="result-value" id="cost-result">—</div>
+        </div>
+        <div style="margin-top:16px; display:grid; grid-template-columns:1fr 1fr; gap:14px; font-size:0.85rem;">
+          <div><span style="color:var(--slate);">Fuel needed</span><br><span id="liters-result" style="font-family:var(--font-mono); font-weight:700;">—</span></div>
+          <div><span style="color:var(--slate);">Cost per km</span><br><span id="perkm-result" style="font-family:var(--font-mono); font-weight:700;">—</span></div>
+        </div>
+      </div>
+
+      <!-- Monetag ad code goes here (in-content, 300x250) --><div class="ad-slot" data-ad="in-content-300x250"></div>
+
+      <div class="related-tools">
+        <h2>Related tools</h2>
+        <div class="tool-grid">
+          <a class="tool-card" href="vehicle-revenue-license.html"><div class="icon">→</div><h3>Vehicle Revenue License</h3><p>Annual road-use fee.</p></a>
+          <a class="tool-card" href="unit-converter.html"><div class="icon">→</div><h3>Unit Converter</h3><p>Convert length, weight, temperature.</p></a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <span>© 2026 ToolReady. All calculations run in your browser — nothing you enter is sent anywhere.</span>
+      <span>Built for Sri Lanka and beyond.</span>
+    </div>
+  </footer>
+
+  <script>
+    const distanceInput = document.getElementById('distance');
+    const efficiencyInput = document.getElementById('efficiency');
+    const priceInput = document.getElementById('price');
+
+    function calc() {
+      const distance = parseFloat(distanceInput.value);
+      const efficiency = parseFloat(efficiencyInput.value);
+      const price = parseFloat(priceInput.value);
+
+      const costEl = document.getElementById('cost-result');
+      const litersEl = document.getElementById('liters-result');
+      const perkmEl = document.getElementById('perkm-result');
+
+      if (isNaN(distance) || isNaN(efficiency) || isNaN(price) || efficiency <= 0) {
+        costEl.textContent = '—'; litersEl.textContent = '—'; perkmEl.textContent = '—';
+        return;
+      }
+
+      const liters = distance / efficiency;
+      const cost = liters * price;
+      const perKm = cost / distance;
+
+      costEl.textContent = cost.toLocaleString(undefined, {maximumFractionDigits: 2});
+      litersEl.textContent = liters.toLocaleString(undefined, {maximumFractionDigits: 2}) + ' L';
+      perkmEl.textContent = isFinite(perKm) ? perKm.toLocaleString(undefined, {maximumFractionDigits: 2}) : '—';
+    }
+
+    [distanceInput, efficiencyInput, priceInput].forEach(el => el.addEventListener('input', calc));
+  </script>
+</body>
+</html>

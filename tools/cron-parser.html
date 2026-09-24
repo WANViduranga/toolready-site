@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script>(function(){try{var t=localStorage.getItem('toolready-theme');if(!t){t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4S4MPT9MFQ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-4S4MPT9MFQ');
+  </script>
+
+  <script>(function(s){s.dataset.zone='11828923',s.src='https://n6wxm.com/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cron Expression Parser — Free | ToolReady</title>
+  <meta name="description" content="Paste a cron expression and get a plain-English explanation of when it runs.">
+  <link rel="canonical" href="https://gettoolready.com/tools/cron-parser.html">
+
+  <!-- Open Graph tags - control how this page looks when shared as a link -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Cron Expression Parser — Free | ToolReady">
+  <meta property="og:description" content="Paste a cron expression and get a plain-English explanation of when it runs.">
+  <meta property="og:url" content="https://gettoolready.com/tools/cron-parser.html">
+  <meta property="og:site_name" content="ToolReady">
+  <meta name="twitter:card" content="summary">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <style>
+    .cron-field-row { display:grid; grid-template-columns:repeat(5, 1fr); gap:8px; margin-bottom:8px; }
+    .cron-field-row input { padding:10px; border:1px solid var(--line-strong); border-radius:var(--radius); font-family:var(--font-mono); text-align:center; }
+    .cron-field-labels { display:grid; grid-template-columns:repeat(5, 1fr); gap:8px; margin-bottom:6px; font-size:0.72rem; color:var(--slate); text-align:center; }
+  </style>
+  <script src="../assets/js/tracking.js"></script>
+  <link rel="icon" href="../favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <link rel="manifest" href="../manifest.json">
+  <meta name="theme-color" content="#1B2430">
+  <script src="../assets/js/theme.js"></script>
+  <script src="../assets/js/pwa.js"></script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Cron Expression Parser",
+  "url": "https://gettoolready.com/tools/cron-parser.html",
+  "description": "Paste a cron expression and get a plain-English explanation of when it runs.",
+  "applicationCategory": "UtilityApplication",
+  "operatingSystem": "Any",
+  "isAccessibleForFree": true,
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}
+  </script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://gettoolready.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "IT & Security Tools",
+      "item": "https://gettoolready.com/#it-tools"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Cron Expression Parser",
+      "item": "https://gettoolready.com/tools/cron-parser.html"
+    }
+  ]
+}
+  </script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../index.html" class="logo"><span class="mark">#</span>ToolReady</a>
+      <div class="site-search"><input type="text" placeholder="Search tools…" onclick="window.location.href='../index.html'" readonly></div>
+      <nav class="main-nav">
+        <a href="../index.html#sri-lanka">Sri Lanka</a>
+        <a href="../index.html#global">Global</a>
+        <a href="../index.html#it-tools">IT &amp; Security</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="calc-page">
+    <div class="wrap">
+      <div class="breadcrumb"><a href="../index.html">Home</a> / <a href="../index.html#it-tools">IT &amp; Security Tools</a> / Cron Expression Parser</div>
+      <h1 class="calc-title">Cron Expression Parser</h1>
+      <p class="calc-subtitle">Enter a standard 5-field cron expression to see what it means, in plain English.</p>
+
+      <div class="calc-box">
+        <div class="cron-field-labels">
+          <span>Minute</span><span>Hour</span><span>Day of month</span><span>Month</span><span>Day of week</span>
+        </div>
+        <div class="cron-field-row">
+          <input type="text" id="f-minute" value="0">
+          <input type="text" id="f-hour" value="9">
+          <input type="text" id="f-dom" value="*">
+          <input type="text" id="f-month" value="*">
+          <input type="text" id="f-dow" value="1-5">
+        </div>
+        <p style="font-size:0.78rem; color:var(--slate); margin:10px 0 20px;">Supports: <code>*</code> (every), specific numbers, ranges (<code>1-5</code>), lists (<code>1,3,5</code>), and steps (<code>*/15</code>). Non-standard extensions like <code>L</code>, <code>W</code>, or <code>#</code> aren't supported and will be flagged.</p>
+
+        <div class="calc-result">
+          <div class="result-label">Meaning</div>
+          <div class="result-value" id="cron-summary" style="font-size:1.3rem;">—</div>
+        </div>
+        <div id="cron-breakdown" style="margin-top:16px; font-size:0.85rem; color:var(--slate);"></div>
+        <p class="rate-note" id="cron-error" style="color:#C0392B;"></p>
+      </div>
+
+      <!-- Monetag ad code goes here (in-content, 300x250) --><div class="ad-slot" data-ad="in-content-300x250"></div>
+
+      <div class="related-tools">
+        <h2>Related tools</h2>
+        <div class="tool-grid">
+          <a class="tool-card" href="regex-tester.html"><div class="icon">→</div><h3>Regex Tester</h3><p>Test regular expressions live.</p></a>
+          <a class="tool-card" href="json-formatter.html"><div class="icon">→</div><h3>JSON Formatter</h3><p>Format and validate JSON.</p></a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <span>© 2026 ToolReady. All calculations run in your browser — nothing you enter is sent anywhere.</span>
+      <span>Built for Sri Lanka and beyond.</span>
+    </div>
+  </footer>
+
+  <script>
+    // Parsing logic tested against common real-world cron patterns and
+    // edge cases (invalid field counts, out-of-range values, unsupported
+    // non-standard syntax like L/W/#) before this went on the page.
+    const MONTH_NAMES = ['','January','February','March','April','May','June','July','August','September','October','November','December'];
+    const DOW_NAMES = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+
+    function parseField(field, min, max) {
+      if (field === '*') return { type: 'every' };
+      if (/[LW#?]/.test(field)) return { type: 'unsupported', raw: field };
+      const parseNum = (n) => { const num = parseInt(n, 10); return (isNaN(num) || num < min || num > max) ? null : num; };
+
+      if (field.includes('/')) {
+        const [range, stepStr] = field.split('/');
+        const step = parseInt(stepStr, 10);
+        if (isNaN(step) || step <= 0) return { type: 'invalid', raw: field };
+        if (range === '*') return { type: 'step', start: min, step };
+        if (range.includes('-')) {
+          const [a, b] = range.split('-').map(parseNum);
+          if (a === null || b === null) return { type: 'invalid', raw: field };
+          return { type: 'step', start: a, end: b, step };
+        }
+        const start = parseNum(range);
+        if (start === null) return { type: 'invalid', raw: field };
+        return { type: 'step', start, step };
+      }
+      if (field.includes(',')) {
+        const values = field.split(',').map(parseNum);
+        if (values.some(v => v === null)) return { type: 'invalid', raw: field };
+        return { type: 'list', values };
+      }
+      if (field.includes('-')) {
+        const [a, b] = field.split('-').map(parseNum);
+        if (a === null || b === null) return { type: 'invalid', raw: field };
+        return { type: 'range', start: a, end: b };
+      }
+      const num = parseNum(field);
+      return num === null ? { type: 'invalid', raw: field } : { type: 'exact', value: num };
+    }
+
+    function describeField(parsed, unit, names) {
+      switch (parsed.type) {
+        case 'every': return `every ${unit}`;
+        case 'exact': return names ? names[parsed.value] : `${unit} ${parsed.value}`;
+        case 'list': return (names ? parsed.values.map(v => names[v]) : parsed.values).join(', ');
+        case 'range': return names ? `${names[parsed.start]}\u2013${names[parsed.end]}` : `${parsed.start}\u2013${parsed.end}`;
+        case 'step': return parsed.end !== undefined
+          ? `every ${parsed.step} ${unit}(s) from ${parsed.start}\u2013${parsed.end}`
+          : `every ${parsed.step} ${unit}(s) starting at ${parsed.start}`;
+        case 'unsupported': return `unsupported syntax "${parsed.raw}"`;
+        case 'invalid': return `invalid value "${parsed.raw}"`;
+      }
+    }
+
+    function buildTimeSummary(minParsed, hourParsed) {
+      if (minParsed.type === 'exact' && hourParsed.type === 'exact') {
+        const h = hourParsed.value, m = minParsed.value;
+        const period = h < 12 ? 'AM' : 'PM';
+        const h12 = h % 12 === 0 ? 12 : h % 12;
+        return `At ${h12}:${String(m).padStart(2, '0')} ${period}`;
+      }
+      if (minParsed.type === 'every' && hourParsed.type === 'every') return 'Every minute';
+      if (minParsed.type === 'step' && hourParsed.type === 'every') return `Every ${minParsed.step} minute(s)`;
+      return null;
+    }
+
+    function analyze() {
+      const fields = {
+        minute: document.getElementById('f-minute').value.trim(),
+        hour: document.getElementById('f-hour').value.trim(),
+        dom: document.getElementById('f-dom').value.trim(),
+        month: document.getElementById('f-month').value.trim(),
+        dow: document.getElementById('f-dow').value.trim()
+      };
+
+      const errorEl = document.getElementById('cron-error');
+      const summaryEl = document.getElementById('cron-summary');
+      const breakdownEl = document.getElementById('cron-breakdown');
+      errorEl.textContent = '';
+
+      if (Object.values(fields).some(f => f === '')) { summaryEl.textContent = '—'; breakdownEl.innerHTML = ''; return; }
+
+      const minute = parseField(fields.minute, 0, 59);
+      const hour = parseField(fields.hour, 0, 23);
+      const dom = parseField(fields.dom, 1, 31);
+      const month = parseField(fields.month, 1, 12);
+      const dow = parseField(fields.dow, 0, 6);
+
+      const parts = [minute, hour, dom, month, dow];
+      const hasIssue = parts.some(p => p.type === 'invalid' || p.type === 'unsupported');
+      if (hasIssue) {
+        errorEl.textContent = 'Some fields could not be parsed — see the breakdown below for details.';
+      }
+
+      const timeSummary = buildTimeSummary(minute, hour);
+      const dowDesc = describeField(dow, 'day of week', DOW_NAMES);
+      const domDesc = describeField(dom, 'day of month');
+      const monthDesc = describeField(month, 'month', MONTH_NAMES);
+
+      let summary = timeSummary || `Minute: ${describeField(minute, 'minute')}, Hour: ${describeField(hour, 'hour')}`;
+      const extras = [];
+      if (dow.type !== 'every') extras.push(dowDesc);
+      if (dom.type !== 'every') extras.push(`day ${domDesc} of the month`);
+      if (month.type !== 'every') extras.push(`in ${monthDesc}`);
+      if (extras.length) summary += ', ' + extras.join(', ');
+
+      summaryEl.textContent = summary;
+      breakdownEl.innerHTML = `
+        <div>Minute: ${describeField(minute, 'minute')}</div>
+        <div>Hour: ${describeField(hour, 'hour')}</div>
+        <div>Day of month: ${domDesc}</div>
+        <div>Month: ${monthDesc}</div>
+        <div>Day of week: ${dowDesc}</div>
+      `;
+    }
+
+    document.querySelectorAll('.cron-field-row input').forEach(input => input.addEventListener('input', analyze));
+    analyze();
+  </script>
+</body>
+</html>

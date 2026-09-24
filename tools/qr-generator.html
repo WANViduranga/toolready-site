@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script>(function(){try{var t=localStorage.getItem('toolready-theme');if(!t){t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4S4MPT9MFQ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-4S4MPT9MFQ');
+  </script>
+
+  <script>(function(s){s.dataset.zone='11828923',s.src='https://n6wxm.com/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QR Code Generator — Free | ToolReady</title>
+  <meta name="description" content="Generate a QR code from any text or URL, free, with a PNG download.">
+  <link rel="canonical" href="https://gettoolready.com/tools/qr-generator.html">
+
+  <!-- Open Graph tags - control how this page looks when shared as a link -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="QR Code Generator — Free | ToolReady">
+  <meta property="og:description" content="Generate a QR code from any text or URL, free, with a PNG download.">
+  <meta property="og:url" content="https://gettoolready.com/tools/qr-generator.html">
+  <meta property="og:site_name" content="ToolReady">
+  <meta name="twitter:card" content="summary">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.0.3/qrcode.min.js"></script>
+  <style>
+    #qr-canvas-wrap { display:flex; justify-content:center; padding:24px; background:#FFFFFF; border-radius:var(--radius); border:1px solid var(--line-strong); margin-top:20px; }
+  </style>
+  <script src="../assets/js/tracking.js"></script>
+  <link rel="icon" href="../favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <link rel="manifest" href="../manifest.json">
+  <meta name="theme-color" content="#1B2430">
+  <script src="../assets/js/theme.js"></script>
+  <script src="../assets/js/pwa.js"></script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "QR Code Generator",
+  "url": "https://gettoolready.com/tools/qr-generator.html",
+  "description": "Generate a QR code from any text or URL, free, with a PNG download.",
+  "applicationCategory": "UtilityApplication",
+  "operatingSystem": "Any",
+  "isAccessibleForFree": true,
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}
+  </script>
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://gettoolready.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "IT & Security Tools",
+      "item": "https://gettoolready.com/#it-tools"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "QR Code Generator",
+      "item": "https://gettoolready.com/tools/qr-generator.html"
+    }
+  ]
+}
+  </script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../index.html" class="logo"><span class="mark">#</span>ToolReady</a>
+      <div class="site-search"><input type="text" placeholder="Search tools…" onclick="window.location.href='../index.html'" readonly></div>
+      <nav class="main-nav">
+        <a href="../index.html#sri-lanka">Sri Lanka</a>
+        <a href="../index.html#global">Global</a>
+        <a href="../index.html#it-tools">IT &amp; Security</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="calc-page">
+    <div class="wrap">
+      <div class="breadcrumb"><a href="../index.html">Home</a> / <a href="../index.html#it-tools">IT &amp; Security Tools</a> / QR Code Generator</div>
+      <h1 class="calc-title">QR Code Generator</h1>
+      <p class="calc-subtitle">Type any text, link, or Wi-Fi code — the QR code updates instantly.</p>
+
+      <div class="calc-box">
+        <div class="field-group">
+          <label for="qr-text">Text or URL</label>
+          <textarea id="qr-text" style="width:100%; min-height:80px; padding:12px; border:1px solid var(--line-strong); border-radius:var(--radius); font-family:var(--font-mono); font-size:0.9rem;" placeholder="https://example.com">https://gettoolready.com</textarea>
+        </div>
+        <p class="rate-note" id="qr-error" style="color:#C0392B;"></p>
+
+        <div id="qr-canvas-wrap">
+          <canvas id="qr-canvas"></canvas>
+        </div>
+
+        <button type="button" id="download-btn" style="margin-top:16px; padding:9px 18px; border:1px solid var(--line-strong); border-radius:var(--radius); background:var(--paper); font-family:var(--font-display); cursor:pointer; font-size:0.85rem;">Download PNG</button>
+      </div>
+
+      <!-- Monetag ad code goes here (in-content, 300x250) --><div class="ad-slot" data-ad="in-content-300x250"></div>
+
+      <div class="related-tools">
+        <h2>Related tools</h2>
+        <div class="tool-grid">
+          <a class="tool-card" href="password-generator.html"><div class="icon">→</div><h3>Password Generator</h3><p>Create a strong password instantly.</p></a>
+          <a class="tool-card" href="uuid-generator.html"><div class="icon">→</div><h3>UUID Generator</h3><p>Generate random UUIDs.</p></a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <span>© 2026 ToolReady. QR codes are generated entirely in your browser — nothing you enter is sent anywhere.</span>
+      <span>Built for Sri Lanka and beyond.</span>
+    </div>
+  </footer>
+
+  <script>
+    // The base qrcode-generator library doesn't handle UTF-8 text
+    // correctly out of the box (verified: Sinhala/Tamil text and emoji
+    // come out corrupted without this). This overrides its byte-encoding
+    // function with a standard UTF-8 byte-array conversion, the same
+    // fix the library's own optional qrcode_UTF8.js add-on applies -
+    // inlined here instead of loading a second script, so there's one
+    // less external dependency that could fail to load.
+    if (typeof qrcode !== 'undefined') {
+      qrcode.stringToBytes = function (s) {
+        const utf8 = [];
+        for (let i = 0; i < s.length; i++) {
+          let charcode = s.charCodeAt(i);
+          if (charcode < 0x80) {
+            utf8.push(charcode);
+          } else if (charcode < 0x800) {
+            utf8.push(0xc0 | (charcode >> 6), 0x80 | (charcode & 0x3f));
+          } else if (charcode < 0xd800 || charcode >= 0xe000) {
+            utf8.push(0xe0 | (charcode >> 12), 0x80 | ((charcode >> 6) & 0x3f), 0x80 | (charcode & 0x3f));
+          } else {
+            // surrogate pair (e.g. emoji) - combine into a single code point
+            i++;
+            charcode = 0x10000 + (((charcode & 0x3ff) << 10) | (s.charCodeAt(i) & 0x3ff));
+            utf8.push(
+              0xf0 | (charcode >> 18),
+              0x80 | ((charcode >> 12) & 0x3f),
+              0x80 | ((charcode >> 6) & 0x3f),
+              0x80 | (charcode & 0x3f)
+            );
+          }
+        }
+        return utf8;
+      };
+    }
+  </script>
+  <script>
+    const textInput = document.getElementById('qr-text');
+    const canvas = document.getElementById('qr-canvas');
+    const ctx = canvas.getContext('2d');
+    const errorEl = document.getElementById('qr-error');
+
+    const CELL_SIZE = 8;
+    const MARGIN = 4;
+
+    function render() {
+      errorEl.textContent = '';
+      const text = textInput.value;
+      if (!text) { canvas.width = 0; canvas.height = 0; return; }
+
+      try {
+        const qr = qrcode(0, 'M'); // typeNumber 0 = auto-detect size; error correction level M
+        qr.addData(text);
+        qr.make();
+
+        const moduleCount = qr.getModuleCount();
+        const size = (moduleCount + MARGIN * 2) * CELL_SIZE;
+        canvas.width = size;
+        canvas.height = size;
+
+        ctx.fillStyle = '#FFFFFF';
+        ctx.fillRect(0, 0, size, size);
+        ctx.fillStyle = '#000000';
+        for (let row = 0; row < moduleCount; row++) {
+          for (let col = 0; col < moduleCount; col++) {
+            if (qr.isDark(row, col)) {
+              ctx.fillRect((col + MARGIN) * CELL_SIZE, (row + MARGIN) * CELL_SIZE, CELL_SIZE, CELL_SIZE);
+            }
+          }
+        }
+      } catch (e) {
+        errorEl.textContent = 'Could not generate a QR code for this input (it may be too long).';
+      }
+    }
+
+    document.getElementById('download-btn').addEventListener('click', () => {
+      if (canvas.width === 0) return;
+      const link = document.createElement('a');
+      link.download = 'qrcode.png';
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    });
+
+    textInput.addEventListener('input', render);
+    window.addEventListener('load', render);
+    render();
+  </script>
+</body>
+</html>
