@@ -36,7 +36,7 @@
     .enc-textarea { width:100%; min-height:120px; padding:12px; border:1px solid var(--line-strong); border-radius:var(--radius); font-family:var(--font-mono); font-size:0.88rem; resize:vertical; }
     .mode-tabs { display:flex; gap:8px; margin-bottom:18px; }
     .mode-tab { padding:8px 16px; border:1px solid var(--line-strong); border-radius:var(--radius); background:var(--paper); cursor:pointer; font-family:var(--font-display); font-size:0.85rem; }
-    .mode-tab.active { background:var(--ink); color:#fff; border-color:var(--ink); }
+    .mode-tab.active { background:var(--ink); color:var(--paper); border-color:var(--ink); }
   </style>
   <script src="../assets/js/tracking.js"></script>
   <link rel="icon" href="../favicon.ico">
@@ -120,7 +120,7 @@
           <textarea id="input-text" class="enc-textarea" placeholder="Type or paste text here"></textarea>
         </div>
         <div style="display:flex; gap:10px; margin:14px 0;">
-          <button type="button" id="encode-btn" style="padding:9px 18px; border:1px solid var(--line-strong); border-radius:var(--radius); background:var(--ink); color:#fff; font-family:var(--font-display); font-weight:600; cursor:pointer;">Encode</button>
+          <button type="button" id="encode-btn" style="padding:9px 18px; border:1px solid var(--line-strong); border-radius:var(--radius); background:var(--ink); color:var(--paper); font-family:var(--font-display); font-weight:600; cursor:pointer;">Encode</button>
           <button type="button" id="decode-btn" style="padding:9px 18px; border:1px solid var(--line-strong); border-radius:var(--radius); background:var(--paper-raised); font-family:var(--font-display); font-weight:600; cursor:pointer;">Decode</button>
         </div>
         <div class="field-group">
