@@ -1,0 +1,18 @@
+Third-party software bundled with the ToolReady PDF tools
+(self-hosted so the editor page never loads code from another website)
+
+1. PDF.js (pdf.min.mjs, pdf.worker.min.mjs, wasm/, standard_fonts/)
+   Copyright Mozilla Foundation and contributors.
+   Licensed under the Apache License, Version 2.0 (see PDFJS-LICENSE-APACHE-2.0.txt)
+   Source: https://github.com/mozilla/pdf.js
+   The bundled wasm decoders and standard fonts carry their own licences
+   (OpenJPEG, JBIG2, qcms, Foxit, Liberation fonts) - see the upstream
+   pdfjs-dist package for the full texts.
+
+2. pdf-lib (pdf-lib.min.js)
+   Copyright (c) 2019 Andrew Dillon - MIT License
+   Source: https://github.com/Hopding/pdf-lib
+
+3. Noto Sans Sinhala / Noto Sans Tamil (../fonts/*.woff2)
+   Copyright The Noto Project Authors - SIL Open Font License 1.1
+   https://openfontlicense.org  (distributed via the Fontsource project)

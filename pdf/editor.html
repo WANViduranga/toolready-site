@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <!-- NO_THIRD_PARTY_PAGE
+       This page must never load ads, analytics or any external script: people
+       open private documents here. The Content-Security-Policy below makes the
+       browser itself enforce that - it can only load files from this site and
+       can only talk to this site. Batch scripts that inject ad/analytics code
+       skip any page containing the marker above. -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self'; img-src 'self' data: blob:; font-src 'self' data: blob:; connect-src 'self' blob: data:; worker-src 'self' blob:; manifest-src 'self'; base-uri 'none'; form-action 'none'">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, follow">
+  <title>Free PDF Editor — Nothing Uploaded | ToolReady</title>
+  <meta name="description" content="Edit, fill and sign PDFs in your browser. Your file never leaves your device.">
+  <meta name="theme-color" content="#1B2430">
+  <script src="../assets/js/theme-init.js"></script>
+  <link rel="icon" href="../favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+  <link rel="manifest" href="../manifest.json">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <link rel="stylesheet" href="editor.css">
+</head>
+<body class="editor-page">
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../index.html" class="logo"><span class="mark">#</span>ToolReady</a>
+      <div class="site-search"><input type="text" id="header-search" placeholder="Search tools…" readonly></div>
+      <nav class="main-nav">
+        <a href="../index.html#sri-lanka">Sri Lanka</a>
+        <a href="../index.html#global">Global</a>
+        <a href="../index.html#it-tools">IT &amp; Security</a>
+        <a href="../index.html#pdf-tools">PDF</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="editor-main">
+    <div class="wrap">
+      <div class="breadcrumb"><a href="../index.html">Home</a> / <a href="../index.html#pdf-tools">PDF Tools</a> / PDF Editor</div>
+      <h1 class="calc-title">Free PDF Editor</h1>
+      <p class="calc-subtitle">Fill forms, add text, sign and cover up mistakes — then download. No watermark, no sign-up, no limits.</p>
+
+      <div class="privacy-bar" role="note">
+        <span class="privacy-icon" aria-hidden="true">&#128274;</span>
+        <span><strong>Your file never leaves your device.</strong> This page loads no ads, trackers or third-party code — everything happens inside your browser.</span>
+        <button type="button" id="verify-btn" class="link-btn">How to verify</button>
+      </div>
+
+      <section id="drop-section">
+        <div id="dropzone" class="dropzone" tabindex="0" role="button" aria-label="Choose a PDF file to open">
+          <p class="dz-title">Drop a PDF here</p>
+          <p class="dz-sub">or</p>
+          <button type="button" id="choose-btn" class="btn btn-primary">Choose PDF file</button>
+          <input type="file" id="file-input" accept="application/pdf,.pdf" hidden>
+          <p class="dz-note">Free forever · works offline once loaded · fillable forms are detected automatically</p>
+        </div>
+        <div id="load-error" class="notice notice-error" role="alert" hidden></div>
+      </section>
+    </div>
+
+    <section id="editor-section" hidden>
+      <div class="toolbar-wrap">
+      <div class="toolbar" id="toolbar">
+        <div class="tool-group" role="toolbar" aria-label="Editing tools">
+          <button type="button" class="tool-btn active" data-tool="select" title="Select and move (Esc)">Select</button>
+          <button type="button" class="tool-btn" data-tool="text" title="Click on the page to add text">Text</button>
+          <button type="button" class="tool-btn" data-tool="date" title="Add today's date">Date</button>
+          <button type="button" class="tool-btn" data-tool="sign" title="Draw, type or upload a signature">Sign</button>
+          <button type="button" class="tool-btn" data-tool="image" title="Add an image">Image</button>
+          <button type="button" class="tool-btn" data-tool="check" title="Add a check mark">&#10003; Check</button>
+          <button type="button" class="tool-btn" data-tool="cross" title="Add a cross">&#10007; Cross</button>
+          <button type="button" class="tool-btn" data-tool="whiteout" title="Hides content visually (does not delete the text underneath)">Whiteout</button>
+        </div>
+        <div class="tool-group">
+          <button type="button" class="tool-btn" id="undo-btn" title="Undo (Ctrl+Z)">Undo</button>
+          <button type="button" class="tool-btn" id="redo-btn" title="Redo (Ctrl+Shift+Z)">Redo</button>
+        </div>
+        <div class="tool-group">
+          <button type="button" class="tool-btn" id="zoom-out" aria-label="Zoom out">&minus;</button>
+          <span id="zoom-label" class="zoom-label">100%</span>
+          <button type="button" class="tool-btn" id="zoom-in" aria-label="Zoom in">+</button>
+        </div>
+        <span id="page-indicator" class="page-indicator">Page 1 / 1</span>
+        <div class="tool-group toolbar-end">
+          <button type="button" class="btn" id="close-btn">Open another</button>
+          <button type="button" class="btn btn-primary" id="download-btn">Download PDF</button>
+        </div>
+      </div>
+
+      <div class="props-bar" id="props-bar">
+        <span class="props-empty" id="props-empty">Select an item on the page, or pick the Text tool, to see its options here.</span>
+        <div class="props-group" id="props-text" hidden>
+          <label class="props-label" for="prop-font">Font</label>
+          <select id="prop-font" class="props-input">
+            <option value="Helvetica">Helvetica</option>
+            <option value="Times">Times</option>
+            <option value="Courier">Courier</option>
+          </select>
+          <label class="props-label" for="prop-size">Size</label>
+          <input type="number" id="prop-size" class="props-input props-num" min="4" max="144" step="1" value="12">
+          <button type="button" class="tool-btn" id="prop-bold" aria-pressed="false"><b>B</b></button>
+          <button type="button" class="tool-btn" id="prop-italic" aria-pressed="false"><i>I</i></button>
+        </div>
+        <div class="props-group" id="props-color" hidden>
+          <label class="props-label" for="prop-color">Colour</label>
+          <input type="color" id="prop-color" class="props-color" value="#000000">
+        </div>
+        <div class="props-group" id="props-delete" hidden>
+          <button type="button" class="btn btn-danger" id="prop-delete">Delete</button>
+        </div>
+      </div>
+
+      </div>
+
+      <div id="status" class="status" role="status" aria-live="polite"></div>
+
+      <div class="pages-wrap">
+        <div id="pages" class="pages"></div>
+      </div>
+    </section>
+  </main>
+
+  <dialog id="sig-dialog" class="dialog">
+    <h2 class="dialog-title">Add your signature</h2>
+    <div class="tabs" role="tablist">
+      <button type="button" class="tab active" data-sig-tab="draw" role="tab">Draw</button>
+      <button type="button" class="tab" data-sig-tab="type" role="tab">Type</button>
+      <button type="button" class="tab" data-sig-tab="upload" role="tab">Upload</button>
+    </div>
+
+    <div class="sig-tools">
+      <span class="props-label">Ink</span>
+      <button type="button" class="ink-dot ink-black active" data-ink="#111111" aria-label="Black ink"></button>
+      <button type="button" class="ink-dot ink-blue" data-ink="#1a3d8f" aria-label="Blue ink"></button>
+    </div>
+
+    <div id="sig-draw" class="sig-pane">
+      <canvas id="sig-canvas" class="sig-canvas" width="1200" height="400" aria-label="Draw your signature here"></canvas>
+      <div class="sig-tools">
+        <button type="button" class="btn" id="sig-clear">Clear</button>
+      </div>
+    </div>
+
+    <div id="sig-type" class="sig-pane" hidden>
+      <input type="text" id="sig-text" class="props-input sig-text-input" placeholder="Type your name" maxlength="40" autocomplete="off">
+      <div class="sig-style-row">
+        <button type="button" class="btn sig-style active" data-sig-style="script">Script</button>
+        <button type="button" class="btn sig-style" data-sig-style="serif">Italic serif</button>
+      </div>
+      <canvas id="sig-type-canvas" class="sig-canvas" width="1200" height="400"></canvas>
+    </div>
+
+    <div id="sig-upload" class="sig-pane" hidden>
+      <input type="file" id="sig-file" accept="image/*">
+      <label class="check-row"><input type="checkbox" id="sig-remove-bg" checked> Remove white background</label>
+      <canvas id="sig-upload-canvas" class="sig-canvas" width="1200" height="400"></canvas>
+    </div>
+
+    <p id="sig-error" class="notice notice-error" hidden></p>
+    <div class="dialog-actions">
+      <button type="button" class="btn" id="sig-reuse" hidden>Use last signature</button>
+      <button type="button" class="btn" id="sig-cancel">Cancel</button>
+      <button type="button" class="btn btn-primary" id="sig-use">Use signature</button>
+    </div>
+  </dialog>
+
+  <dialog id="verify-dialog" class="dialog">
+    <h2 class="dialog-title">How to verify your file stays private</h2>
+    <ol class="verify-steps">
+      <li>Press <kbd>F12</kbd> (or right-click → Inspect) and open the <strong>Network</strong> tab.</li>
+      <li>Open a PDF here and edit it. You will only see requests to this site's own files — nothing carrying your document goes anywhere.</li>
+      <li>Even stronger: once this page has loaded, switch off your Wi-Fi. Opening, editing and downloading still work.</li>
+      <li>This page also ships a strict security policy (Content-Security-Policy), so your browser itself refuses to load scripts from, or send data to, any other website.</li>
+    </ol>
+    <p class="dialog-note">Our ad and analytics code lives on the other pages of this site — never on this editor page.</p>
+    <div class="dialog-actions">
+      <button type="button" class="btn btn-primary" id="verify-close">Got it</button>
+    </div>
+  </dialog>
+
+  <input type="file" id="image-input" accept="image/*" hidden>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <span>© 2026 ToolReady. Your PDF is processed entirely in your browser and never uploaded.</span>
+      <span><a href="../about.html">About</a> · <a href="../contact.html">Contact</a></span>
+    </div>
+  </footer>
+
+  <script src="vendor/pdf-lib.min.js"></script>
+  <script type="module" src="editor.js"></script>
+  <script src="../assets/js/theme.js"></script>
+  <script src="../assets/js/pwa.js"></script>
+</body>
+</html>
