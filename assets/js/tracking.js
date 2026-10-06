@@ -34,4 +34,11 @@
   // though it's attached before the page's own inputs exist yet.
   document.addEventListener('input', trackToolUse, { capture: true, once: true });
   document.addEventListener('change', trackToolUse, { capture: true, once: true });
+
+  // Clicks on buttons marked data-track="..." (e.g. landing page -> PDF editor).
+  // The editor page itself deliberately has no analytics at all.
+  document.addEventListener('click', function (e) {
+    var el = e.target.closest && e.target.closest('[data-track]');
+    if (el && typeof gtag === 'function') gtag('event', 'cta_click', { cta: el.getAttribute('data-track') });
+  });
 })();

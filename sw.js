@@ -10,7 +10,7 @@
    analytics, and Google Fonts always go straight to the network,
    untouched by this worker.
    ============================================ */
-const CACHE_NAME = 'toolready-v1';
+const CACHE_NAME = 'toolready-v2';
 const PRECACHE_URLS = [
   '/index.html',
   '/assets/css/style.css',
@@ -43,6 +43,19 @@ self.addEventListener('fetch', (event) => {
   const url = new URL(event.request.url);
   if (url.origin !== self.location.origin) return; // let cross-origin (ads, GA, fonts) pass through
   if (event.request.method !== 'GET') return;
+
+  // Big, rarely-changing libraries for the PDF editor: serve from cache first (fast + works offline).
+  // If these files are ever updated, bump CACHE_NAME above.
+  if (url.pathname.startsWith('/pdf/vendor/') || url.pathname.startsWith('/pdf/fonts/')) {
+    event.respondWith(
+      caches.match(event.request).then((cached) => cached || fetch(event.request).then((response) => {
+        const clone = response.clone();
+        caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
+        return response;
+      }))
+    );
+    return;
+  }
 
   event.respondWith(
     fetch(event.request)
