@@ -10,7 +10,7 @@
    analytics, and Google Fonts always go straight to the network,
    untouched by this worker.
    ============================================ */
-const CACHE_NAME = 'toolready-v2';
+const CACHE_NAME = 'toolready-v3';
 const PRECACHE_URLS = [
   '/index.html',
   '/assets/css/style.css',

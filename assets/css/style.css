@@ -449,3 +449,9 @@ footer.site-footer {
 .faq-item { max-width: 68ch; margin-bottom: 14px; }
 .faq-item h3 { font-size: 1rem; margin-bottom: 4px; }
 .faq-item p { color: var(--slate); font-size: 0.95rem; }
+
+/* Adsterra ads: reserve space to avoid layout shift, centre, keep clear of content */
+.ad-slot{margin:24px 0}
+.ad-box{display:flex;justify-content:center;max-width:100%;overflow:hidden;margin:24px auto}
+.ad-banner{min-height:250px}
+.ad-native{min-height:120px}
