@@ -122,6 +122,7 @@
         <p><strong>If you're testing by double-clicking the file:</strong> this specific page won't work, because browsers block this kind of external request from a page opened directly off your computer (a <code>file://</code> address). Every other calculator on this site works fine that way — this is the one exception, since it's the only one that needs to reach the internet. It works correctly once the site is served by an actual web server, including a local test server or the live site.</p>
       </div>
 
+      <div class="share-row"><span>Share this tool:</span> <a class="share-btn" data-track="share_whatsapp" target="_blank" rel="noopener" href="#" onclick="this.href='https://wa.me/?text='+encodeURIComponent(document.title+' '+location.href)">WhatsApp</a> <a class="share-btn" data-track="share_facebook" target="_blank" rel="noopener" href="#" onclick="this.href='https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href)">Facebook</a> <button type="button" class="share-btn" onclick="var b=this;(navigator.clipboard?navigator.clipboard.writeText(location.href):Promise.reject()).then(function(){b.textContent='Link copied'}).catch(function(){prompt('Copy this link:',location.href)})">Copy link</button></div>
       <div class="related-tools">
         <h2>Related tools</h2>
         <div class="tool-grid">

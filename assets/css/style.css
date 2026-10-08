@@ -260,7 +260,8 @@ nav.main-nav a:focus-visible {
   color: var(--slate);
   margin-bottom: 10px;
 }
-.tool-card h3 {
+.tool-card h3,
+.tool-card .tool-title {
   font-size: 1rem;
   font-weight: 700;
   margin-bottom: 6px;
@@ -455,3 +456,9 @@ footer.site-footer {
 .ad-box{display:flex;justify-content:center;max-width:100%;overflow:hidden;margin:24px auto}
 .ad-banner{min-height:250px}
 .ad-native{min-height:120px}
+
+.section-intro{color:var(--muted,inherit);opacity:.85;max-width:720px;margin:-4px 0 24px;font-size:.95rem;line-height:1.6}
+
+.share-row{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:28px 0 8px;font-size:.9rem}
+.share-btn{font:inherit;font-size:.85rem;padding:6px 12px;border:1px solid var(--line-strong);border-radius:6px;background:transparent;color:var(--ink);text-decoration:none;cursor:pointer}
+.share-btn:hover,.share-btn:focus-visible{background:var(--ink);color:var(--paper)}
